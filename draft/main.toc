@@ -1,0 +1,23 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\defcounter {refsection}{0}\relax 
+\select@language {slovak}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {1}\IeC {\'U}vod}{9}{chapter.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {2}Charakteristika - obrazky, zoznamy...}{10}{chapter.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2.1}Podkapitola o zdrojoch}{10}{section.2.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.1.1}Este mensia podsekcia - zoznamy}{10}{subsection.2.1.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.1.2}Este jedna - obrazky vedla seba}{11}{subsection.2.1.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2.2}Ina podkapitola}{12}{section.2.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.2.1}A v nej subsekcia}{12}{subsection.2.2.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {3}N\IeC {\'a}vrh - ako vlo\IeC {\v z}i\IeC {\v t} uk\IeC {\'a}\IeC {\v z}ku k\IeC {\'o}du}{13}{chapter.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {4}Z\IeC {\'a}ver}{15}{chapter.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{Zoznam pou\IeC {\v z}itej literat\IeC {\'u}ry}{16}{chapter*.5}

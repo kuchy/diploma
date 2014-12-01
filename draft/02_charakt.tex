@@ -1,0 +1,61 @@
+Lorem ipsum dolor sit amet, consectetur adipiscing elit a další text... 
+\\\\
+V nasledujúcich častiach...
+
+\section{Podkapitola o zdrojoch}
+Text s uvedenym zdrojom \cite{vis}:
+Zdroje sa ako bibtex(ten sa da vacsinou rovno stiahnut) pridavaju do textoveho suboru \emph{bibliography.bib} (ktory treba nasledne tiez prekompilovat) a potom sa mozu citovat. Zdroj moze byt napr typu article \cite{taxonomia},  online link a ine. Pri online linku \cite{anemone}
+treba uviest datum citovania, ten sa nastavuje v subore \emph{fmph.bbx} a pri online zdrojoch sa potom uz automaticky vypise. 
+\subsection{Este mensia podsekcia - zoznamy}
+
+Zoznam poloziek:
+\begin{itemize}
+	\item \textbf{prve} – popis
+	\item \textbf{dalsie} – Aliquam erat volutpat. Proin vel mi aliquet, dignissim metus quis, elementum lectus. Quisque ac est enim. Interdum et malesuada fames ac ante ipsum primis in faucibus.
+	\item \textbf{este nieco dalsie} - dalsi popis
+\end{itemize}
+
+  Číslovaný zoznam:
+  \begin{enumerate}
+    \item\textbf{Analýza dát}
+    \item\textbf{Niečo dalšie}
+    \item\textbf{Ešte niečo}
+    \item\textbf{Aby toho bolo viac} 
+  \end{enumerate}
+  
+\subsection{Este jedna - obrazky vedla seba}
+ %parameter H znamena ze obrazok ma byt vzhladom na ostatny obsah presne na tom mieste ako v zdrojovom subore,  parameter ht je volnejsi a obcas dava text okolo obrazkov resp obrazok do zvysneho obsahy podla vlastneho uvazenia...
+
+\begin{figure}[H] 
+\begin{center}
+\includegraphics[scale=0.7]{pics/ilu.png} \hspace{1.5cm}
+\includegraphics[scale=0.57]{pics/ilu.png}
+\caption{Dva obrazky so spolocnym popisom a vlozenou horizontalnou medzerou medzi obr}
+\label{fig:ch3}
+\end{center}
+\end{figure}
+
+\begin{figure}[H]   
+\begin{center}
+\captionsetup{font=small}
+\includegraphics[scale=1.0]{pics/ilu.png}
+\caption{Popis obrazku s mensim fontom popisu ked mam priiilis dlhyy popis velky ako odsek a uz by sa to bilo so zvysnim textom tak nech to odlisim ze je to popis}
+\label{fig:ch1}
+\end{center}
+\end{figure}
+
+vlozeny vacsi vertikalny priestor medzi obrazkami
+\vspace{1.6cm}  
+
+\begin{figure}[ht] 
+\begin{center}
+\includegraphics[scale=1.0]{pics/ilu.png}
+\caption{Dalsi obrazok s velkostou fontu popisu ako ostatny text}
+\label{fig:ch2}
+\end{center}
+\end{figure}
+
+
+\section{Ina podkapitola}
+a dalsi mudry text
+\subsection{A  v nej subsekcia}
