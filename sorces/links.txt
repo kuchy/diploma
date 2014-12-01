@@ -1,1 +1,3 @@
 http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=6400404 - “na zaciatok”
+http://dl.acm.org/citation.cfm?id=1180824 - A DATASET AND EVALUATION METHODOLOGY FOR VISUAL SALIENCY IN VIDEO
+http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=5202529 - Visual Attention Detection in Video Sequences Using Spatiotemporal Cues
