@@ -3,13 +3,6 @@ module.exports = function(grunt) {
     grunt.initConfig({
         latex: {
             src: [ 'main.tex' ],
-            options: {
-                // Task-specific options go here.
-            },
-            your_target: {
-                // Target-specific file lists and/or options go here.
-                outputDirectory: 'build/pdf'
-            },
         },
         watch: {
             scripts: {
