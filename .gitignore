@@ -38,4 +38,4 @@ draft/*.pdf
 .DS_Store
 
 #grunt installed modules
-draft/node_modules
+node_modules
