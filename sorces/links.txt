@@ -1,3 +1,7 @@
 http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=6400404 - “na zaciatok”
 http://dl.acm.org/citation.cfm?id=1180824 - A DATASET AND EVALUATION METHODOLOGY FOR VISUAL SALIENCY IN VIDEO
-http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=5202529 - Visual Attention Detection in Video Sequences Using Spatiotemporal Cues
+http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=5202529 - Visual Attention Detection in Video Sequences Using Spatiotemporal Cues
+http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=6507579 - Regularized Feature Reconstruction for Spatio-temporal Saliency Detection
+http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=6783970 - Coherency Based Spatio-Temporal Saliency Detection for Video Object Segmentation
+http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=6595884 - Spatio-Temporal Saliency for Action Similarity
+http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=6738712-  SPATIO-TEMPORAL SALIENCY BASED ON RARE MODEL
