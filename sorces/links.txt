@@ -8,3 +8,5 @@ http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=6738712-  SPATIO-TEMPORA
 http://www.jdl.ac.cn/user/jiali/RSD_Dataset.rar - downloaded dataset
 http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=6616164 - introduction to sound saliency - TOWARD THE INTRODUCTION OF AUDITORY INFORMATION IN DYNAMIC VISUAL ATTENTION MODELS
 http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=730558 - short saliency model vycuc
+http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=6889424 - Pulse Coupled Neural Network and Optical Flow
+http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=5254757 - Motion Detection Using Lucas Kanade Algorithm and Application Enhancement
