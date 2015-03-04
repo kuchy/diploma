@@ -10,3 +10,5 @@ http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=6616164 - introduction t
 http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=730558 - short saliency model vycuc
 http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=6889424 - Pulse Coupled Neural Network and Optical Flow
 http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=5254757 - Motion Detection Using Lucas Kanade Algorithm and Application Enhancement
+http://www.gipsa-lab.grenoble-inp.fr/~antoine.coutrot/Coutrot_ICIP2014.pdf - AN AUDIOVISUAL ATTENTION MODEL FOR NATURAL CONVERSATION SCENES
+http://www.gipsa-lab.grenoble-inp.fr/~antoine.coutrot/Coutrot_2013_Annals_of_Telecommunications.pdf - Video viewing: do auditory salient events capture visual attention?
