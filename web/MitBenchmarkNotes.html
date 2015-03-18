@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<!--[if IE 8]>
+<html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]>
+<html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en"> <!--<![endif]-->
+<head>
+    <title>Detekcia významných oblastí vo videu</title>
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <!--[if IE]>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Responsive HTML5 Website landing Page for Developers">
+    <meta name="author" content="3rd Wave Media">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,300italic,400italic' rel='stylesheet'
+          type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="assets/plugins/font-awesome/css/font-awesome.css">
+    <!-- github acitivity css -->
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/octicons/2.0.2/octicons.min.css">
+    <link rel="stylesheet" href="http://caseyscarborough.github.io/github-activity/github-activity-0.1.0.min.css">
+
+    <!-- Theme CSS -->
+    <link id="theme-style" rel="stylesheet" href="assets/css/styles.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+<div class="container sections-wrapper">
+    <div class="row">
+        <h1>MIT saliency benchmark methods</h1>
+        <div class="primary col-md-8 col-sm-12 col-xs-12">
+            <section class="about section">
+                <ul>
+                    <li>Judd Model (Fail) - dependencies?</li>
+                    <li>Graph-Based Visual Saliency (GBVS) - OK - Nepouzitelna rychlost</li>
+                    <li>Baseline Center - Trivialne -> pouzit rychle desiva uspesnost |TODO : skusit dat otestovat
+                        center posunuty do zleteho rezu/niekam?
+                    </li>
+                    <li>IttiKoch2 - obsiahnute v GBVS</li>
+                    <li>IttiKoch - obsiahnute v GBVS</li>
+                    <li>Context-Aware saliency - TODO - <a
+                            href="http://webee.technion.ac.il/~ayellet/Ps/10-Saliency.pdf">clanok</a></li>
+                    <li>Adaptive Whitening Saliency Model (AWS) - Hlavne na tvare</li>
+                    <li>Weighted Maximum Phase Alignment Model (WMAP) - SIFT + SURF => nie</li>
+                    <li>Torralba saliency - Local features <a
+                            href="http://people.csail.mit.edu/torralba/publications/torralbaEyeMovements.pdf">clanok</a>
+                    </li>
+                    <li>Murray model (Chromatic Induction Wavelet Model) - top 10 objects - <a
+                            href="http://ieeexplore.ieee.org/xpl/articleDetails.jsp?tp=&arnumber=6331539&queryText%3DWavelet+Model+saliency">clanok</a>
+                    </li>
+                    <li>SUN saliency - TODO</li>
+                    <li>Achanta -TODO</li>
+                </ul>
+                Ideas's:
+                <ol>
+                    <li>Spravit Lucas/Kanade rychlu verziu clanok r. c. 12</li>
+                    <li>Winer take all strategy</li>
+                    <li>Baseline Center prekryt tam kde je winner</li>
+                    <li>Opakuj n krat podla casu vypoctu(kolko stihnes) vzhladom na pocet pixelov diverzitu alebo daco
+                    </li>
+                </ol>
+
+                <ol>
+                    <li>Prvy-nty frame zanedbat nechat na pocitanie celej mapy potom ohodnotit m vitazov s priemerom r</li>
+                    <li>Dalej len prepocitavat okolia vsetkych vytazov a nejako prisposobovat priemer okolia</li>
+                </ol>
+            </section>
+        </div>
+    </div>
+</div>
+</body>
