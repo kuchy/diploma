@@ -13,3 +13,17 @@ http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=5254757 - Motion Detecti
 http://www.gipsa-lab.grenoble-inp.fr/~antoine.coutrot/Coutrot_ICIP2014.pdf - AN AUDIOVISUAL ATTENTION MODEL FOR NATURAL CONVERSATION SCENES
 http://www.gipsa-lab.grenoble-inp.fr/~antoine.coutrot/Coutrot_2013_Annals_of_Telecommunications.pdf - Video viewing: do auditory salient events capture visual attention?
 http://people.csail.mit.edu/tjudd/WherePeopleLook/Docs/wherepeoplelook.pdf - Learning to Predict Where Humans Look
+http://webee.technion.ac.il/~ayellet/Ps/10-Saliency.pdf - Context-Aware Saliency Detection
+http://people.csail.mit.edu/torralba/publications/torralbaEyeMovements.pdf - The role of global features on object search
+http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=6331539 - A Saliency Detection Model Using Low-Level
+Features Based on Wavelet Transform
+http://www.journalofvision.org/content/8/7/32.full.pdf - SUN: A Bayesian framework for saliency using
+natural statistics
+http://infoscience.epfl.ch/record/135217/files/1708.pdf - Frequency-tuned Salient Region Detection
+http://coxlab.org/pdfs/cvpr2014_vig_saliency.pdf - Ensembles of Deep Networks (eDN)
+http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=7025221 - A SCALABLE AND EFFICIENT METHOD FOR SALIENT REGION DETECTION USING SAMPLED TEMPLATE COLLATION
+http://tcts.fpms.ac.be/publications/papers/2012/accv2012_nrmmbgtd.pdf - Dynamic saliency models and human attention: a comparative study on videos
+http://tcts.fpms.ac.be/publications/papers/2011/mmnrjlbg_icip.pdf - ABNORMAL MOTION SELECTION IN CROWDS USING BOTTOM-UP SALIENCY
+http://www.tcts.fpms.ac.be/attention/data/documents/spie/culibrk_spie2012.pdf - Data-driven Approach to Dynamic Visual Attention modelling
+http://tcts.fpms.ac.be/publications/papers/2013/iccv2013_nrmdmmbgtd.pdf -  Study of Comparison Metrics
+http://tcts.fpms.ac.be/publications/papers/2011/mmfpmp_gw2011.pdf - Human-Motion Saliency in Multi-Motion Scenes and in Close Interaction
