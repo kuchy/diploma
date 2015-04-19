@@ -41,8 +41,6 @@ draft/*.pdf
 node_modules
 
 #ignore prototypes models
-/src/prototype/models/*
-!/src/prototype/models/.gitkeep
 /src/prototype/temp/*
 !/src/prototype/temp/.gitkeep
 /src/prototype/metrics/*
