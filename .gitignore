@@ -47,3 +47,6 @@ node_modules
 !/src/prototype/temp/.gitkeep
 /src/prototype/metrics/*
 !/src/prototype/metrics/.gitkeep
+
+#matlab
+*~
