@@ -97,13 +97,16 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 [FileName,PathName]=uigetfile('*.*','All Files');
 images = loadVideo(FileName,PathName);
 
-
-
 % --- Executes on button press in pushbutton2.
 function pushbutton2_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton2 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+index=get(handles.listbox2,'value');
+list=get(handles.listbox2,'string');
+video = cellstr(list(index));
+
+createSaliencyVideo(fullfile('temp',video{1},'saliency'));
 
 
 % --- Executes on button press in pushbutton3.
