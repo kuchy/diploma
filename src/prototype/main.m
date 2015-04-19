@@ -59,8 +59,15 @@ guidata(hObject, handles);
 % UIWAIT makes main wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
 
+% loading models
 modelFiles = dir(fullfile('models','*.m'));
 modelFiles = {modelFiles.name}';
+
+for ii = 1:length(modelFiles)
+    path = fullfile('models',modelFiles{ii});
+    [pathstr,name,ext] = fileparts(path);
+    modelFiles{ii} = name;
+end
  
 set(handles.listbox1, 'String', modelFiles);
 
@@ -102,7 +109,7 @@ function pushbutton3_Callback(hObject, eventdata, handles)
 
 
 % --- Executes on selection change in listbox1.
-function listbox1_Callback(hObject, eventdata, handles)
+function listbox1_Callback(hObject, eventdata, handles) 
 % hObject    handle to listbox1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
@@ -112,7 +119,7 @@ function listbox1_Callback(hObject, eventdata, handles)
 
 
 % --- Executes during object creation, after setting all properties.
-function listbox1_CreateFcn(hObject, eventdata, handles)
+function listbox1_CreateFcn(hObject, eventdata, handles)  
 % hObject    handle to listbox1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
@@ -129,3 +136,7 @@ function pushbutton4_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton4 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+index=get(handles.listbox1,'value');
+list=get(handles.listbox1,'string');
+functionName = cellstr(list(index));
+computeModel(fullfile('temp','162.mp4'), functionName{1});
