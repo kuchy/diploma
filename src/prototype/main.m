@@ -196,5 +196,16 @@ function pushbutton5_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton5 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+videoData = get(handles.pushbutton1,'UserData');
 
+index=get(handles.listbox2,'value');
+list=get(handles.listbox2,'string');
+video = cellstr(list(index));
+name = video{1};
 
+data = findVideoByName(name, videoData);
+
+videoPath = fullfile(data.path,data.name);
+saliencyPath = fullfile('temp',data.name,'saliency','shuttle_out.avi');
+
+play(videoPath, saliencyPath);
