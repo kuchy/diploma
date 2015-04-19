@@ -59,6 +59,11 @@ guidata(hObject, handles);
 % UIWAIT makes main wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
 
+% loading generated videos
+tempFiles = dir(fullfile('temp'));
+tempFiles = {tempFiles(4:end).name}';
+set(handles.listbox2, 'String', tempFiles);
+
 % loading models
 modelFiles = dir(fullfile('models','*.m'));
 modelFiles = {modelFiles.name}';
@@ -139,4 +144,32 @@ function pushbutton4_Callback(hObject, eventdata, handles)
 index=get(handles.listbox1,'value');
 list=get(handles.listbox1,'string');
 functionName = cellstr(list(index));
-computeModel(fullfile('temp','162.mp4'), functionName{1});
+
+index=get(handles.listbox2,'value');
+list=get(handles.listbox2,'string');
+video = cellstr(list(index));
+
+computeModel(fullfile('temp',video{1}), functionName{1});
+
+
+% --- Executes on selection change in listbox2.
+function listbox2_Callback(hObject, eventdata, handles)
+% hObject    handle to listbox2 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: contents = cellstr(get(hObject,'String')) returns listbox2 contents as cell array
+%        contents{get(hObject,'Value')} returns selected item from listbox2
+
+
+% --- Executes during object creation, after setting all properties.
+function listbox2_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to listbox2 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: listbox controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
