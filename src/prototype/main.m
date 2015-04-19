@@ -60,9 +60,8 @@ guidata(hObject, handles);
 % uiwait(handles.figure1);
 
 % loading generated videos
-tempFiles = dir(fullfile('temp'));
-tempFiles = {tempFiles(4:end).name}';
-set(handles.listbox2, 'String', tempFiles);
+% tempFiles = dir(fullfile('temp'));
+% tempFiles = {tempFiles(4:end).name}';
 
 % loading models
 modelFiles = dir(fullfile('models','*.m'));
@@ -73,7 +72,6 @@ for ii = 1:length(modelFiles)
     [pathstr,name,ext] = fileparts(path);
     modelFiles{ii} = name;
 end
- 
 set(handles.listbox1, 'String', modelFiles);
 
 
@@ -95,7 +93,14 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 [FileName,PathName]=uigetfile('*.*','All Files');
-images = loadVideo(FileName,PathName);
+LoadedData = loadVideo(FileName,PathName);
+
+videoData = get(handles.pushbutton1,'UserData');
+videoData = [videoData, LoadedData];
+
+set(handles.pushbutton1,'UserData', videoData);
+% refresh list of loaded videos
+% set(handles.listbox2, 'String', refreshList(get(handles.pushbutton1,'UserData')));
 
 % --- Executes on button press in pushbutton2.
 function pushbutton2_Callback(hObject, eventdata, handles)
@@ -105,8 +110,12 @@ function pushbutton2_Callback(hObject, eventdata, handles)
 index=get(handles.listbox2,'value');
 list=get(handles.listbox2,'string');
 video = cellstr(list(index));
+name = video{1};
 
-createSaliencyVideo(fullfile('temp',video{1},'saliency'));
+videoData = get(handles.pushbutton1,'UserData');
+data = findVideoByName(name, videoData);
+
+createSaliencyVideo(fullfile('temp',data.name,'saliency'), data.frameRate);
 
 
 % --- Executes on button press in pushbutton3.
@@ -150,9 +159,13 @@ functionName = cellstr(list(index));
 
 index=get(handles.listbox2,'value');
 list=get(handles.listbox2,'string');
-video = cellstr(list(index));
+name = cellstr(list(index));
+name = name{1};
 
-computeModel(fullfile('temp',video{1}), functionName{1});
+videoData = get(handles.pushbutton1,'UserData');
+data = findVideoByName(name, videoData);
+
+computeModel(fullfile('temp',data.name), functionName{1});
 
 
 % --- Executes on selection change in listbox2.
@@ -176,3 +189,19 @@ function listbox2_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
+
+
+% --- Executes on button press in pushbutton5.
+function pushbutton5_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbutton5 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+
+% --- Executes on button press in pushbutton6.
+function pushbutton6_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbutton6 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+list = refreshList(get(handles.pushbutton1,'UserData'));
+set(handles.listbox2, 'String', list);

@@ -1,7 +1,7 @@
-function createSaliencyVideo(path)
+function createSaliencyVideo(path, framerate)
 
 outputVideo = VideoWriter(fullfile(path,'shuttle_out.avi'));
-outputVideo.FrameRate = 10;
+outputVideo.FrameRate = framerate;
 open(outputVideo);
 
 imageNames = dir(fullfile(path,'*.jpg'));

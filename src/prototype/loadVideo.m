@@ -1,4 +1,4 @@
-function [path]=loadVideo(FileName,PathName)
+function videoData=loadVideo(FileName,PathName)
 shuttleVideo = VideoReader(fullfile(PathName,FileName));
 
 videoDir = fullfile('temp',FileName);
@@ -14,6 +14,9 @@ while shuttleVideo.NumberOfFrames>=ii && maxFrames>=ii
    fullname = fullfile(videoDir,filename);
    imwrite(img,fullname);
    disp(['current frame:',num2str(ii)]);
-   ii = ii+1;   
+   ii = ii+1;
 end
-path = videoDir;
+
+videoData.frameRate = shuttleVideo.frameRate;
+videoData.name = shuttleVideo.name;
+videoData.path = shuttleVideo.path;
