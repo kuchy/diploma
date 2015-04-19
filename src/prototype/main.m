@@ -100,7 +100,7 @@ videoData = [videoData, LoadedData];
 
 set(handles.pushbutton1,'UserData', videoData);
 % refresh list of loaded videos
-% set(handles.listbox2, 'String', refreshList(get(handles.pushbutton1,'UserData')));
+set(handles.listbox2, 'String', refreshList(get(handles.pushbutton1,'UserData')));
 
 % --- Executes on button press in pushbutton2.
 function pushbutton2_Callback(hObject, eventdata, handles)
@@ -198,10 +198,3 @@ function pushbutton5_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 
-% --- Executes on button press in pushbutton6.
-function pushbutton6_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton6 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-list = refreshList(get(handles.pushbutton1,'UserData'));
-set(handles.listbox2, 'String', list);
