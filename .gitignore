@@ -39,3 +39,11 @@ draft/*.pdf
 
 #grunt installed modules
 node_modules
+
+#ignore prototypes models
+/src/prototype/models/*
+!/src/prototype/models/.gitkeep
+/src/prototype/temp/*
+!/src/prototype/temp/.gitkeep
+/src/prototype/metrics/*
+!/src/prototype/metrics/.gitkeep
