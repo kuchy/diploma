@@ -63,6 +63,12 @@ guidata(hObject, handles);
 % tempFiles = dir(fullfile('temp'));
 % tempFiles = {tempFiles(4:end).name}';
 
+% add to path models folder
+addpath(genpath('models'));
+
+% add to path metrics folder
+addpath(genpath('metrics'));
+
 % loading models
 modelFiles = dir(fullfile('models','*.m'));
 modelFiles = {modelFiles.name}';
@@ -160,7 +166,7 @@ functionName = cellstr(list(index));
 index=get(handles.listbox2,'value');
 list=get(handles.listbox2,'string');
 name = cellstr(list(index));
-name = name{1};
+name = name{1}; 
 
 videoData = get(handles.pushbutton1,'UserData');
 data = findVideoByName(name, videoData);
