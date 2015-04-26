@@ -175,7 +175,11 @@ name = name{1};
 videoData = get(handles.pushbutton1,'UserData');
 data = findVideoByName(name, videoData);
 
+% compute maps
 computeModel(fullfile('temp',data.name), functionName{1});
+
+% save video
+createSaliencyVideo(fullfile('temp',data.name,'saliency',functionName{1}), data.frameRate);
 
 
 % --- Executes on selection change in listbox2.
@@ -229,4 +233,4 @@ function figure1_DeleteFcn(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % cleanup temporary data after exit
-system('rm -rf temp/*')
+system('rm -rf temp/*');
