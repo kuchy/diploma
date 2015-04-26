@@ -9,9 +9,10 @@ imageNames = dir(fullfile(folder,'*.jpg'));
 imageNames = {imageNames.name}';
 
 for ii = 1:length(imageNames)
+    disp(['current frame:',num2str(ii)]);
     frameName = fullfile(folder,imageNames{ii});
     img = imread(frameName);
     map = modelFunction(img);
-    imwrite(map,fullfile(folder, mapsSubdirectory,imageNames{ii}));
+    imwrite(map,fullfile(folder, mapsSubdirectory,imageNames{ii}));    
 end
 map = fullfile(folder, mapsSubdirectory);
