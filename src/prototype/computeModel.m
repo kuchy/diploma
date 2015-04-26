@@ -2,7 +2,7 @@ function [map]=computeModel(folder, model)
 modelFunction = str2func(model);
 
 mapsSubdirectory = 'saliency';
-mkdir(fullfile(folder,mapsSubdirectory));
+mkdir(fullfile(folder,mapsSubdirectory,model));
 
 % load all images from this folder (video)
 imageNames = dir(fullfile(folder,'*.jpg'));
@@ -13,6 +13,6 @@ for ii = 1:length(imageNames)
     frameName = fullfile(folder,imageNames{ii});
     img = imread(frameName);
     map = modelFunction(img);
-    imwrite(map,fullfile(folder, mapsSubdirectory,imageNames{ii}));    
+    imwrite(map,fullfile(folder, mapsSubdirectory,model,imageNames{ii}));    
 end
 map = fullfile(folder, mapsSubdirectory);

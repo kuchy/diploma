@@ -1,6 +1,6 @@
 function createSaliencyVideo(path, framerate)
 
-outputVideo = VideoWriter(fullfile(path,'shuttle_out.avi'));
+outputVideo = VideoWriter(fullfile(path,'saliency_out.avi'));
 outputVideo.FrameRate = framerate;
 open(outputVideo);
 

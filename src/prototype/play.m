@@ -1,21 +1,39 @@
 function play (videoPath, saliencyPath)
 v1 = VideoReader(videoPath);
-v2 = VideoReader(saliencyPath);
+
+videos = rdir(fullfile(saliencyPath,'**','*.avi'));
+numberOfVideos = size(videos,1);
+
+for ii = 1:numberOfVideos
+    salVideo(ii) = VideoReader(videos(ii).name);
+    pathToVideo = strsplit(salVideo(ii).path,'/');
+    
+%     model is placed in directory with its name.
+    modelName{ii} = pathToVideo{end};
+end
+
 figure
 
 i1 = 0;
-i2 = 0;
-while i1 < v1.NumberOfFrames && i2 < v2.NumberOfFrames
+
+while i1 < v1.NumberOfFrames && i1 < salVideo(1).NumberOfFrames
+    
+%     ogirinal video
     if i1 < v1.NumberOfFrames
         i1 = i1+1;
-        subplot(1,2,1)
+        subplot(1,(numberOfVideos+1),1)
         image(v1.read(i1))
+        text(-5,-5,'Original video');
     end
 
-    if i2 < v2.NumberOfFrames
-        i2 = i2+1;
-        subplot(1,2,2)
-        image(v2.read(i2))
+%     all created saliency videos
+    for ii = 1:numberOfVideos
+        v2 = salVideo(ii);
+        if i1 < v2.NumberOfFrames             
+            subplot(1,(numberOfVideos+1),(ii+1))
+            image(v2.read(i1))
+            text(-5,-5,['Model: ',modelName{ii}]);
+        end
     end
 
     drawnow

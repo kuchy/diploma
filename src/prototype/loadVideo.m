@@ -6,7 +6,7 @@ mkdir(videoDir)
 
 ii = 1;
 % TODO parametrize
-maxFrames = 100;
+maxFrames = 40;
 
 while shuttleVideo.NumberOfFrames>=ii && maxFrames>=ii
    img = read(shuttleVideo,ii);

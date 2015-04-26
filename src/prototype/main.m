@@ -19,7 +19,7 @@ function varargout = main(varargin)
 %      instance to run (singleton)".
 %
 % See also: GUIDE, GUIDATA, GUIHANDLES
-
+    
 % Edit the above text to modify the response to help main
 
 % Begin initialization code - DO NOT EDIT
@@ -121,7 +121,11 @@ name = video{1};
 videoData = get(handles.pushbutton1,'UserData');
 data = findVideoByName(name, videoData);
 
-createSaliencyVideo(fullfile('temp',data.name,'saliency'), data.frameRate);
+index=get(handles.listbox1,'value');
+list=get(handles.listbox1,'string');
+modelName = cellstr(list(index));
+
+createSaliencyVideo(fullfile('temp',data.name,'saliency',modelName{1}), data.frameRate);
 
 
 % --- Executes on button press in pushbutton3.
@@ -212,6 +216,7 @@ name = video{1};
 data = findVideoByName(name, videoData);
 
 videoPath = fullfile(data.path,data.name);
-saliencyPath = fullfile('temp',data.name,'saliency','shuttle_out.avi');
+saliencyPath = fullfile('temp',data.name,'saliency');
+
 
 play(videoPath, saliencyPath);
