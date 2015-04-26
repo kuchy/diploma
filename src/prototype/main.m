@@ -220,3 +220,13 @@ saliencyPath = fullfile('temp',data.name,'saliency');
 
 
 play(videoPath, saliencyPath);
+
+
+% --- Executes during object deletion, before destroying properties.
+function figure1_DeleteFcn(hObject, eventdata, handles)
+% hObject    handle to figure1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% cleanup temporary data after exit
+system('rm -rf temp/*')
