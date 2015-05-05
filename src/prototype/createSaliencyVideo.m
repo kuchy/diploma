@@ -8,9 +8,8 @@ imageNames = dir(fullfile(path,'*.jpg'));
 imageNames = {imageNames.name}';
 
 for ii = 1:length(imageNames)
-   img = imread(fullfile(path,imageNames{ii}));
-   writeVideo(outputVideo,img)
-   disp(['current frame:',num2str(ii)]);
+   img = imread(fullfile(path,imageNames{ii}));   
+   writeVideo(outputVideo,img)   
 end
 
 close(outputVideo)

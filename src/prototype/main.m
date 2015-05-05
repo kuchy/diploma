@@ -69,6 +69,9 @@ addpath(genpath('models'));
 % add to path metrics folder
 addpath(genpath('metrics'));
 
+%inicialize table
+data=get(handles.uitable1, 'data');
+
 % loading models
 modelFiles = dir(fullfile('models','*.m'));
 modelFiles = {modelFiles.name}';
@@ -77,8 +80,12 @@ for ii = 1:length(modelFiles)
     path = fullfile('models',modelFiles{ii});
     [pathstr,name,ext] = fileparts(path);
     modelFiles{ii} = name;
+    data(ii,1)={name};
 end
 set(handles.listbox1, 'String', modelFiles);
+
+
+set(handles.uitable1, 'data', data);
 
 
 
@@ -175,8 +182,22 @@ name = name{1};
 videoData = get(handles.pushbutton1,'UserData');
 data = findVideoByName(name, videoData);
 
+tableData=get(handles.uitable1, 'data');
+
 % compute maps
-computeModel(fullfile('temp',data.name), functionName{1});
+[avgtime, max, min, fps] = computeModel(fullfile('temp',data.name), functionName{1});
+
+for ii = 1:length(tableData)
+    rowName = tableData(ii,1);
+    if strcmp(rowName{1}, functionName{1})
+        tableData(ii,2) = {avgtime};
+        tableData(ii,3) = {max};
+        tableData(ii,4) = {min};
+        tableData(ii,5) = {fps};
+    end
+end
+
+set(handles.uitable1, 'data', tableData);
 
 % save video
 createSaliencyVideo(fullfile('temp',data.name,'saliency',functionName{1}), data.frameRate);
