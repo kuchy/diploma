@@ -61,8 +61,8 @@
 							<li>Všetko dostupné v repozitári projektu na <a target="_blank" href="https://github.com/kuchy/diploma/blob/master/sorces/links.txt">githube</a></li>
 							<li>Vybrané témy článkov
 								<ul>
-									<li>Saliency všeobecne</li>
-									<li>Pohyb vo videu</li>
+									<li>Saliency všeobecne (Ittiho model)</li>
+									<li>Pohyb vo videu (LUCAS KANADE alg.)</li>
 									<li>Zohladnenie zvuku v saliency modeloch</li>
 								</ul>
 								</li>
@@ -71,9 +71,16 @@
 						</ul>
 					</section>
 					<section>
-						<h2>Saliency všeobecne</h2>
-						<p>TODO - popisat ittyho model</p>
+						<h2>Ittiho model</h2>
+						<img src="https://www.dropbox.com/s/w9popkgddefhh1p/itti.png?raw=1">
 					</section>
+
+					<section>
+						<h2>Ittiho model</h2>
+						<img src="https://www.dropbox.com/s/c2u0dqi169gz10v/itti2.png?raw=1">
+						<p>Založené na článku:<small>A Model of Saliency-Based Visual Attention for Rapid Scene Analysis (1998)</small></p>
+					</section>
+
 					<section>
 						<h2>Pohyb vo videu</h2>
 						<h3>Lucas Kanade Algorithm</h3>
@@ -84,16 +91,20 @@
 					</section>
 
 				<section>
-					<p>Zlepšenie: použitie algortmu iba na zaujímavé časti obrazu (Horn Schunck alg.).</p>
-
-
+					<p>Zlepšenie: použitie algoritmu iba na zaujímavé časti obrazu (filtrácia pomocou Horn Schunck algoritmu).</p>
 					<img src="https://www.dropbox.com/s/mvi3cuckd7tbnqg/L-K2.png?raw=1">
-					<p>Založené na článku:<small>Motion Detection Using Lucas Kanade Algorithmand Application Enhancement(2009)</small></p>
+					<p>Založené na článku:<small>Motion Detection Using Lucas Kanade Algorithmand Application Enhancement (2009)</small></p>
 				</section>
 
 					<section>
 						<h2>Zohladnenie zvuku v saliency modeloch</h2>
-						<p>TODO</p>
+						<ul>
+							<li>Viac observer-dependent</li>
+							<li>Veľké rozdiely ak je to soundtrack alebo reč</li>
+							<li>Trvácnejší efekt (až 10-20) framov</li>
+							<li>Rozlišovanie context-sensitive (zhlukovanie fixácií) alebo skôr rozptýlenie fixácií na vedšiu plochu obrazu</li>
+						</ul>
+						<p>Založené na článku:<small>Video viewing: do auditory salient events capture visual attention? (2013)</small></p>
 					</section>
 					<section>
 						<h2>Poznámky</h2>
@@ -102,12 +113,12 @@
 					<section>
 						<ul>
 								<li>Judd Model -> pomalé ale učinné</li>
-								<li>Baseline Center - Trivialne -> rýchle, desivá úspešnosť na takéto trivialne riešenie </li>
+								<li>Baseline Center - Trivialne -> rýchle, desivá úspešnosť na takéto triviálne riešenie </li>
 								<li>Context-Aware saliency -> využívajúci <a href="http://webee.technion.ac.il/~ayellet/Ps/10-Saliency.pdf"> segmentáciu </a></li>
 								<li>Adaptive Whitening Saliency Model (AWS) -> Hlavne na tváre</li>
 								<li>Weighted Maximum Phase Alignment Model (WMAP) -> SIFT + SURF => nie</li>
-								<li>Torralba saliency - Low level local features => rychle relativne efektivne. </li>
-								<li>Murray model (Chromatic Induction Wavelet Model) -> top 10 objects - <a href="http://ieeexplore.ieee.org/xpl/articleDetails.jsp?tp=&arnumber=6331539&queryText%3DWavelet+Model+saliency">segmenácia</a></li>
+								<li>Torralba saliency - Low level local features => rýchle a relatívne efektívne. </li>
+								<li>Murray model (Chromatic Induction Wavelet Model) -> top 10 objects - <a href="http://ieeexplore.ieee.org/xpl/articleDetails.jsp?tp=&arnumber=6331539&queryText%3DWavelet+Model+saliency">segmentácia</a></li>
 						</ul>
 				</section>
 			</section>
@@ -118,21 +129,21 @@
 						<h2>Datasety</h2>
 						<h3>RSD</h3>
 						<p>Obsahuje 41 videí, ktoré pozorovalo 23 rôznych používateľov vo veku 21-37.
-						<ol style="float:left; width:60%">
-							Kategorie
+						<ol style="float:left; width:60%;">
+							<a>Kategorie</a>
 							<li>Surveillance video</li>
 							<li>Artificial video</li>
 							<li>Natural video with artificial part</li>
 							<li>Natural video</li>
 						</ol>
 						<ol style="float:right;width:30%">
-							Metriky
+							<a>Metriky</a>
 							<li>Precision</li>
 							<li>ROC</li>
 							<li>Compactness</li>
 						</ol>
-						<br style="clear:both">
-						Bohužial nie je kompletený na stiahnutie, (obsahuje iba referencie ktoré sú už neaktuálne). Stiahnuté videá mali poškodení index, bolo ich potrebné upraviť.
+						<br style="clear:both;">
+						<div style="border-top: 1px solid white;">Bohužial nie je kompletný na stiahnutie, (obsahuje iba referencie, ktoré sú už neaktuálne). Stiahnuté videá mali poškodení index, bolo ich potrebné upraviť.</div>
 						</p>
 					</section>
 					<section>
@@ -143,7 +154,7 @@
 					<section>
 						<h3>Auditory dataset</h3>
 								<iframe width="560" height="315" src="https://www.youtube.com/embed/K3dI9hTc1cg" frameborder="0"></iframe>
-								<p>Obsahuje videa aj so zvukovou stopou (bohužial vo francúzština)</p>
+								<p>Obsahuje videá aj so zvukovou stopou (bohužial vo francúzštine)</p>
 					</section>
 				</section>
 
@@ -199,7 +210,7 @@
 						<section>
 							<h2>Ukážka</h2>
 							<p>
-								Čas na ukážku prototypu v akcií.
+								Čas na ukážku prototypu v akcii.
 							</p>
 						</section>
 					</section>
@@ -207,26 +218,15 @@
 					<section>
 						<section>
 							<h2>Návrhy na zlepšenia</h2>
-							<p>Kandidáti na implementáciu</p>
 						</section>
 						<section>
-							<h2>Prvý kandidát</h2>
+							<h2>Optical flow + center model</h2>
 							<ol>
 								<li>Lucas/Kanade na detekciu pohybu</li>
 								<li>Winer take all strategy</li>
 								<li>Baseline Center prekryt tam kde je winner</li>
 								<li>Opakuj n-krát podla času výpočtu (kolko stihneš) vzhľadom na počet pixelov diverzitu etc.</li>
 							</ol>
-						</section>
-						<section>
-							<h2>Druhý kandidát</h2>
-							TODO
-							<!-- <ol>
-								<li>Lucas/Kanade na detekciu pohybu</li>
-								<li>Winer take all strategy</li>
-								<li>Baseline Center prekryt tam kde je winner</li>
-								<li>Opakuj n-krát podla času výpočtu (kolko stihneš) vzhľadom na počet pixelov diverzitu etc</li>
-							</ol> -->
 						</section>
 					</section>
 
