@@ -76,11 +76,21 @@
 					</section>
 					<section>
 						<h2>Pohyb vo videu</h2>
-						<p>Fast Lucas Kanade Algorithm</p>
-						TODO
-						<!-- <p>Differential approach</p> -->
-						<p>Založené na článku:<small>Motion Detection Using Lucas Kanade Algorithmand Application Enhancement(2009)</small></p>
+						<h3>Lucas Kanade Algorithm</h3>
+						<p>
+							Diferenčný prístup. Podľa parametru šírky okna hľadá pixely, ktoré sa posunuli o rovnaký vektor. Výpočtovo náročné preto sa používajú gausovské pyramídy (najčastejšie level 3). Náchylné na šum.<br>
+							<img src="https://www.dropbox.com/s/mbkcl2new2mgaha/L-K.png?raw=1">
+						</p>
 					</section>
+
+				<section>
+					<p>Zlepšenie: použitie algortmu iba na zaujímavé časti obrazu (Horn Schunck alg.).</p>
+
+
+					<img src="https://www.dropbox.com/s/mvi3cuckd7tbnqg/L-K2.png?raw=1">
+					<p>Založené na článku:<small>Motion Detection Using Lucas Kanade Algorithmand Application Enhancement(2009)</small></p>
+				</section>
+
 					<section>
 						<h2>Zohladnenie zvuku v saliency modeloch</h2>
 						<p>TODO</p>
