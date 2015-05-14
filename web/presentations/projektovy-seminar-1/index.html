@@ -20,6 +20,10 @@
 		<!-- Code syntax highlighting -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
 
+		<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 		<!--[if lt IE 9]>
 		<script src="lib/js/html5shiv.js"></script>
 		<![endif]-->
@@ -125,20 +129,33 @@
 						<h3>Lucas Kanade Algorithm</h3>
 						<p>
 							Diferenčný prístup. Podľa parametru šírky okna hľadá pixely, ktoré sa posunuli o rovnaký vektor. Výpočtovo náročné preto sa používajú gausovské pyramídy (najčastejšie level 3). Náchylné na šum.<br>
-							<img src="https://www.dropbox.com/s/mbkcl2new2mgaha/L-K.png?raw=1">
+							<img width="100%" src="https://www.dropbox.com/s/mbkcl2new2mgaha/L-K.png?raw=1">
 						</p>
 
 						<aside class="notes">
 	        		<ul>
-								<li></li>
+								<li>differential techniques, region-based matching, energy based methods</li>
+								<li>predpoklad: v+setky body sa pohli rovnakym smerom a rychlostous</li>
+								<li>Least Mean Square estimation</li>
 							</ul>
 	    			</aside>
 					</section>
 
 				<section>
 					<p>Zlepšenie: použitie algoritmu iba na zaujímavé časti obrazu (filtrácia pomocou Horn Schunck algoritmu).</p>
-					<img src="https://www.dropbox.com/s/mvi3cuckd7tbnqg/L-K2.png?raw=1">
-					<p>Založené na článku:<small>Motion Detection Using Lucas Kanade Algorithmand Application Enhancement (2009)</small></p>
+						<img width="40%" src="https://www.dropbox.com/s/mvi3cuckd7tbnqg/L-K2.png?raw=1" style="float:left">
+						<br>
+						<br>
+						$$E_r ( u , v ) = 1/2 ( | ∇ u |^2 + | ∇ v |^2 )$$<br>
+						<p>Založené na článku: Motion Detection Using Lucas Kanade Algorithmand Application Enhancement (2009)</p>
+
+
+					<aside class="notes">
+						<ul>
+							<li>Pridana podmienka ze susedne body sa musia pohybovat rovnkou/podobnou rychlostou</li>
+							<li>Iteracie</li>
+						</ul>
+					</aside>
 				</section>
 
 					<section>
@@ -150,10 +167,30 @@
 							<li>Rozlišovanie context-sensitive (zhlukovanie fixácií) alebo skôr rozptýlenie fixácií na vedšiu plochu obrazu</li>
 						</ul>
 						<p>Založené na článku:<small>Video viewing: do auditory salient events capture visual attention? (2013)</small></p>
+
+						<aside class="notes">
+							<ul>
+								<li>Potrebuje viac vyskumu, ktore maju aky vplyv</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<h2>Poznámky</h2>
 						<p>Postrehy k najznámejším modelom saliency (image only modely) prezentovaných a testovaných v <a target="_blank" href="http://saliency.mit.edu/results_cat2000.html"> mit saliency benchmark</a>.</p>
+
+						<aside class="notes">
+							<ul>
+								<li>Porovnanie mnoztva modelov</li>
+								<li>pouzite 2 roznych datasetov<ol>
+									<li>mit300 </li>
+									<li>cat2000 - 100 images of each of 20 different stimuli categories</li>
+								</ol>
+							</li>
+							<li>1) 42 models, 5 baselines, 7 metrics, and counting...</li>
+							<li>2) 12 models, 4 baselines, 7 metrics</li>
+
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<ul>
@@ -195,6 +232,13 @@
 						<h3>SAVAM</h3>
 						<iframe width="560" height="315" src="https://www.youtube.com/embed/eMSTmIb6LJ4" frameborder="0" allowfullscreen></iframe>
 						<p>Obsahuje 41 videí, ktoré pozorovalo 50 rôznych používateľov vo veku 18-56</p>
+						<aside class="notes">
+							<ul>
+								<li>Rusi</li>
+								<li>Kvalitne pristoje 20 fixacii/frame</li>
+								<li>Application to video compression</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<h3>Auditory dataset</h3>
