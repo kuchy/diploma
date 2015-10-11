@@ -9,6 +9,11 @@ imageNames = dir(fullfile(folder,'*.jpg'));
 imageNames = {imageNames.name}';
 evulationTimes= zeros(length(imageNames),1);
 
+% Parameters
+modelFunction = str2func(model');
+memoryRange = 24;
+activeMemory = {};
+
 for ii = 2:length(imageNames)
     frameName = fullfile(folder,imageNames{ii-1});
     oldFrame = imread(frameName);
@@ -17,10 +22,23 @@ for ii = 2:length(imageNames)
     tic;
     switch nargin(modelFunction)
         case 1
-            map = modelFunction(img);
+            aktualFrame = modelFunction(img);
         case 2
-            map = modelFunction(img, oldFrame);
+            aktualFrame = modelFunction(img, oldFrame);
     end
+    
+    % regenerate aktual map
+    if (size(activeMemory,1) ~= 0)
+        % parametrize memory size
+        modFrame = size(activeMemory,2);
+        modFrame = mod(modFrame, memoryRange)+1;
+        activeMemory{modFrame} = aktualFrame;
+        map = mean(cat(3,activeMemory{:}),3);
+    else
+        activeMemory{1} = aktualFrame;
+        map = aktualFrame;
+    end
+
     imwrite(map,fullfile(folder, mapsSubdirectory,model,imageNames{ii})); 
     time = toc;
     evulationTimes(ii) = time;

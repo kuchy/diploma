@@ -87,8 +87,6 @@ set(handles.listbox1, 'String', modelFiles);
 
 set(handles.uitable1, 'data', data);
 
-
-
 % --- Outputs from this function are returned to the command line.
 function varargout = main_OutputFcn(hObject, eventdata, handles) 
 % varargout  cell array for returning output args (see VARARGOUT);
@@ -255,3 +253,84 @@ function figure1_DeleteFcn(hObject, eventdata, handles)
 
 % cleanup temporary data after exit
 system('rm -rf temp/*');
+
+
+% --- Executes on button press in pushbutton7.
+function pushbutton7_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbutton7 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+
+% --- Executes on key press with focus on pushbutton7 and none of its controls.
+function pushbutton7_KeyPressFcn(hObject, eventdata, handles)
+% hObject    handle to pushbutton7 (see GCBO)
+% eventdata  structure with the following fields (see UICONTROL)
+%	Key: name of the key that was pressed, in lower case
+%	Character: character interpretation of the key(s) that was pressed
+%	Modifier: name(s) of the modifier key(s) (i.e., control, shift) pressed
+% handles    structure with handles and user data (see GUIDATA)
+
+
+% --- Executes on button press in pushbutton8.
+function pushbutton8_Callback(hObject, eventdata, handles)
+index=get(handles.listbox1,'value');
+list=get(handles.listbox1,'string');
+functionName = cellstr(list(index));
+video(functionName{1});
+% hObject    handle to pushbutton8 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+
+% --- Executes on key press with focus on pushbutton8 and none of its controls.
+function pushbutton8_KeyPressFcn(hObject, eventdata, handles)
+% hObject    handle to pushbutton8 (see GCBO)
+% eventdata  structure with the following fields (see UICONTROL)
+%	Key: name of the key that was pressed, in lower case
+%	Character: character interpretation of the key(s) that was pressed
+%	Modifier: name(s) of the modifier key(s) (i.e., control, shift) pressed
+% handles    structure with handles and user data (see GUIDATA)
+
+
+% --- If Enable == 'on', executes on mouse press in 5 pixel border.
+% --- Otherwise, executes on mouse press in 5 pixel border or over pushbutton8.
+function pushbutton8_ButtonDownFcn(hObject, eventdata, handles)
+% hObject    handle to pushbutton8 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+
+% --- Executes on button press in pushbutton9.
+function pushbutton9_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbutton9 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+index=get(handles.listbox1,'value');
+list=get(handles.listbox1,'string');
+functionName = cellstr(list(index));
+
+index=get(handles.listbox2,'value');
+list=get(handles.listbox2,'string');
+name = cellstr(list(index));
+name = name{1}; 
+
+videoData = get(handles.pushbutton1,'UserData');
+data = findVideoByName(name, videoData);
+
+tableData=get(handles.uitable1, 'data');
+
+% compute maps
+[avgtime, max, min, fps] = computeModelWithMemory(fullfile('temp',data.name), functionName{1});
+
+for ii = 1:length(tableData)
+    rowName = tableData(ii,1);
+    if strcmp(rowName{1}, functionName{1})
+        tableData(ii,2) = {avgtime};
+        tableData(ii,3) = {max};
+        tableData(ii,4) = {min};
+        tableData(ii,5) = {fps};
+    end
+end
+
+set(handles.uitable1, 'data', tableData);
