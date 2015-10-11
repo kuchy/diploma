@@ -20,13 +20,13 @@
 \bibliography{bibliography}
 
 \usepackage{float}
-%\usepackage[compact]{titlesec} 
+%\usepackage[compact]{titlesec}
 %\titlespacing{\section}{0pt}{28pt}{24pt}
 %\titlespacing{\subsection}{0pt}{25pt}{15pt} %left top down
 \setcounter{secnumdepth}{5}
 \setcounter{tocdepth}{5}
 
-%toto sposobi ze slova sa nebudu na konci riadkov rozdelovat pomlckami 
+%toto sposobi ze slova sa nebudu na konci riadkov rozdelovat pomlckami
 \tolerance=100000000
 \hyphenpenalty 10000000
 \exhyphenpenalty 10000000
@@ -52,18 +52,18 @@ pdfsubject={\fakulta}
 
 \hypersetup{citecolor=black}
 
-\setlength{\parindent}{0pt} 
+\setlength{\parindent}{0pt}
 \definecolor{light-gray}{gray}{0.93}
 \definecolor{darkgray}{rgb}{0.2,0.2,0.2}
 \definecolor{brown}{rgb}{0.3,0.15,0.0}
 
 %formatovanie zdrojoveho kodu - pre viac info a moznosti pouzi google
 \lstset{ %
-basicstyle=\footnotesize\ttfamily, 
-backgroundcolor=\color{light-gray},  
+basicstyle=\footnotesize\ttfamily,
+backgroundcolor=\color{light-gray},
 language=PHP,
 breaklines=true,
-%columns=flexible,  
+%columns=flexible,
 showspaces=false, % show spaces adding particular underscores
 showstringspaces=false, % underline spaces within strings
 escapeinside={\%*}{*)}, % if you want to add a comment within your code
@@ -72,7 +72,7 @@ stringstyle=\color{brown},
 }
 %nastavenie klucovych slov ktore maju byt inak zvyraznene
 \lstset{
-morekeywords={try,class,extends,__construct,var, construct,this,parent,catch,new,protected,private,public,function,return}, 
+morekeywords={try,class,extends,__construct,var, construct,this,parent,catch,new,protected,private,public,function,return},
 keywordstyle=\color{black}\bfseries
 }
 
@@ -85,23 +85,7 @@ keywordstyle=\color{black}\bfseries
 \tableofcontents
 \newpage
 
-\chapter{Úvod}
-\input 00_uvod.tex
-
-\chapter{Charakteristika - obrazky, zoznamy...}
-\input 02_charakt.tex
-
-\chapter{Návrh - ako vložiť ukážku kódu}
-\input{03_navrh.tex}
-
-\chapter{Záver}
-\input zaver.tex
-\printbibliography
-\addcontentsline{toc}{chapter}{Zoznam použitej literatúry}  %pridanie nadpisu zdrojov k obsahu
-
-
-\chapter*{Prílohy}   %hviezdicka ze necislovana kapitola  a nie je v obsahu
-\input prilohy.tex
+\input 00_obsah.tex
 
 \label{totalpages}
 \end{document}
