@@ -7,7 +7,14 @@ module.exports = function(grunt) {
         watch: {
             draft: {
                 files: ['draft/**/*.tex'],
-                tasks: ['latex','shell'],
+                tasks: ['latex','shell:open'],
+                options: {
+                    spawn: false
+                }
+            },
+            bibliography: {
+                files: ['draft/bibliography.bib'],
+                tasks: ['shell:biber'],
                 options: {
                     spawn: false
                 }
@@ -23,6 +30,9 @@ module.exports = function(grunt) {
         shell: {
             open: {
                 command: 'open draft/main.pdf'
+            },
+            biber: {
+                command: 'cd draft/; biber main;'
             }
 
         },
