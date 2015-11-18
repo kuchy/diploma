@@ -33,6 +33,7 @@ draft/*.mtc1
 draft/*.out
 draft/*.synctex.gz
 draft/*.pdf
+!draft/main.pdf
 
 # Mac finder files and hidden folders
 .DS_Store
