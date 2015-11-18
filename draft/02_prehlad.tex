@@ -9,8 +9,20 @@ TODO jeden obrazok-povodny/mapa/eyetracker vizualizacia
 Skupina algoritmov využívajúca význačné prechody v obraze inak nazývane hrany.
 TODO
 \subsection{Ittiho model}
-\subsection{spektralne rezidua}
-\subsection{Judd Model}
+Najznámejším modelom pre výpočet významných oblastí pre statické farebné obrazy je ittiho model navrhnutý v roku 1998. Model zakladá na rozložení obrazu na 3 základné charakteristiky obrazu a to farbu, intensitu, orientaciu.
+
+\begin{wrapfigure}{r}{6cm}
+\includegraphics[width=7cm]{pics/itti-1.png}
+\caption{Itti model general workflow.}\label{wrap-fig:1}
+\end{wrapfigure}
+
+Chrakteristika farby obsahuje 12 máp (šedotónové obrazy), pričom model používa farebný model RGB. Nazačiatku sa vypočíta intenzita podľa vztahu \begin{math} I = (R+G+B)/3\end{math}. Pomocou mapy I sa následne normalizujú všetky farebné kanáli modelu RGB. Model extrahuje 4 farebné kanáli červený (r), zelený (g), modrý (b), zltý (y) a pomocou Gausvých pyramíd vytvorí 3 rôzne mapy každej farebnej zložky separátne. Červená zložka sa počíta difenčným spôsobom ako \begin{math} R = r - (g + b)/2 \end{math}, zelená ako \begin{math} G = g - (r + b)/2 \end{math}, modrá ako \begin{math}B = b - (r + g)/2\end{math} a žltá ako \begin{math}Y = (r + g)/2 - |r - g|/2 - b\end{math}. Chrakteristika intenzity obsahuje 6 máp. Získaná je pomocou orientovaných gáborových filtrov s orientáciou 0\degree, 45\degree, 90\degree, 135\degree. Dokopy 42 máp charakteristík je následne linárne skombinovaných do jednej saliency mapy\cite{itty-98}.
+
+
+\subsection{Spektralne rezidua}
+Medtóda využíva princím, že potláča štatisticky často opakujúce sa časti obrazu a do popredia stavia časti obrazu ktoré sa štatisticky odlišujú od ostatných. Na detekciu používa rýchlu fourierovu transformáciu. Pomocou nej rozdelí obrázok na amplitúdovú čast a fázovú čast. Amplitúdová zložka sa následne vyhladí čím sa do popredia dostanú iba informácie ktoré sa vymykajú z priemeru. Odčítaním od pôvodnej amplitúdoje zložky dostaneme iba časti obrazu ktoré sú významné \cite{spectral-rezidual}
+TODO obrazok asi porovnanie s itty
+\subsection{Sun Model}
 \subsection{Rare Model}
 ...Context-Aware saliency, Weighted Maximum Phase Alignment Model, Torralba saliency, Murray model,
 \section{Metody pre videá}
