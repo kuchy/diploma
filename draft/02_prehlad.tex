@@ -1,11 +1,13 @@
-\\\\
 \section{Úvod do problematiky}
-Saliency a teda detekcia významných oblatí je využívaná roznych oblastiach. Počínajúc automatizáciou je tažiskom pri segmentácií obrazu alebo detekcíi špecifických objektov. Od saliency modelov sú taktiež závyslé aj programy ovládajúce zabezpečovacie zariadenia. Až po reklamu kde je vyzuálna pozornosť klúčovým parametrom čo može rozhodnúť o úspechu produktu, veď aký význam by mala reklama kde si nevšimnete prezentovaný produkt.
+Saliency a teda detekcia významných oblastí je využívaná rôznych oblastiach. Počínajúc automatizáciou je tažiskom pri segmentácií obrazu alebo detekcíi špecifických objektov. Od saliency modelov sú taktiež závyslé aj programy ovládajúce zabezpečovacie zariadenia. Až po reklamu kde je vyzuálna pozornosť klúčovým parametrom čo može rozhodnúť o úspechu produktu, veď aký význam by mala reklama kde si nevšimnete prezentovaný produkt, alebo si všimnete iba jeho "menej" dokonalé časti.
 \section{Metody pre statické obrázky}
-Algoritmy pre statické oblasti tvoria základ všetkých saliency modelov a tvoria najstaršiu oblasť výskumu. V tejto časti uvediem prehlad algoritmov pre výpočet saliency modelov od najjednoduchších cez najznámejšie až po nejefektívnejšie.
-\subsection{Baseline Center}
+Algoritmy pre statické obrazy tvoria základ všetkých saliency modelov a tvoria najstaršiu oblasť výskumu. V tejto časti uvediem prehľad algoritmov pre výpočet saliency modelov od najjednoduchších cez najznámejšie až po nejefektívnejšie. Na záver uvediem porovnanie všetkých metód pomocou všeobecne uznávaných metrík a dát získaných z zariadní merajúcich pohyb očí používateľa (eyetrackera).
+\subsection{Baseline Center}\label{section:caseline-center}
+Baseline center je triviálny model ktorý sa vypočítava pomocou Gaussovej krivky vzľadom na pomer strán čím predpokladá salientné oblasti presne v strede obrazu. Nezachytáva však žiadne sémantické aspekty videa ako ani podvedome informácie vnímanania obrazu iba rozlíšenie dané optikou skenujúcou scénu.
+TODO jeden obrazok-povodny/mapa/eyetracker vizualizacia
 \subsection{Hrany}
-\subsection{Prechody}
+Skupina algoritmov využívajúca význačné prechody v obraze inak nazývane hrany.
+TODO
 \subsection{Ittiho model}
 \subsection{spektralne rezidua}
 \subsection{Judd Model}
