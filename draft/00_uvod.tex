@@ -1,23 +1,16 @@
 
 Ľudské oko je schopné spracovať \begin{math}10^8\end{math} až \begin{math}10^9\end{math} bitov obrazových
 dát za sekundu. Ludský mozog nie je schopný spracovať také možstov dát naraz,
-preto sa získané informácie filtrujú pomocou ľudského vizuálneho systému. Ľudský vizuálny systém
+preto sa získané informácie filtrujú pomocou ľudského vizuálneho systému\cite{Fmph-videnie}. Ľudský vizuálny systém
 je pravdepodobne najzložitejším mechanizom akým človek disponuje. Je natoľko klúčovým pre fungovanie spoločnosti či jedinca, že
 psychológovia sa zaoberajú jeho výskumom. Už viacero dekád študujú vlastnosti tohoto
-mechanizmu z pohladu psychológie, fyziológie alebo neurobiológie. \\
-
-Vyfiltrované oblasti obrazu už je možne spracovať v reálnom čase. Takéto oblasti sa nazívajú
-význammné (salient). Významné oblasti su vyberané pomocou mnoha faktorov. Najznámejšímy su prechody
-vo farbe, intenzite alebo orientácií. Ľudský vizuálný systém taktiež využíva
-skúsenosti pri pozorovaní. Oblasti takto vyfiltrované nesú pre pozorovateľa
-viac potencionálnych informácií ako ostatné oblasti obrazu. \\
-
-V systémoch počítačového videnia sa snažíme využivať primárne tieto oblasti pre
-pridelenie väčšej časti zdrojov. Z toho dôvodu je zistenie zaujímavých oblasti
-prvým krokom mnohých algoritmov v oblasti počítačového videnia.\\
-
-Algoritmy na detekciu význammných oblastí sa delia do 3 skupín podľa princípu
-akým spracovávajú dáta[Saliency in images and video: a brief survey]
+mechanizmu z pohladu psychológie, fyziológie alebo neurobiológie.
+\\
+Vyfiltrované oblasti obrazu už je možne spracovať v výrazne rýchlejšie ako nefiltrované, ideálne v reálnom čase. Takéto oblasti sa nazívajú význammné alebo charakteristické (v literatúre salient - prebrané v angličtiny). Významné oblasti su vyberané pomocou mnoha faktorov. Najznámejšímy su prechody vo farbe, intenzite alebo orientácií. Ľudský vizuálný systém taktiež využíva skúsenosti pri pozorovaní. Oblasti takto vyfiltrované nesú pre pozorovateľa viac potencionálnych informácií ako ostatné oblasti obrazu a preto sa stávajú salietnýmy.
+\\
+V systémoch počítačového videnia sa snažíme využívať primárne tieto oblasti pre pridelenie väčšej časti zdrojov. Z tohoto dôvodu je zistenie zaujímavých oblasti častým prvým krokom mnohých algoritmov v oblasti počítačového videnia.
+\\
+Algoritmy na detekciu význammných oblastí sa delia do 3 skupín podľa princípu akým spracovávajú dáta\cite{brief-survey}
 
   \begin{enumerate}
 
@@ -31,18 +24,12 @@ akým spracovávajú dáta[Saliency in images and video: a brief survey]
 
           \item Algoritmy využívajúce neurónové siete.
 
-  \end{list_type}
- \\
-Cieľom práce je štúdium a výskum nových metód na detekciu významných oblastí vo videu.
-Následne porovnanie nových métod s existujúcimi v rôznych štandardnych oblastiach ako aj v rýchlosti výpočtu. \\
+  \end{enumerate}
 
-V prvej časti sa nachádza prehľad metód na detekciu významných oblastí vo videu,
-alebo metód na detekciu v statických obrazoch ktoré je možné aplikovať aj vo videu.
-Ďalej detailné vysvetlenie fungovania metód ktoré budú použité v implementácií zlepšenia. \\
-
-V druhej časti je popísaný postup a princíp zlepšenia. Následne porovnanie s metódamy
-uvedenýmy v prvej časti.
-
+Cieľom práce je štúdium a výskum nových metód na detekciu významných oblastí vo videu. Následne porovnanie nových métod s existujúcimi v rôznych štandardnych oblastiach ako aj v rýchlosti výpočtu.
 \\
-Ďalej.....  \\
+V prvej časti sa nachádza prehľad metód na detekciu významných oblastí vo videu, alebo metód na detekciu v statických obrazoch ktoré majú potenciál pre použitie aj vo videu. Ďalej detailné vysvetlenie fungovania metód ktoré budú použité v implementácií zlepšenia.
+\\
+V druhej časti je popísaný postup a princíp zlepšenia. Následne porovnanie s metódamy uvedenýmy v prvej časti.
+\\
 V závere....
