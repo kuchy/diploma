@@ -17,16 +17,25 @@ TODO
 Video obsahuje rozsiahlejšie možnosti ako iba obrazová informácia, pribúdajú dalšie rozmery ako je pohyb objektov na obraze alebo vplyv zvuku na ľudské vnímanie. Avšak oproti obrazu obsahuje je potrebné spracovávať vedšie množtvo
 dát. Navyše vo vedšine algoritmov využívajúcich saliency modely je potrebné aby model dával výsledky v reálnom čase. Používané hlavne v oblasti zabezpečovacej techniky.
 \subsection{Zohladnenie audio informácie}
-1)http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=6616164
-2)http://www.gipsa-lab.grenoble-inp.fr/~antoine.coutrot/Coutrot_ICIP2014.pdf
-3)http://www.gipsa-lab.grenoble-inp.fr/~antoine.coutrot/Coutrot_2013_Annals_of_Telecommunications.pdf
+Saliency modely využívaju rôznorodé druhy príznakov a to od geneticky zakorenených ako sú prechody farieb, alebo intenzít, až po sémantické príznaky ako je detekcia tváre \cite{salient-faces}. Majoritná vedšina saliency modelov využíva iba obrazovú zložku ale zvuková stopa býva ponechaná stranou ale úplne zanedbaná. Použitie zvuku je známimtrikom filmovej scény uz desatročia, kde režiséri posilnujú kontrolu nad diváckou pozornosťou pomocou práve pomocou zvukového doporovodu. Prvé štúdie sa zaoberali detekciou reči a tváre, kde je spojitosť jednoznačná \cite{sound-1}. Neskoršie štúdie dokazujú korelácie aj na všeobecnejšej úrovni a pokusy o extrakciu samotnej charakteristiky zo zvukovej stopy\cite{sound-coutrot-1}. Tieto pokusy viedli aj zostaveniu modelov zohladnujúch zvukovú stopu ako samostatnú charakteristiku spolu s kombináciou s nízko-urovnovým príznami obrazu \cite{sound-courot-2}.
+
+\begin{wrapfigure}{r}{5.5cm}
+\includegraphics[width=7cm]{pics/courot-1.png}
+\caption{Audiovisual model workflow.\cite{sound-courot-2}}\label{wrap-fig:1}
+\end{wrapfigure}
+
+Model extrahuje video na sekvenciu obrazov (framy) a audio stopu v tvare grafu vlnovej dĺžky. Potom extrahuje 3 typy rôznych chrakteristík. Nízko-úrovnové príznaky založené na biologicky inširovaných saliency modeloch rozdelených na dynamickú časť a satickú časť. Statická časť sa zameriava na najasnejšie a najkontrastnejšie časti obrazu. Dynamická časť sa zameriava na relatívny pohyb objektov vhľadom na pozadie (eliminácia pohybu kamery). Tieto 2 časti sa nakoniec spoja
+Dalšou chrakteritikou použitou v tomto modeli je detekcia tváre. Každý objekt klasifikovaný ako tvár je v saliency mape nahradený oválnym objektom, intensita daných objetov je daná pomocou metódy Speaker Diarization, ktorá detekuje podľa zvukovej stopy objekt ktorý generuje zvuk. Metóda predpokladá striedavú konverzáciu n objektov oddelenú pauzou. Následne spojí vyššie spomýnané charakteristiky do jden výslednej mapy. Ako posledný krok preloží cez celú mapu baseline center model popísaný v časti \ref{section:caseline-center}.
+
 \subsection{Detekcia pohybu}
 V tejto časti sa zmeriame na segmentáciu objektov ktoré sa na scéne pohybujú. Taktéto obrazy sú v ľudskom vyzuálnom systéme vysoko hodnotené. Dôvody, prečo takto ludský vyzuálny systém pridáva prijoritu práve takýmto oblastiam možeme nájsť v antropológií (najsť zdroj!). Vysvetlenie je jednoduché a to snaha zabezpečit bezpečné prostredie okolo seba a všetko pohybujúce sa narušuje pocit bezpečnosti. V nasledujúcom texte rozoberieme 2 najpožívanejšie algoritmy používané na detekciu oblastí pohybu v obraze. Prvým z nich bude LUCAS KANADE[anotacia!], a druhým Horn Schunck[anotacia!].
 TODO:
-#http://ieeexplore.ieee.org/xpl/login.jsp?tp=&arnumber=4269999&url=http%3A%2F%2Fieeexplore.ieee.org%2Fxpls%2Fabs_all.jsp%3Farnumber%3D4269999
+\iffalse
+  #http://ieeexplore.ieee.org/xpl/login.jsp?tp=&arnumber=4269999&url=http%3A%2F%2Fieeexplore.ieee.org%2Fxpls%2Fabs_all.jsp%3Farnumber%3D4269999
+\fi
 \section{Metódy Využívajúce neurónové siete}
-\section{Refenčné datasety}
-RSD, SAVAM, AUDITORY DATASET
 \section{Metriky úspešnosti}
 Zobrat z MIT saliency
+\section{Refenčné datasety}
+RSD, SAVAM, AUDITORY DATASET
 \section{Porovnanie štandardných Metód}
