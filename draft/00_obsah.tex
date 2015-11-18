@@ -1,0 +1,25 @@
+\input firstpages.tex
+\input abstract.tex
+
+\tableofcontents
+\newpage
+
+\chapter{Úvod}
+\input 00_uvod.tex
+
+\chapter{Prehlad literatúry}
+\input 02_prehlad.tex
+\chapter{Charakteristika - obrazky, zoznamy...}
+\input 02_charakt.tex
+
+\chapter{Návrh - ako vložiť ukážku kódu}
+\input{03_navrh.tex}
+
+\chapter{Záver}
+\input zaver.tex
+\printbibliography
+\addcontentsline{toc}{chapter}{Zoznam použitej literatúry}  %pridanie nadpisu zdrojov k obsahu
+
+
+\chapter*{Prílohy}   %hviezdicka ze necislovana kapitola  a nie je v obsahu
+\input prilohy.tex
