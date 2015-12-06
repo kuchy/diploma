@@ -62,14 +62,88 @@ Model extrahuje video na sekvenciu obrazov (framy) a audio stopu v tvare grafu v
 Dalšou chrakteritikou použitou v tomto modeli je detekcia tváre. Každý objekt klasifikovaný ako tvár je v saliency mape nahradený oválnym objektom, intensita daných objetov je daná pomocou metódy Speaker Diarization, ktorá detekuje podľa zvukovej stopy objekt ktorý generuje zvuk. Metóda predpokladá striedavú konverzáciu n objektov oddelenú pauzou. Následne spojí vyššie spomýnané charakteristiky do jden výslednej mapy. Ako posledný krok preloží cez celú mapu baseline center model popísaný v časti \ref{section:caseline-center}.
 
 \subsection{Detekcia pohybu}
-V tejto časti sa zmeriame na segmentáciu objektov ktoré sa na scéne pohybujú. Taktéto obrazy sú v ľudskom vyzuálnom systéme vysoko hodnotené. Dôvody, prečo takto ludský vyzuálny systém pridáva prijoritu práve takýmto oblastiam možeme nájsť v antropológií (najsť zdroj!). Vysvetlenie je jednoduché a to snaha zabezpečit bezpečné prostredie okolo seba a všetko pohybujúce sa narušuje pocit bezpečnosti. V nasledujúcom texte rozoberieme 2 najpožívanejšie algoritmy používané na detekciu oblastí pohybu v obraze. Prvým z nich bude LUCAS KANADE[anotacia!], a druhým Horn Schunck[anotacia!].
+V tejto časti sa zmeriame na segmentáciu objektov ktoré sa na scéne pohybujú. Metódy tohoto typu sa snažia vyzualizovať 3D prostredia (v našom prípade disponujeme výskou, širkou, časom) na 2D výstup (obrazový výstup). Takáto informácia dokáže priblížíť výpočtové modeli blyžšie k realite. Ludský vyzuálny systém totiž nepoužíva iba 2d vstup (ako to prebieha vo drvivej vedšine metód na výpočet významných oblastí). Taktéto obrazy sú v ľudskom vyzuálnom systéme vysoko hodnotené. Dôvody, prečo takto ludský vyzuálny systém pridáva prijoritu práve takýmto oblastiam možeme nájsť v antropológií (citacia?). Vysvetlenie je jednoduché a to snaha zabezpečit bezpečné prostredie okolo seba a všetko pohybujúce sa narušuje pocit bezpečnosti. V nasledujúcom texte rozoberieme 2 najpožívanejšie algoritmy používané na detekciu oblastí pohybu v obraze a výpočet vektoru posunu. Prvým z nich bude LUCAS KANADE\cite{lucas-kanade}, a druhým Horn Schunck\cite{horn-schunck}.
+
+\subsection{LUCAS KANADE}
+Algoritmus prvotne vnikol ako návrh pre časovú optimalizáciu problému výpočtu vektoru posunu medzi dvoma krivkami. Povodné intitívne riešenie vyžadovalo \begin{math} O(M^2 * N^2) \end{math} času pre výpočet daného vektoru ak M,N bolo rozlíšenie daného obrazového vzoru. Vtedy nahvrhovaná optimalizácia vyžadovala zadanie rozsahu hladania, pomocou ktorého sa vypočítali diferencie pre celý obraz a pre dalšiu iteráciu sa rozsah vypočítal pomocou horolezeckého algoritmu. Metóda Lucas Kanade využíva priestový gradient pre výpočet nových hodnôt a zároveň upravuje hodnotu rozsahu pri výpočte kažkého obrazového pixelu v obraze a nie iba po výpočte celého obrazu. Pomocou takejto úpravu naivného algortimu sa časová zložitosť zlepšila na \begin{math} O(M^2 log N) \end{math}\cite{lucas-kanade}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=10cm]{pics/lukas-kanade.jpg}
+  \caption{Vyzualizacie výsledkov algoritmu Lucas-Kanade vždy po 1 iterácíí}
+\end{figure}
+\vspace{10mm}
+
+\subsection{horn-schunck}
 TODO:
 \iffalse
   #http://ieeexplore.ieee.org/xpl/login.jsp?tp=&arnumber=4269999&url=http%3A%2F%2Fieeexplore.ieee.org%2Fxpls%2Fabs_all.jsp%3Farnumber%3D4269999
 \fi
+
 \section{Metódy Využívajúce neurónové siete}
+TODO:
+
 \section{Metriky úspešnosti}
-Zobrat z MIT saliency
+Metriky úspešnosti sú algoritmy pre čo najpresnejšie vyjadrenie presnosti modelov v meratelných jednotkách. Takýto algoritmus dostáva na vstupe čisté dáta z eye trackera. Tieto je potrebné predspracovať z dôvodu, že každý výrobca poskytuje iné zariadenia na hardwarovej úrovni a výrobcovia neštandardizujú výstup do jednotnej formy. Následne je potrebné vytvoriť mapy fixácií ktorá sa používa ako jeden zo vstupných parametrov v algoritmoch rátajúcich metriky úspešnosti. \\
+Metriky úspešnosti možno rozdeliť do 3 štandardných skupín podľa druhu hodnôt na ktorý porovnávajú reálne dáta (v literatúre nazívané ground truth) s vygenerovanýmy mapamy význačných oblastí\cite{metrics-1}.
+\begin{enumerate}
+  \item\textbf{Založené na porovnávaní hodnôt} - NSS, Percentile, Pf
+  \item\textbf{Založené na vyhodnocovaní vzdialenistí} - AUC-Judd, AUC-Zhao, AUC Borji, AUC-Li
+  \item\textbf{Založeneé na distribúcií} - KL-Div, EMD, CC, SRCC
+\end{enumerate}
+
+\subsection{NSS}
+NSS (Normalized Scanpath Saliency) metrika narvrhnutá v roku 2005 ktorej autormi sú R. J. Peters a L. Itti. Metrika zakladá na ohodnotení salientných oblastí vzľadom na pozíciu fixácií samostatne a následná normalizácia podľa počtu fixácií. \\
+Pre každú fixáciu používa:
+\begin{figure}
+  \begin{equation}
+    NSS(p) =  (SM(p)-\SI{}{\micro}_{SM}) / 	\sigma_{SM}
+  \end{equation}
+  \caption{kde SM je mapa význačných oblastí a p je bod danej fixácie pre ktorú sa hodnota vypočítava.}
+
+  \begin{equation}
+    NSS = 1/N * \sum_{p=1}^{N}NSS(p)
+  \end{equation}
+  \caption{normalizácia vzľadom na počet fixácií}
+\end{figure}
+
+\subsection{AUC-Judd}
+
+\subsection{KL-Div}
+
+Každý projekt vytvárajúci model významných oblastí si volí vlastné metriky úspešnosti podľa ktorých sa určuje úspešnosť daného modelu. Pre meranie úspešnosti modelov je okrem samotných algoritmov pre meranie úspešnosti potrebné zabezpečiť dostatočne rôznorodú skupinu testovacích dát tkz. datasetov.
+
 \section{Refenčné datasety}
-RSD, SAVAM, AUDITORY DATASET
+Dataset je testovacia množina ktorá sa snaží obsiahnuť dostatočne rôznorodé vzorky vhodné pre komplexné testovanie. Pri zostavovaní datasetov sú dôležité nielen videá ale eyetracker data alebo nejakým spôsobom zverejnené fixácie, aby bolo možné výsledky validovať pomocou vyššie uvedených metrík. Poslednou charakteristikou datasetu je množsto ludí na ktorých boli dané viedeá nahrávané. \\ Príklady datasetov:
+\begin{itemize}
+	\item \textbf{RSD}\cite{rsd}
+	\item \textbf{SAVAM}\cite{savam}
+	\item \textbf{AUDITORY DATASET}\cite{courot-dataset}
+\end{itemize}
+
+\subsection{RSD}
+Regional Saliency Dataset je zaujímavý o čo najobšírnejšie testovanie je rozdelený do 4 havných kategórií: \\
+\begin{itemize}
+	\item \textbf{bezpečnostné záznamy} - Štadardné záznamy z bezpečnostných kamier obsahujú statické pozadie a salientné pohybujúce sa objekty. Pre túto čast datasetu vyžili záznamy z prjektu CAVIAR\cite{rsd-caviar}.
+	\item \textbf{Grafika} - Použité animované filmy/seriáli ktoré obsahujú 2D aj 3D grafiku.
+  \item \textbf{Prirodzené videá s prvkami grafiky} - Prirodzené videá  podobné bezpečnostným ale s prvkamy umelo vložených priamo do obrazového kanálu.
+  \item \textbf{Prirodzené videá} - Videá bez pridaných grafických prvkov, tak ako boli nasnímané kamerou.
+\end{itemize}
+
+Na vyznačenie zaujímavých oblastí nezvolili techniku (eyetracke) ale manuálne vyznačovanie zaujímavých oblastí pomocou používatelov. Výskumu sa zúčastnilo 17 mužov 6 žien medzi 10-23 rokov, na označení každého z videa sa podielalo 10-23 ludí.
+
+\begin{figure}[H]
+ \centering
+ \includegraphics[width=7cm]{pics/rsd.png}
+ \caption{Ukážka z každej kategórie videa s oznčeným významnýmy oblastami}
+\end{figure}
+\vspace{10mm}
+
+\subsection{SAVAM}
+SAVAM (Semiautomatic Visual-Attention Modeling) je dataset nahrávaný priamo pomocou eyetrackera pri sledovaní videí v HD rozlíšení pričom pre každému nahrávanému používateľovy sú pridelené dáta seprátne pre kažké oko. Dokopy obsahuje 13minút videa ktoré bolo otestované na 50 používateľoch rôzneho veku. Dataset je rozdelený na videá z filmov, ukážky z komerčných videí a stereoskopické videá. SAVAM taktiež poskytuje všetky raw dáta z eyetrackere ako aj vizualizácie daných dát\cite{savam}.
+
+\subsection{AUDITORY DATASET}
+Posledný dataset ako jediný poskytuje aj audio informácie ktoré je možné ďalej spracovávať.
+
+
 \section{Porovnanie štandardných Metód}
