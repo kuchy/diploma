@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Detekcia významných oblastí vo videu</title>
+
+		<meta name="description" content="diploma thesis progress presentation">
+		<meta name="author" content="Martin Kuchyňár">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h2>Detekcia významných oblastí vo videu</h2>
+					<h3>EN: Spatio-temporal salient object detection</h3>
+					<p>
+						<small>Created by <a href="http://davinci.fmph.uniba.sk/~kuchynar1/diplomovka/">Martin Kuchyňár</a> / <a href="https://github.com/kuchy">@kuchy</a></small>
+					</p>
+
+					<aside class="notes">
+        		<ul>
+							<li>Zadanie prace</li>
+						</ul>
+    			</aside>
+				</section>
+
+				<section>
+					<h2>Ciele v oblasti detekcie významných oblastí vo videu</h2>
+					<ul>
+						<li>Naštudovanie</li>
+						<li>Návrh zlepšenia</li>
+						<li>Implementácia</li>
+						<li>Porovnanie výsledkov</li>
+					</ul>
+
+					<aside class="notes">
+        		<ul>
+							<li>Ciele vytycene skolitelom prace (RNDr. Elena Šikudová, PhD.)</li>
+						</ul>
+    			</aside>
+				</section>
+
+		<section>
+			<section>
+				<h2>Implementácia</h2>
+				<ul>
+					<li>Matlab</li>
+					<li>Pseudomodulárna app
+						<ul>
+							<li>Modely</li>
+							<li>Metriky</li>
+							<li>Porovnanie časovej náročnosti</li>
+							<li>Načítanie eyetracking dát - Per dataset</li>
+							<li>Live testing</li>
+							<li>Prvé náznaky nového modelu</li>
+						</ul>
+					</li>
+				</ul>
+			</section>
+
+			<section>
+				<h3>Detekcia pohybu ako klúčová zložka</h3>
+				<ol>
+					<li>gausove pyramídy</li>
+					<li>Horn-Struck algoritmus</li>
+					<li>Spojenie oblastí podla vzdialenosti a smeru</li>
+				</ol>
+
+				<p>Ostatné zložky: nízkoúronové príznaky, zvuková stopa (COUTROT model)</p>
+			</section>
+
+			<section>
+				<video width="320" height="240" controls>
+					<source src="img/first.mp4" type="video/mp4">
+					<source src="img/first.mp4" type="video/ogg">
+					Your browser does not support the video tag.
+				</video>
+			</section>
+
+
+			<section>
+				<p>Navrhy na nove modely: https://github.com/kuchy/diploma/issues</p>
+				<img src="img/proto-5.png">
+			</section>
+		</section>
+
+				<section>
+					<section>
+						<h3>SAVAM</h3>
+						<iframe width="560" height="315" src="https://www.youtube.com/embed/eMSTmIb6LJ4" frameborder="0" allowfullscreen></iframe>
+						<p>Obsahuje 41 videí, ktoré pozorovalo 50 rôznych používateľov vo veku 18-56</p>
+						<p>Stiahnutelné všetky videa + vizualizacie fixacii, raw gaze_data (nie fixacie) - pre lave okolo a prave oko</p>
+						<p>Koli meraniu metrik je potrebne napisat parser</p>
+					</section>
+					<section>
+						<h3>Implementácia nažítavanie dát z tohoto datasetu</h3>
+							<p>Nacita raw data z eyetrackera</p>
+							<img src="img/savam-1.png"/>
+					</section>
+					<section>
+							<p>Vyzualizácia (kôli kontrole dát v pripravenej štruktúre)</p>
+							<p>Validácia oproti zverejneným videám</p>
+							<img src="img/savam-2.png"/>
+					</section>
+					<section>
+						<video width="320" height="240" controls>
+							<source src="img/v01_Hugo_2172_left.avi" type="video/mp4">
+							<source src="img/v01_Hugo_2172_left.avi" type="video/ogg">
+							Your browser does not support the video tag.
+						</video>
+						<video width="320" height="240" controls>
+							<source src="img/savam-sample.avi" type="video/mp4">
+							<source src="img/savam-sample.avi" type="video/ogg">
+							Your browser does not support the video tag.
+						</video>
+					</section>
+					<section>
+							<p>Implmentovanie prístupných metrík</p>
+							<p><a target="_blank" href="https://github.com/cvzoya/saliency/">https://github.com/cvzoya/saliency/</a></p>
+							<p>Predprogramovane vsetky zakladne metriky ako AUC, CC, EMD, NS...</p>
+							<img src="img/metrics.png"/>
+					</section>
+
+					<section>
+						<h3>Coutrot Database</h3>
+								<p>Volne dostupné videa</p>
+								<p>Priamo .mat subory ale niesu to fixacie + nieje to s cim porovnat aspon vizaulizaciu</p>
+								<p>Koli meraniu metrik je potrebne napisat parser, </p>
+					</section>
+				</section>
+
+					<section>
+						<section>
+							<h2>Prototyp</h2>
+							<p>Testovanie ľubovolného počtu saliency modelov na ľubovolnom počte videí.
+							<img src="img/proto-1.png">
+						</p>
+						</section>
+
+						<section>
+							<h2>Modely</h2>
+							<ul>
+								<li>Jednoduche pridavanie modelov (video alebo image)<img src="img/proto-3.png"></li>
+								<li>Volba v GUI</li>
+								<li>Pridanie "pamete"</li>
+								<li>Porovnanie</li>
+								<img src="img/proto-4.png">
+							</ul>
+						</section>
+
+						<section>
+							<h2>Vizuálne porovnávanie</h2>
+							<p>
+								Simultálne sledovanie videa a saliency máp
+								<video width="320" height="240" controls>
+								  <source src="img/simul.mp4" type="video/mp4">
+								  <source src="img/simul.mp4" type="video/ogg">
+									Your browser does not support the video tag.
+								</video>
+							</p>
+						</section>
+
+						<section>
+							<h2>Porovnanie času výpočtu</h2>
+							<p>
+								<ul>
+									<li>Priemerný čas výpočtu 1 mapy</li>
+									<li>Najhorší čas výpočtu 1 mapy</li>
+									<li>Najlepší čas výpočtu 1 mapy</li>
+									<li>Počet vypočítaných framov za sekundu (fps)</li>
+								</ul>
+							<img src="img/proto-7.png">
+						</p>
+						</section>
+
+						<section>
+							<h2>Live - testovanie</h2>
+							<ul>
+								<li>Len ukážka</li>
+							</ul>
+						</section>
+					</section>
+
+
+						<section>
+							<section>
+								<h2>Text práce</h2>
+								<p>Predné strany v štandardnej forme (latex)</p>
+								<p>Štandardizovana bibliografia (BibTeX formát)</p>
+							</section>
+
+							<section>
+								<h2>Progress písania textu</h2>
+								<p>Úvod - Napísaný vyžaduje este gramatickú korektúru</p>
+								<p>Prvá kapitola - Napísaná z 90% </p>
+								<p>Druhá a tretia kapitola - Určené základné sekcie</p>
+								<p>Spolu < 40 stran aktuálna verzia dostupná <a href="https://github.com/kuchy/diploma/blob/master/draft/main.pdf">online</a></p>
+							</section>
+						</section>
+
+					<section>
+						<h2>Ďakujem Za pozornosť</h2>
+						<p> Miesto pre návrhy a otázky
+							<br><br>alebo<br><br>
+							<small>Pridaj <a target="_blank" href="https://github.com/kuchy/diploma/issues/new">issue</a> na githube</small><br>
+							<small>email: <a target="_blank" href="mailto:kuchynar1@uniba.sk">kuchynar1@uniba.sk</a> </small><br>
+						</p>
+					</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
