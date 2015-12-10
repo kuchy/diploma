@@ -86,8 +86,8 @@
 			<section>
 				<h3>Detekcia pohybu ako klúčová zložka</h3>
 				<ol>
-					<li>gausove pyramídy</li>
-					<li>Horn-Struck algoritmus</li>
+					<li>Zjednodušenie obrazu</li>
+					<li>Horn-Struck algoritmus + prahovanie</li>
 					<li>Spojenie oblastí podla vzdialenosti a smeru</li>
 				</ol>
 
@@ -95,11 +95,71 @@
 			</section>
 
 			<section>
+				<h3>Zjednodušenie obrazu</h3>
+				<ul>
+					<li>Gausove pyramídy</li>
+					<li>Keyframing</li>
+				</ul>
+			</section>
+
+			<section>
+				<h3>Detekcia pohybu</h3>
+				<p>Algoritmus: Horn-Struck algoritmus</p>
+				<h4>predpoklady</h4>
+				<ol>
+					<li>Jas obrazu sa vzhladom n čas nemení</li>
+					<li>Optický tok mení plynule v tom zmysle, že susediace body objektu majú takmer rovnakú rýchlosť</li>
+				</ol>
+			</section>
+
+			<section>
+				<h3>Spojenie regionov</h3>
+				<ul>
+					<li>Smer</li>
+					<li>Velkost</li>
+					<li>Poloha</li>
+				</ul>
+			</section>
+
+			<section>
+				<h3>Spojenie všetkých zložiek</h3>
+			</section>
+
+			<section>
+				<h3>Aktálne implementované riešenie</h3>
+				<p>Porovnanie výsledku detekcie pohybu a následné spojenie 2 najvedších regiónov pomocou konvexného obalu.</p>
+			</section>
+			<section>
+				<h3>Príklad 1</h3>
+				<img src="img/solution-aim.jpg">
+			</section>
+
+			<section>
+				<h3>Príklad 2</h3>
+				<img src="img/solution-good.jpg">
+			</section>
+
+			<section>
+				<h3>Worst case</h3>
+				<img src="img/solution-worst.jpg">
+			</section>
+
+			<section>
+				<p>Video</p>
 				<video width="320" height="240" controls>
-					<source src="img/first.mp4" type="video/mp4">
-					<source src="img/first.mp4" type="video/ogg">
+					<source src="img/newMethod.mp4" type="video/mp4">
+					<source src="img/newMethod.mp4" type="video/ogg">
 					Your browser does not support the video tag.
 				</video>
+			</section>
+
+			<section>
+				<h3>Riešenie</h3>
+				<ol>
+					<li>Porovnávanie smerových vektorov</li>
+					<li>Zohladnovnie vzdialenosti regiónov</li>
+					<li>Detekcia pohybu kamery (pozadia)</li>
+				</ol>
 			</section>
 
 
@@ -128,16 +188,7 @@
 							<img src="img/savam-2.png"/>
 					</section>
 					<section>
-						<video width="320" height="240" controls>
-							<source src="img/v01_Hugo_2172_left.avi" type="video/mp4">
-							<source src="img/v01_Hugo_2172_left.avi" type="video/ogg">
-							Your browser does not support the video tag.
-						</video>
-						<video width="320" height="240" controls>
-							<source src="img/savam-sample.avi" type="video/mp4">
-							<source src="img/savam-sample.avi" type="video/ogg">
-							Your browser does not support the video tag.
-						</video>
+						<p>Vyzualizácia ukážka</p>
 					</section>
 					<section>
 							<p>Implmentovanie prístupných metrík</p>
