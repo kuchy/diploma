@@ -12,7 +12,12 @@ for ii = 1:numberOfVideos
     modelName{ii} = pathToVideo{end};
 end
 
-figure
+hFig = figure(1);
+set(hFig, 'Position', [0 0 1024 1024])
+
+btn = uicontrol('Style', 'pushbutton', 'String', 'Save',...
+        'Position', [20 20 50 20],...
+        'Callback', 'saveScreenshot'); 
 
 i1 = 0;
 
@@ -36,5 +41,5 @@ while i1 < v1.NumberOfFrames && i1 < salVideo(1).NumberOfFrames
         end
     end
 
-    drawnow
+    drawnow       
 end
