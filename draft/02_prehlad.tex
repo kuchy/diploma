@@ -43,8 +43,6 @@ Výrazná vätšina modelov pozornosti typy bottom-up funguje ustáleným postup
   \caption{Rare model workflow}\label{wrap-fig:3}
 \end{figure}
 
-\subsection{TODO}
-Context-Aware saliency, Weighted Maximum Phase Alignment Model, Torralba saliency, Murray model
 \section{Metody pre videá}
 Video obsahuje rozsiahlejšie možnosti ako iba obrazová informácia, pribúdajú ďalšie rozmery ako je pohyb objektov na obraze alebo vplyv zvuku na ľudské vnímanie. Avšak oproti obrazu obsahuje je potrebné spracovávať vedšie množtvo
 dát. Navyše vo vetšine algoritmov využívajúcich saliency modely je potrebné aby model dával výsledky v reálnom čase. Používané hlavne v oblasti zabezpečovacej techniky.
@@ -168,4 +166,12 @@ Posledný dataset ako jediný poskytuje aj audio informácie ktoré je možné �
 
 
 \section{Porovnanie štandardných Metód}
-Porovnávanie metód je štandardne publikované formou ucelených benchmarkov. Príkladom takéhoto banchmarku je mit saliency benchmark\cite{mit-saliency-benchmark}, ktorý sa snaží zgrupovať a porovnávať obrazové modeli pozornosti. V tejto sekcií ďalej uvedieme iba vyualizácie všetkých vyššie uvedených metód, pomocou obrázkov z testovaného videa (vybrané z vyššie uvedených datasetov) a im prislúchajúcich saliency máp vygenerovaných pomocou popísaných modelov alebo metód. Ďalej ich porovnanie pomocou vyššie uvedených metrík a nakoniec uvedieme porovnanie výpočtovej zložitosti na jednotnej sade testovacích dát (reálne otestovaných na rovnakom hardware-i). V dalších sekciách podrobnejšie objasníme algoritmus a v prílohe uvedieme kód (v programovacom jazyku matlab) pre generovanie dát potrebných pre vizualizáciu pomocou implementovaný model pozornosti.
+Porovnávanie metód je štandardne publikované formou ucelených benchmarkov. Príkladom takéhoto banchmarku je mit saliency benchmark\cite{mit-saliency-benchmark}, ktorý sa snaží zgrupovať a porovnávať obrazové modeli pozornosti. V tejto sekcií ďalej uvedieme iba vyualizácie všetkých vyššie uvedených metód, pomocou obrázkov z testovaného videa (vybrané z vyššie uvedených datasetov) a im prislúchajúcich saliency máp vygenerovaných pomocou popísaných modelov alebo metód. Ďalej ich porovnanie pomocou výpočtových parametrov v tabulke.
+
+\begin{figure}[H]
+ \includegraphics[width=17cm]{pics/porovnanie-1.png}
+ \includegraphics[width=17cm]{pics/porovnanie-2.png}
+ \includegraphics[width=17cm]{pics/porovnanie-3.png}
+ \includegraphics[width=17cm]{pics/porovnanie-4.png}
+ \caption{Porovnanie vybraných algorithov na videu z datasetu RSD.}
+\end{figure}
