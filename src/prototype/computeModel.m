@@ -33,3 +33,4 @@ maxTime = num2str(max(evulationTimes));
 minTime = num2str(min(evulationTimes));
 fps = 1/averageTimeNum;
 disp(['average time of frame: ', averageTime]);
+clear modelFunction;
