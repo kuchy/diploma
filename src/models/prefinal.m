@@ -1,4 +1,4 @@
-function img= hornSchunckNew( CurrentFrame, PreviousFrameOrig )
+function img= hornSchunckNew( CurrentFrameOrig, PreviousFrameOrig )
 
 debug = false;
 
@@ -6,10 +6,9 @@ debug = false;
 % estimation
 
 %% Object flow estimation 
-% % todo cache old image, dymamic reducing or keyframing
 % % reduce image by gausian pyramid
-CurrentFrame = impyramid(CurrentFrame, 'reduce');
-CurrentFrame = impyramid(CurrentFrame, 'reduce');
+CurrentFrameOrig = impyramid(CurrentFrameOrig, 'reduce');
+CurrentFrameOrig = impyramid(CurrentFrameOrig, 'reduce');
 
 hsize=[5 5];
 sigma=1;
@@ -21,13 +20,13 @@ if isempty(PreviousFrame)
     PreviousFrame = impyramid(PreviousFrame, 'reduce');
     PreviousFrame= imfilter(rgb2gray(PreviousFrame),h,'replicate');
 end
-CurrentFrame=imfilter(rgb2gray(CurrentFrame),h,'replicate');
+CurrentFrame=imfilter(rgb2gray(CurrentFrameOrig),h,'replicate');
 [height, width]=size(PreviousFrame);
+
 
 alpha=10;
 % Number of iterations.
 iterations=3;
-
 
 TempU=zeros(height,width);
 TempV=zeros(height,width);
@@ -39,10 +38,6 @@ TempEy= conv2(double(CurrentFrame), double(0.25*[-1,-1;1,1]),'same') + conv2(dou
 
 TempEt= conv2(double(CurrentFrame), double(0.25*ones(2)),'same') + conv2(double(PreviousFrame), double(-0.25*ones(2)),'same');
 
-% TempNormal=TempEt./sqrt(TempEy.^2+TempEx.^2);
-% TempNormal(isnan(TempNormal))=0;
-% TempNormal(isinf(TempNormal))=0;
-% size(TempEx);
 for i=iterations
     ubar=conv2(double(TempU),Window,'same');
     vbar=conv2(double(TempV),Window,'same');
@@ -62,8 +57,10 @@ if isempty(TTL)
 end
 
 %% Marging regions by velocity && distance
+objectFlowThreshold = 0.2;
+
 % thresholding for regioprops
-img = abs(img) > 0.2;
+img = abs(img) > objectFlowThreshold;
 
 cc = bwconncomp(img,8);
 rp = regionprops(img, 'Area', 'PixelList','centroid','Extrema', 'PixelIdxList');
@@ -75,11 +72,12 @@ if (cc.NumObjects > 2)
 %      rp=rp(ind);
 %     try
 %         finding shifting by region
-        horizontalAverage = zeros(cc.NumObjects);
-        verticalAverage = zeros(cc.NumObjects);
+        horizontalAverage = zeros(cc.NumObjects,1);
+        verticalAverage = zeros(cc.NumObjects,1);
+        
         for regionIndex=1:cc.NumObjects             
-            horizontalAverage(regionIndex) = mean(TempV(rp(regionIndex).PixelIdxList));
-            verticalAverage(regionIndex) = mean(TempU(rp(regionIndex).PixelIdxList));
+            horizontalAverage(regionIndex) = max(TempV(rp(regionIndex).PixelIdxList));
+            verticalAverage(regionIndex) = max(TempU(rp(regionIndex).PixelIdxList));
         end
         
 %         create coocurrance matrix of distance of regions
@@ -107,13 +105,17 @@ if (cc.NumObjects > 2)
         end       
         img = mat2gray(img);
         
-%       Marge all regions with save directions
-        for regionIndexOne=1:round(cc.NumObjects/2)+1
-            for regionIndexTwo=round(cc.NumObjects/2)+1:-1:(regionIndexOne+1)                
-                horizontalCondition = abs(horizontalAverage(regionIndexOne) - horizontalAverage(regionIndexTwo)) < 0.2;
-                verticalCondition = abs(verticalAverage(regionIndexOne) - verticalAverage(regionIndexTwo)) < 0.2;
-                positionCondition = distanceAverage(regionIndexOne,regionIndexTwo) < 10;
-                if (horizontalCondition && verticalCondition && positionCondition)
+%         constants
+        velocityTreshold = 0.1;
+        distanceTreshold = 10;
+        
+%       Marge all regions with save directions and
+        for regionIndexOne=1:cc.NumObjects
+            for regionIndexTwo=regionIndexOne+1:1:cc.NumObjects
+                horizontalCondition = abs(horizontalAverage(regionIndexOne) - horizontalAverage(regionIndexTwo)) < velocityTreshold;
+                verticalCondition = abs(verticalAverage(regionIndexOne) - verticalAverage(regionIndexTwo)) < velocityTreshold;
+                positionCondition = distanceAverage(regionIndexOne,regionIndexTwo) < distanceTreshold;
+                if (verticalCondition && horizontalCondition && positionCondition)
                     if debug
                         disp(strcat(int2str(regionIndexOne), '-margeWith-',int2str(regionIndexTwo)));
                     end
@@ -139,18 +141,23 @@ if (cc.NumObjects > 2)
                 end
             end
         end    
-        
+    
+%   treshold matrix
+    img = img > 0;
     
     % apply ttl matrix
     img = img .* TTL;
 
 %   calculate coeficients
-%     TTL = ones(size(img)) - (img .* 0.2);
+    memoryCoeficient = 0.2;
 
-    TTL = ones(size(img));
-    for ii = 1:size(memory,2)
-        TTL = TTL - memory{ii};
+    if size(memory,2)>=20
+        TTL = ones(size(img));
+        for ii = 1:size(memory,2)
+            TTL = TTL - (memory{ii}/size(memory,2))*memoryCoeficient;
+        end
     end
+    
     
 %   TODO: 24frames memory
     modFrame = mod(frameNumber, memoryRange)+1;
@@ -158,6 +165,16 @@ if (cc.NumObjects > 2)
     frameNumber = frameNumber + 1;
     
 %   Apply gausian filter
+    hsize=[10 10];
+    sigma=1;
+    h = fspecial('gaussian',hsize,sigma);
+    
     img = imfilter(img, h);
     PreviousFrame = CurrentFrame;
+    
+    staticFeatures = spectralResidual(CurrentFrameOrig);
+    percentage = ((sum(img(:) > 0))/numel(img));
+    
+    img = (img .* (1-percentage)) + (staticFeatures .* percentage);
+    disp(percentage);
 end
