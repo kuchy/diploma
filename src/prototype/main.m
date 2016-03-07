@@ -1,4 +1,4 @@
-function varargout = main(varargin)
+    function varargout = main(varargin)
 % MAIN MATLAB code for main.fig
 %      MAIN, by itself, creates a new MAIN or raises the existing
 %      singleton*.
@@ -68,6 +68,8 @@ addpath(genpath('models'));
 
 % add to path metrics folder
 addpath(genpath('metrics'));
+
+addpath(genpath('datasets'));
 
 %inicialize table
 data=get(handles.uitable1, 'data');
@@ -364,6 +366,48 @@ function pushbutton11_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton11 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+index=get(handles.listbox3,'value');
+list=get(handles.listbox3,'string');
+databaseName = cellstr(list(index));
+
+index=get(handles.listbox1,'value');
+list=get(handles.listbox1,'string');
+functionName = cellstr(list(index));
+
+
+if strcmp(databaseName, 'ACCV2012_database')
+    print(strcat('Evaluation of: ',functionName{1}, ' on ',databaseName{1})); 
+    Evaluation(functionName{1});
+end
+
+% % SAVAM
+% videoData = get(handles.pushbutton1,'UserData');
+% 
+% index=get(handles.listbox2,'value');
+% list=get(handles.listbox2,'string');
+% video = cellstr(list(index));
+% name = video{1};
+% 
+% data = findVideoByName(name, videoData);
+% index=get(handles.listbox1,'value');
+% list=get(handles.listbox1,'string');
+% functionName = cellstr(list(index));
+% 
+% % TODO parametrize the frame number
+% saliencyPath = fullfile('temp',data.name,'saliency', functionName{1},'005.jpg');
+% saliencyMap = imread(saliencyPath);
+% video = VideoReader('/Users/kuchy/skola/diplomovka/src/prototype/datasets/savam/video/v04_LIVE1_0_left_gt.avi');
+% fixationMap = video.read(5);
+% % fixationMap = loader('v04_LIVE1_0');
+% % fixations = load('/Users/kuchy/skola/diplomovka/src/prototype/datasets/coutrot_database1.mat');
+% fixationMap=rgb2gray(fixationMap);
+% % figure; imshow(saliencyMap);
+% % figure; imshow(fixationMap);
+% saliencyMap = impyramid(saliencyMap, 'reduce');
+% saliencyMap = impyramid(saliencyMap, 'reduce');
+% fixationMap = impyramid(fixationMap, 'reduce');
+% fixationMap = impyramid(fixationMap, 'reduce');
+% AUC_Judd(saliencyMap, fixationMap, 0, 1)
 
 
 % --- Executes on button press in pushbutton12.
@@ -387,4 +431,14 @@ function pushbutton12_KeyPressFcn(hObject, eventdata, handles)
 function pushbutton13_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton13 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+
+% --- Executes on key press with focus on pushbutton11 and none of its controls.
+function pushbutton11_KeyPressFcn(hObject, eventdata, handles)
+% hObject    handle to pushbutton11 (see GCBO)
+% eventdata  structure with the following fields (see UICONTROL)
+%	Key: name of the key that was pressed, in lower case
+%	Character: character interpretation of the key(s) that was pressed
+%	Modifier: name(s) of the modifier key(s) (i.e., control, shift) pressed
 % handles    structure with handles and user data (see GUIDATA)
