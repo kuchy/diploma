@@ -376,7 +376,7 @@ functionName = cellstr(list(index));
 
 
 if strcmp(databaseName, 'ACCV2012_database')
-    print(strcat('Evaluation of: ',functionName{1}, ' on ',databaseName{1})); 
+    disp(strcat('Evaluation of: ',functionName{1}, ' on ',databaseName{1})); 
     Evaluation(functionName{1});
 end
 

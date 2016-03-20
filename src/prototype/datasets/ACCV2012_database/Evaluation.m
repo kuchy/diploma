@@ -4,7 +4,6 @@ modelFunction = str2func(ModelName);
     % for each video in the database
     for video = 1:1:24
 
-
      if     video ==1  
                       N_frames = 878;
      elseif video == 2 
@@ -129,6 +128,10 @@ modelFunction = str2func(ModelName);
 
                        [A,Aci] = auc([Iet1,map3],0.05,'hanley');
                        AUROC_score(1,frame) = mean(A);
+                       
+%                        % auc mit
+%                        AUC_Judd(map,ET,0,1);
+%                        movOld =  mov;
 
     end
 
@@ -136,7 +139,7 @@ modelFunction = str2func(ModelName);
     % you can change the .mat name if needed
     name = strcat(ModelName,num2str(video),'.mat');
     save(name,'KLDIV_score','NSS_score','AUROC_score');
-    movOld =  mov;
+    
 
     end
 end
