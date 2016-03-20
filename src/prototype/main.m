@@ -380,6 +380,11 @@ if strcmp(databaseName, 'ACCV2012_database')
     Evaluation(functionName{1});
 end
 
+if strcmp(databaseName, 'Coutrot')
+    disp(strcat('Evaluation of: ',functionName{1}, ' on ',databaseName{1})); 
+    EvaluationCoutrot(functionName{1});
+end
+
 % % SAVAM
 % videoData = get(handles.pushbutton1,'UserData');
 % 
