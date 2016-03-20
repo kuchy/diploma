@@ -61,7 +61,7 @@ modelFunction = str2func(ModelName);
     se = strel('ball',4,2);
     se1 = strel('rectangle',[12 2]);
 
-    name=strcat('videos/video',num2str(video),'.mp4');
+    name=strcat('datasets/ACCV2012_database/videos/video',num2str(video),'.mp4');
     xyloObj = VideoReader(name);
     mov = read(xyloObj, 1);
     movOld = zeros(size(mov));
@@ -69,10 +69,10 @@ modelFunction = str2func(ModelName);
     % for each frame in the video
     for frame = 1:1:N_frames
 
-        disp(strcat('Video: ',num2str(video),' -- Frame: ',num2str(frame)))
+        disp(strcat('Video: ',num2str(video),' -- Frame: ',num2str(frame), '/', num2str(N_frames)))
 
         % Video Reader: only works in the windows system (if you use other systems, we can provide the corresponding frames on request.)
-        name=strcat('videos/video',num2str(video),'.mp4');
+        name=strcat('datasets/ACCV2012_database/videos/video',num2str(video),'.mp4');
         xyloObj = VideoReader(name);
         mov = read(xyloObj, frame); 
 
@@ -131,7 +131,7 @@ modelFunction = str2func(ModelName);
                        
 %                        % auc mit
 %                        AUC_Judd(map,ET,0,1);
-%                        movOld =  mov;
+                       movOld =  mov;
 
     end
 
