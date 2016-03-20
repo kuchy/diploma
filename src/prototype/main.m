@@ -415,7 +415,7 @@ function pushbutton12_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton12 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
+showResults();
 
 % --- Executes on key press with focus on pushbutton12 and none of its controls.
 function pushbutton12_KeyPressFcn(hObject, eventdata, handles)
