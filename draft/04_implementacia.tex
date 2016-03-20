@@ -1,12 +1,16 @@
 \section{Návrh metódy}
-Navrhovaná metóda zohľadnuje vlastnosti ktoré nie je možné získať iba z videa, budeme ich nazívať dynamické príznaky videa.
+Navrhovaná metóda zohľadnuje vlastnosti ktoré nie je možné získať iba zo statického obrazu, budeme ich nazívať dynamické príznaky videa.
 Avšak metóda stále zohľadnuje v pozorovanom videu aj aspekty statického obrazu, tieto budeme nazívať statické príznaky videa.
-Tieto príznaky sú vypočítavané seprátne a nakoniec ich metóda spája do jednej výslednej mapy pozornosti. Výsledkom je postupnosť máp pozornosti pre každý frame videa (podľa vstupnej konfigurácie), ktorý možno spojiť do videa pozornosti pre vstupné video.
+Tieto príznaky sú vypočítavané seprátne a nakoniec ich metóda spája do jednej výslednej mapy pozornosti. Výsledkom je postupnosť máp pozornosti pre každý frame videa (podľa vstupnej konfigurácie), ktorý možno spojiť do videa pozornosti pre ľubovolné vstupné video.
 
 \subsection{Dynamické príznaky videa}
-Dynamické príznaky metóda najprv extrahuje pomocou štadardnej metódy Horn-Schunck, (referencia na 2 kapitolu alebo na článok?) ktorá vypočíta optický tok na 2 rozdielnych framoch videa čím vzniká sémantický príznak pohybu rôznych objektov po scéne spolu s smerovýmy vektormy pohybu daných vektorov.
+Dynamické príznaky metóda najprv extrahuje pomocou štadardnej metódy Horn-Schunck, (referencia na 2 kapitolu alebo na článok?) ktorá vypočíta optický tok na každých 2 rozdielnych framoch videa čím vzniká sémantický príznak pohybu rôznych objektov po scéne spolu s smerovýmy vektormy pohybu daných vektorov.
 Získané smerové vektory okamžite spočítavame aby sme získali celkový obraz optického toku pre danú dvojicu obrazov.
-Obraz sa následne prahuje statickou konštantou kôli ostráneniu šumu. V našej implementácií sme použili prah v absolútnej hodnote (0.2) pre každý obrazový pixel vo výslednom optikom toku.
+Obraz sa následne prahuje statickou konštantou kôli ostráneniu šumu.
+Prahovanie prebieha dynamicky vzľadom na počet nájdených 8-spojitých regiónov tj. výstup optikého toku. V našej implementácií je obmedzený počet regiónov na maximálnu hodnotu 200 regiónov.
+Prahovanie začne s konštantou ktorú určí pomocou algoritmu Otsu\cite{otsu}, následne určí počet 8-spojitých regiónov akje počet vädší ako maximálna hodnota, zvýši konštantu o 10% z pôvodnej hodnoty.
+Tento proces sa opakuje pokial sa v obraze vyskytuje viacej ako maximálny počet regiónov.
+Takéto prahovanie je nutné pre optimalizáciu výkonu algoritmu, pretože v prípadoch ked obraz obsahuje veľké množtvo regónov výpočtová rýchlosť algortmu je maximálne neúčinná.
 Pixeli s valídnou honotou sa rozdelia na regióny podľa spojitosti a podobnosti štandardným spôsobom.
 Pripomenme, že v tomto obraze sa spočítali hodnoty posunu v oboch smeroch aritmeticky do jednej hodnotiacej konštanty (pre každý pixel obrazu), ktorá už nereprezentuje smer posunu daného obrazového pixelu, ale iba hodnotí celkový posun pixelu.
 Takto získané regóny budeme vyhodnocovať a spájať podľa pôvodných výsledkov metódy Horn-Schunck.
@@ -104,7 +108,7 @@ Výpočet pomeru bude určovať pomer výskytu salientných pixelov v mape dynam
   \vspace{10mm}
 \end{figure}
 
-Ak je vysoký výskyt salientých pixelov, potrebujeme utlmit zobrazovanie tejto časti príznakov a prioritizovať zobrazovanie statických priznakov preto zmišavacia funkcia vyzerá nasledovne:
+Ak je vysoký výskyt salientých pixelov, potrebujeme utlmit zobrazovanie tejto časti príznakov a prioritizovať zobrazovanie statických priznakov preto zmiešavacia funkcia vyzerá nasledovne:
 
 \begin{figure}[H]
   \begin{equation}
@@ -114,10 +118,42 @@ Ak je vysoký výskyt salientých pixelov, potrebujeme utlmit zobrazovanie tejto
   \vspace{10mm}
 \end{figure}
 
+V prípade, že algoritmus nedokáže detekovať žiadny pohyb na scéne, bol by model pozornosti prázdny.
+Preto v prípade keď je vyššie spomýnaný pomer dynamických pixelov extrémne nízky použijeme ako výstup algoritmu iba statické príznaky.
+
 \subsection{Pipeline metódy}
-  TODO nakoniec wokflow diagram.
+  Grafický popis metódy
+
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=15cm]{pics/workflow.jpg}
+    \caption{Ucelená vyzualizácia algoritmu}
+    \vspace{10mm}
+  \end{figure}
 
 \section{Implementácia riešenia}
+Implementácia vyššie uvedeného algoritmu je implementovaná ako modul pre aplikáciu na porovnávanie a  automatickú validáciu výsledkov.
+Aplikácia na porovnávanie je takisto implementovaná v prostredí matlab.
+
+\subsection{Aplikáciu na porovnávanie a automatickú validáciu}
+Sekundárnym prínosom práce je vytvorenie aplikácie pre zjednodušenie budúcej práce pri prototypovaní nových modelov pozornosti.
+A následné uľahčenie validačného procesu pre potencionálnych vývojárov.\\
+Základná functionalita:
+\begin{enumerate}
+  \item\textbf{Oddelenie logiky testovnia a logiky samotného modelu}
+  \item\textbf{Simultálne sledovanie videa z viacerých modelov}
+  \item\textbf{Spustenie a prezentovanie validácie}
+  \item\textbf{Vizualizácia výsledkov validácie}
+\end{enumerate}
+
+\subsubsection{Oddelenie logiky testovnia a logiky samotného modelu}
+\subsubsection{Simultálne sledovanie videa z viacerých modelov}
+\subsubsection{Spustenie a prezentovanie validácie}
+\subsubsection{Vizualizácia výsledkov validácie}
+
+\subsection{Implementácia modulu}
+
 \section{Validácia výsledkov}
+Automatická validácia je možná pomocou datasetu\cite{accv}, ktorí bol upravený pre použitie s lubovolným modelom intregovaním do tejto applikácie.
 \section{Možnosti pre zlepšenie}
 \section{Diskusia}
