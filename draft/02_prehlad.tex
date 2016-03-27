@@ -129,7 +129,6 @@ Z čoho je ľahko odvoditeľné, že:
   dI/dt = \sigmai/\sigmax dx/dt + \sigmai/\sigmay dy/dt + dI/dt  =  0
 \end{equation}
 
-
 \subsection{Lucas Kanande}
 Algoritmus prvotne vznikol ako návrh pre časovú optimalizáciu problému výpočtu vektoru posunu medzi dvomi krivkami.
 Povodné intitívne riešenie vyžadovalo \begin{math} O(M^2 * N^2) \end{math} času pre výpočet daného vektoru ak M,N bolo rozlíšenie daného obrazového vzoru.
@@ -178,27 +177,19 @@ Itti.
 Metrika zakladá na ohodnotení salientných oblastí vzľadom na pozíciu fixácií samostatne a následná normalizácia podľa počtu fixácií.
 \\
 Pre každú fixáciu používa vzťah
-
-\begin{figure}[H]
   \begin{equation}
     NSS(p) =  (SM(p)-\SI{}{\micro}_{SM}) / 	\sigma_{SM}
   \end{equation}
-  \caption{kde SM je mapa význačných oblastí a p je bod danej fixácie pre ktorú sa hodnota vypočítava.}
-  \vspace{10mm}
-\end{figure}
+Kde SM je mapa význačných oblastí a p je bod danej fixácie pre ktorú sa hodnota vypočítava.
 
 Pričom mapa fixácií SM je normalizovaná tak aby nadobúdala nulovú strednú hodnotu a zároveň jednotkovú štandardnú dochýlku.
 Metrika NSS nadhodnocuje ak je saliency mape minimálna rozmanitosť hodnôt (malý rozdiel medzi hodnotami fixácií a strednou hodnotou), pretože v takomto prípade nebude model dostatocne odhonotený, ak nájde presné pozície v prípade, že odchýlka je malá, alebo
 rozdiel medzi hodnotami fixácie a strednou hodnotou je vysoké.
 Finálna hodnota NSS metriky je určená priemerom hodnôt pre všetky fixácie\cite{metrics-1}.
 
-\begin{figure}[H]
-  \begin{equation}
-    NSS = 1/N * \sum_{p=1}^{N}NSS(p)
-  \end{equation}
-  \caption{normalizácia vzľadom na počet fixácií}
-  \vspace{10mm}
-\end{figure}
+\begin{equation}
+  NSS = 1/N * \sum_{p=1}^{N}NSS(p)
+\end{equation}
 
 \subsection{AUC-Judd}
 Metrika je clasická AUC ktorú navrhol Judd \cite{auc-judd}.
