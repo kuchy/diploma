@@ -136,18 +136,38 @@ Základná functionalita:
 \begin{enumerate}
   \item\textbf{Oddelenie logiky testovnia a logiky samotného modelu}
   \item\textbf{Simultálne sledovanie videa z viacerých modelov}
-  \item\textbf{Spustenie a prezentovanie validácie}
+  \item\textbf{Automatická validácia modelu}
   \item\textbf{Vizualizácia výsledkov validácie}
 \end{enumerate}
 
 \subsubsection{Oddelenie logiky testovnia a logiky samotného modelu}
+V aplikácií na testovanie je možné pripdávať lubovolné modeli pre ktoré je dostupná implmentácia v jazyku matlab.
+Pre iné jazyky je potrebné doprogramovat wrapper ktorý spustí daný jazyk a vypočíta mapu pozornosti.
+Ukážkový wrapper je súčastou aplikácie.
+Pre pripadnie nového modelu je potrebné pridať wrapper do zložky "models", knižnice vyžadované modelmi je potrebné skopírovat do lubovolnej podzložky tohoto priečinka.
+Pri spustení apikácie sa načítaju všetky moduli aj kničnice uložené v podzložkách.
+
 \subsubsection{Simultálne sledovanie videa z viacerých modelov}
-\subsubsection{Spustenie a prezentovanie validácie}
+Pre rýchle prototypovanie je vhodné pozorovať rovnaké video pri rôznych úpravách.
+Táto funkcionalita je dostupná pre každý model s vygenerovanýmy mapamy pozornosti na zvolenom videu.
+
+\subsubsection{Automatická validácia modelu}
+Validovanie výsledokov je nutnou súčastou každého modelu pozornosti preto aplikácia ponúka automatizovaný spôsob ako zvalidovať výsledky na vybraných referenčných datasetoch.
+Validácia tvorí pre kažké video perzistentný súbor obsahujúci 3 metriky: AUC-Judd, KL-Div, NSS.
+Vyššie spomenuté metriky sa rátajú pre každý frame videa.
+Validácia prebieha paralelne pre všetky videá zvoleného datasetu.
+Vytvorené súbory sú perzistetné z dôvodu dlhého výpočtového času, a ukladajú sa do priečinku results a podložky podľa názvu testovaného datasetu v tvare \begin{math}názovModelu.názovDatasetuČísloVidea.mat\end{math}.
+Formát súboru obsahuje 3 premenné s názvamy: AUROC\_score, KLDIV\_score, NSS\_score.
+Každá premenná obsahuje pole podla dĺžky videa (počet frameov) a hodnotami danej metriky.
+Aplikácia aktuálne podporuje 2 datasety a to: ACCV 2012\cite{accv}, acoutrot( dataset nazov + referencia?), tieto datasety sú volne dostupné a sú súčastou aplikácie (zistit ci su licencie s timto ok).
+Dataset ACCV 2012\cite{accv} je poskytovaný autormy aj s testovacím algoritmom na výpočet vyššie uvedených metrík, do aplikácie na testovanie bol iba pozmenený pre načítanie ľubovolného modelu a prisposobený na paralelný vypočet všetkých videí naraz.
+Pre dataset acoutrot aplikácie obsahuje upravenú verziu validačného algoritmu z datasetu ACCV 2012.
+
 \subsubsection{Vizualizácia výsledkov validácie}
+Pre analýzu výsledkov validácie dokáže aplikácia prehladne vyzualizovať všetky dáta získané testovaním.
 
 \subsection{Implementácia modulu}
 
 \section{Validácia výsledkov}
-Automatická validácia je možná pomocou datasetu\cite{accv}, ktorí bol upravený pre použitie s lubovolným modelom intregovaním do tejto applikácie.
 \section{Možnosti pre zlepšenie}
 \section{Diskusia}
