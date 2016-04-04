@@ -1,6 +1,9 @@
-function showResults ()
-    listing = dir('results');
+function showResults (dataset)
+    path = strcat('results/',dataset,'/');
+    listing = dir(path{1});
     tests = {};
+    
+    numOfVideos = 24;
 
     %% remove system files
     testNumber = 1;
@@ -22,7 +25,7 @@ function showResults ()
         modelName = modelName(1);
         modelName = sprintf('%s', modelName{:});
 
-        data = load(fullfile('results',char(tests(i))));
+        data = load(fullfile(path{1},char(tests(i))));
         result.(modelName).data(videoNumber) = data;
 
     %     calculate and save frame average
@@ -40,7 +43,7 @@ function showResults ()
     %% plot AUROC_score
     i = 1;
     for model = fieldnames(result)'
-    %     videos = size(result.(model).frameMean,2);    
+    %     videos = size(result.(model).frameMean,2); 
         modelName = char(model);
         data= extractfield(result.(modelName).frameMean(:), 'AUROC_score');    
         graph(i,:) = data(:);
@@ -49,9 +52,9 @@ function showResults ()
     figure
     subplot(3, 1, 1)
     title('Results for selected Dataset');
-    bar(1:24, graph', 1)
-    axis([0 28 0 1])
-    set(gca, 'XTick', 1:24)
+    bar(1:numOfVideos, graph', 1)
+    axis([0 numOfVideos+5 0 1])
+    set(gca, 'XTick', 1:numOfVideos)
     xlabel('Video');
     ylabel('Score of AUROC_score');
     legend(fieldnames(result)');
@@ -68,9 +71,9 @@ function showResults ()
     end
     subplot(3, 1, 2)
     title('Results for selected Dataset');
-    bar(1:24, graph', 1)
-    axis([0 28 0 3])
-    set(gca, 'XTick', 1:24)
+    bar(1:numOfVideos, graph', 1)
+    axis([0 numOfVideos+5 0 3])
+    set(gca, 'XTick', 1:numOfVideos)
     xlabel('Video');
     ylabel('Score of KLDIV_score');
     legend(fieldnames(result)');
@@ -89,9 +92,9 @@ function showResults ()
     % Show graph
     subplot(3, 1, 3)
     title('Results for selected Dataset');
-    bar(1:24, graph', 1)
-    axis([0 28 -0.8 3])
-    set(gca, 'XTick', 1:28)
+    bar(1:numOfVideos, graph', 1)
+    axis([0 numOfVideos+5 -0.8 3])
+    set(gca, 'XTick', 1:numOfVideos)
     xlabel('Video');
     ylabel('Score of NSS_score');
     legend(fieldnames(result)');
