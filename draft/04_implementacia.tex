@@ -114,9 +114,19 @@ V prípade, že algoritmus nedokáže detekovať žiadny pohyb na scéne, bol by
 Preto v prípade keď je vyššie spomýnaný pomer dynamických pixelov extrémne nízky použijeme ako výstup algoritmu iba statické príznaky.
 Naopak v prípade, že kamera je v pohybe Horn-Schunck algoritmus označí ako pohybujúci sa vädšinovú oblasť obrazu a v tom prípade je potrebné utlmiť dynamické príznaky obrazu a do popredia vystupujú statické.
 
-@TODO add new page symbol latex
+\subsection{Zdrojové kodý modelu}
+Zdrojový kód obsahuje jednu metódu ktorá príma na vstupe vždy 2 parametre.
+Prvý parameter je aktuálny frame videa a druhý parameter je frame videa určený na extrakciu dynamických príznakov videa pomocou differencie vzľadom na prvý obrazový frame.
+Tieto 2 obrazové vstupy nemusia byť nutne po sebe idúce, je na používateľovy či použije model serializovane na každý frame videa, alebo zvolí vlastnú implementáciu keyframingu (napríklad kôli časovej náročnosti algoritmu).
+Algoritmus je schopný processovať farebné aj čiernobiele obrazové vstupy.
+V prílohe je možné nájsť 2 implementácie a to implementáciu ako modelu pre applikáciu na porovnávanie modelov načítavajúca kažké 2 posebeidúce obrazové framy.
+Druhá implementácia načítava na vstupe priamo video a na výstup dá video s korešpondujúcim videom význačných oblastí, tátoimplementácia je určená na použitie mimo aplikácie na testovanie.
+Obe implementácie sú dostupné v prílohe na CD alebo voľne dostupné na internete.
+
+\clearpage
+
 \subsection{Pipeline metódy}
-  Grafický popis metódy
+  Grafický popis metódy obsahujúci príklad zostavenia mapy pozornosti.
 
   \begin{figure}[H]
     \centering
@@ -167,7 +177,70 @@ Pre dataset acoutrot aplikácie obsahuje upravenú verziu validačného algoritm
 Pre analýzu výsledkov validácie dokáže aplikácia prehladne vyzualizovať všetky dáta získané testovaním.
 
 \subsection{Implementácia modulu}
+Implementácia mového modelu pozornosti je jednoduchá.
+Pre integrovanie ľubovolného modelu je možné použiť vzorovú implementáciu ktorá je dostupná v prílohách.
 
 \section{Validácia výsledkov}
+Validácia vyššie spomínaného modelu prebiahala pomocou automatického testovania v aplikácií na testovanie.
+Validácia potvrdila, že detekcia pohybu a následné optimalizácie majú nenáhodný efekt vzľadom na namerané hodnoty pomocou eyetrackingu viacerých používateľov na roznych videách.
+
+\clearpage
+
+\subsection{Analýza výsledkov}
+V tejto sekcií budem prezentovat výsledky všetkých testovaných datasetov.
+Výsledky budeme vyzualizovať pomocou chrakteristiky vzniknutej zo strednej hodnoty framov, pre jednotlivé videá datasetov. pre každú metriku samostatným grafom hodnôt.
+\\
+\vspace{10mm}
+Dataset: ACCV 2012\cite{accv}
+\begin{figure}[H]
+  \includegraphics[width=15cm]{pics/single-accv.jpg}
+  \caption{Vyzualizácia všetkých testovaných metrík pre dataset ACCV 2012\cite{accv}}
+\end{figure}
+
+\subsubsection{ACCV 2012 - AUCROC}
+Podla tejto metriky ...
+\subsubsection{ACCV 2012 - KLDIV}
+Podla tejto metriky ...
+\subsubsection{ACCV 2012 - NSS}
+Podla tejto metriky ...
+
+Všetky metriky potvrdzuu tvrdenie, že narvhovaný model ma značnú koreláciu k skutočným dátam nameraných na reálnych užívateľoch.
+
+\\
+\\
+\\
+Dataset: coutrot1\cite{accv}
+@TODO images\\
+Dataset: coutrot2\cite{accv}
+@TODO \\
+
+\subsection{Porovnávanie s konkurenčnýmy modelmy pozornosti}
+Porovnanie s konkurenciou nám poskytne dalšie relevantné poznatky.
+Budeme sa konkrétne snažiť dokázať ze efektivita našeho nového modelu je vyššia ako povodného horn-struck algoritmu\cite{horn-schunck}, používaného na extrakciu dynamickej zložky príznakov.
+Zároveň sa budeme snažiť o dôkaz, že algoritmus je efektívnejší aj ako samotná statická zložka ktorá je vypočítavaná pomocou Spektralnych rezidual\cite{spectral-rezidual}.
+
+Dataset: ACCV 2012\cite{accv}
+\begin{figure}[H]
+  \includegraphics[width=15cm]{pics/porovnanie-accv.jpg}
+  \caption{Vyzualizácia porovnania pre dataset ACCV 2012\cite{accv}}
+\end{figure}
+
+\subsubsection{ACCV 2012 - AUCROC}
+Podla tejto metriky ...
+\subsubsection{ACCV 2012 - KLDIV}
+Podla tejto metriky ...
+\subsubsection{ACCV 2012 - NSS}
+Podla tejto metriky ...
+
+\\
+\\
+\\
+Dataset: coutrot1\cite{accv}
+@TODO images\\
+Dataset: coutrot2\cite{accv}
+@TODO \\
+
+\subsection{Zhrnutie validacie}
+
 \section{Možnosti pre zlepšenie}
 \section{Diskusia}
