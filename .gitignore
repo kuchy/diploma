@@ -56,3 +56,7 @@ src/prototype/models
 #matlab - datasets section
 /src/prototype/datasets/savam
 !/src/prototype/datasets/savam/loader.m
+/src/prototype/datasets/coutrot/videos
+/src/prototype/datasets/coutrot/raw_data
+/src/prototype/datasets/ACCV2012_database/videos
+/src/prototype/datasets/ACCV2012_database/raw_data
