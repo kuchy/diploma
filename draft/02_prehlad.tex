@@ -21,8 +21,8 @@ Model zakladá na rozložení obrazu na 3 základné charakteristiky obrazu a to
 
 \begin{figure}[H]
  \centering
- \includegraphics[width=7cm]{pics/itti-1.png}
- \caption{Itti model general workflow.}\label{wrap-fig:1}
+ \includegraphics[width=7cm]{pics/itti-1-svk.png}
+ \caption{Ucelená vyzualizácia ittiho modelu\cite{itty-98}}\label{wrap-fig:1}
 \end{figure}
 \vspace{10mm}
 
@@ -43,8 +43,8 @@ Pomocou nej rozdelí obrázok na amplitúdovú čast a fázovú čast.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=10cm]{pics/spectral-rezidual-1.png}
-  \caption{Príklad rozloženia typovo rôznych obrázkov}\label{wrap-fig:2}
+  \includegraphics[width=10cm]{pics/spectral-img.png}
+  \caption{Príklad rozloženia typovo rôznych obrázkov\cite{spectral-rezidual}}\label{wrap-fig:2}
 \end{figure}
 \vspace{10mm}
 
@@ -69,8 +69,8 @@ Metóda preskúmala možnosti nesekvenčnej extrakcie príznakov z obrazu bol no
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=6cm]{pics/rare-1.png}
-  \caption{Rare model workflow}\label{wrap-fig:3}
+  \includegraphics[width=6cm]{pics/rare-1-svk.png}
+  \caption{Rare model workflow\cite{rare-1}}\label{wrap-fig:3}
 \end{figure}
 
 \section{Metody pre videá}
@@ -90,7 +90,7 @@ Tieto pokusy viedli aj k zostaveniu modelov zohladňujúc zvukovú stopu ako sam
 \begin{figure}[H]
   \centering
   \includegraphics[width=10cm]{pics/courot-1.png}
-  \caption{Audiovisual model workflow.\cite{sound-courot-2}}\label{wrap-fig:4}
+  \caption{Vizualizácia audiovizuálneho modulu\cite{sound-courot-2}}\label{wrap-fig:4}
 \end{figure}
 \vspace{10mm}
 
@@ -139,7 +139,7 @@ Pomocou takejto úpravu naivného algortimu sa časová zložitosť zlepšila na
 \begin{figure}[H]
   \centering
   \includegraphics[width=10cm]{pics/lukas-kanade.jpg}
-  \caption{Vyzualizacie výsledkov algoritmu Lucas-Kanade vždy po 1 iterácíí}
+  \caption{Vyzualizacie výsledkov algoritmu Lucas-Kanade vždy po 1 iterácií\cite{lucas-kanade}}
 \end{figure}
 \vspace{10mm}
 
@@ -214,6 +214,7 @@ Poslednou charakteristikou datasetu je množsto ľudí na ktorých boli dané vi
 	\item \textbf{RSD}\cite{rsd}
 	\item \textbf{SAVAM}\cite{savam}
 	\item \textbf{AUDITORY DATASET}\cite{courot-dataset}
+  \item \textbf{ASCMN}\cite{accv}
 \end{itemize}
 
 \subsection{RSD}
@@ -242,12 +243,29 @@ Dokopy obsahuje 13minút videa, ktoré bolo otestované na 50 používateľoch r
 Dataset je rozdelený na videá z filmov, ukážky z komerčných videí a stereoskopické videá.
 SAVAM taktiež poskytuje všetky raw dáta z eyetrackere ako aj vizualizácie daných dát\cite{savam}.
 
-\subsection{ACoutrot DATASET}
-Dataset žé videi pre vyhodnocovanie saliency modelov.
+\subsection{ASCMN DATASET}
+ASCMN nazvaný podľa rozčlenenia do 5 skupín videa: Abnormálne, bezpečnostné, videá s davom, videá s pohybom a videá s chybamy v obraze (z anglckých názvou: Abnormal, Surveillance, Crowd, Moving, Noise).
+Spolu obsahuje 24 videjí, každé video bolo namerané na 10 rôznych používateľoch.
+K datasetu je taktiež dostupný validačný kód\cite{accv} vypočítavajúci hodnotiace metriky.
 
+\subsection{Coutrot DATASETS}
+Ide 2 rôzne datasety, oba sú nazvané podľa jeho authora, Antoine Coutrota.
+Prvý dataset\cite{sound-1} obsahuje videá s dynamickou povahou scény.
+Je rozčlenený do 4 vyzuálne rozličných kategórií.
+\begin{itemize}
+  \item Jeden pohybyjúci sa objekt
+  \item Viacej pohybujúcich sa objektov
+  \item Prírodné scény
+  \item Konverzačné scény
+\end{itemize}
+Tento dataset obsahuje dokopy 60 videí, ktoré sledovalo vždy 18 rôznych používateľov.
+Všetky videá boli zaznamenanávnané v 4 rôznych zvukových zvukových podmienkach (využívať budeme iba dáta s pôdvodnou zvukovou stopou). \\
+Druhý dataset \cite{coutrot-database-2} bol obsahuje 15 videí.
+Všetky videá obsahujú nahraté stretnutie 4 konverzujúcich ludí so statickou kamerou.
+Dáta oboch datasetou boli nahrávané pomocou eyetrackera EyeLink 1000 pri 1000Hz, pričom používatelia sedeli 57cm od monitoru.
+Eyetracker nahrával iba dáta z dominantného oka.
 
 \section{Porovnanie štandardných Metód}
 Porovnávanie metód je štandardne publikované formou ucelených benchmarkov.
 Príkladom takéhoto banchmarku je mit saliency benchmark\cite{mit-saliency-benchmark}, ktorý sa snaží zgrupovať a porovnávať obrazové modeli pozornosti.
-V tejto sekcií ďalej uvedieme iba vyualizácie všetkých vyššie uvedených metód, pomocou obrázkov z testovaného videa (vybrané z vyššie uvedených datasetov) a im prislúchajúcich saliency máp vygenerovaných pomocou popísaných modelov alebo metód.
-Ďalej ich porovnanie pomocou výpočtových parametrov v tabulke.
+Pre účeli validácie bude vypracovaný podobný benchmark určený pre porovnanie na rozvnakých vstupoch a validáciu

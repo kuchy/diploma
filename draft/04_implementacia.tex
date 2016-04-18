@@ -169,9 +169,9 @@ Validácia prebieha paralelne pre všetky videá zvoleného datasetu.
 Vytvorené súbory sú perzistetné z dôvodu dlhého výpočtového času, a ukladajú sa do priečinku results a podložky podľa názvu testovaného datasetu v tvare \begin{math}názovModelu.názovDatasetuČísloVidea.mat\end{math}.
 Formát súboru obsahuje 3 premenné s názvamy: AUROC\_score, KLDIV\_score, NSS\_score.
 Každá premenná obsahuje pole podla dĺžky videa (počet frameov) a hodnotami danej metriky.
-Aplikácia aktuálne podporuje 2 datasety a to: ACCV 2012\cite{accv}, acoutrot( dataset nazov + referencia?), tieto datasety sú volne dostupné a sú súčastou aplikácie (zistit ci su licencie s timto ok).
-Dataset ACCV 2012\cite{accv} je poskytovaný autormy aj s testovacím algoritmom na výpočet vyššie uvedených metrík, do aplikácie na testovanie bol iba pozmenený pre načítanie ľubovolného modelu a prisposobený na paralelný vypočet všetkých videí naraz.
-Pre dataset acoutrot aplikácie obsahuje upravenú verziu validačného algoritmu z datasetu ACCV 2012.
+Aplikácia aktuálne podporuje 2 datasety a to: ASCMN\cite{accv}, acoutrot( dataset nazov + referencia?), tieto datasety sú volne dostupné a sú súčastou aplikácie (zistit ci su licencie s timto ok).
+Dataset ASCMN\cite{accv} je poskytovaný autormy aj s testovacím algoritmom na výpočet vyššie uvedených metrík, do aplikácie na testovanie bol iba pozmenený pre načítanie ľubovolného modelu a prisposobený na paralelný vypočet všetkých videí naraz.
+Pre dataset acoutrot aplikácie obsahuje upravenú verziu validačného algoritmu z datasetu ASCMN.
 
 \subsubsection{Vizualizácia výsledkov validácie}
 Pre analýzu výsledkov validácie dokáže aplikácia prehladne vyzualizovať všetky dáta získané testovaním.
@@ -182,32 +182,57 @@ Pre integrovanie ľubovolného modelu je možné použiť vzorovú implementáci
 
 \section{Validácia výsledkov}
 Validácia vyššie spomínaného modelu prebiahala pomocou automatického testovania v aplikácií na testovanie.
-Validácia potvrdila, že detekcia pohybu a následné optimalizácie majú nenáhodný efekt vzľadom na namerané hodnoty pomocou eyetrackingu viacerých používateľov na roznych videách.
+Prezentovať budem výsledky z nasledujúch datasetov:
+\begin{enumerate}
+  \item\textbf{ASCMN\cite{accv}}
+  \item\textbf{acoutrot1\cite{coutrot-database}}
+  \item\textbf{acoutrot2\cite{coutrot-database-2}}
+\end{enumerate}
+
+Výsledky budeme hodnotiť pomocou nasledkujúcich metrík:
+\begin{enumerate}
+  \item\textbf{AUC\cite{metrics-1}}
+  \item\textbf{KLDIV\cite{metrics-1}}
+  \item\textbf{NSS\cite{metrics-1}}
+\end{enumerate}
+
+@TODO screens+postup of validation
 
 \clearpage
 
 \subsection{Analýza výsledkov}
-V tejto sekcií budem prezentovat výsledky všetkých testovaných datasetov.
-Výsledky budeme vyzualizovať pomocou chrakteristiky vzniknutej zo strednej hodnoty framov, pre jednotlivé videá datasetov. pre každú metriku samostatným grafom hodnôt.
-\\
-\vspace{10mm}
-Dataset: ACCV 2012\cite{accv}
+V tejto sekcií budem prezentovať výsledky všetkých datasetov vzhľadom na navrhovaný model.
+Výsledky budem vyzualizovať pomocou chrakteristiky vzniknutej zo strednej hodnoty framov, jednotlivých videí.
+Kažká metrika bude vyhodnocovaná samostane. Ako prvý budeme analyzovať dataset ASCMN\cite{accv} a následne...
+
 \begin{figure}[H]
-  \includegraphics[width=15cm]{pics/single-accv.jpg}
-  \caption{Vyzualizácia všetkých testovaných metrík pre dataset ACCV 2012\cite{accv}}
+  \includegraphics[angle=90, width=15cm]{pics/single-accv.jpg}
+  \caption{Vyzualizácia všetkých testovaných metrík pre dataset ASCMN\cite{accv} pre jednotlivé videá}
+  \label{fig:ASCMN1}
 \end{figure}
 
-\subsubsection{ACCV 2012 - AUCROC}
-Podla tejto metriky ...
-\subsubsection{ACCV 2012 - KLDIV}
-Podla tejto metriky ...
-\subsubsection{ACCV 2012 - NSS}
-Podla tejto metriky ...
+\begin{figure}[H]
+  \includegraphics[width=15cm]{pics/single-mean-accv.png}
+  \caption{Vyzualizácia konečných výsledkov pre dataset ASCMN\cite{accv}}
+  \label{fig:ASCMN2}
+\end{figure}
 
-Všetky metriky potvrdzuu tvrdenie, že narvhovaný model ma značnú koreláciu k skutočným dátam nameraných na reálnych užívateľoch.
 
-\\
-\\
+\subsubsection{ASCMN - AUCROC}
+Ideálna hodnota tejto metriky je 1, čo reálne značí 100\% úspešnosť.
+Náhodná mapa pozornosti má hodnotu 0.5, z toho dôvodu aby sme dokázali správnosť nového modelu potrebujeme dokázať, že model má hodnotu AUC v intervale \interval[{0.5,1}].
+Z grafu \ref{fig:ASCMN1} vyplýva, že všetky videá spĺnaju vyššie uvedenú podmienku.
+Graf \ref{fig:ASCMN2} už priamo dokazuje túto hypotézu keďže ho tvorí stredná hodnota všekých testovaných videí.
+Výsledná hodnota AUC 0.651, je hodnota dostatočne vyššia ako 0.5.
+takáto hodnota vyhodnocuje náš model ako korelujúci s reálne nameranýmy dátamy na používateľoch zúčastnených sa na tvorbe tohoto datasetu.
+\subsubsection{ASCMN - KLDIV}
+Ideálna hodnota tejto metriky je 0, čo reálne značí že saliency mapa je totožná s ground truth mapou.
+Výsledné hodnoty pre všetky videá sa podľa grafu \ref{fig:ASCMN1} pohybujú v intervale \interval[{1.5,1.7}].
+Hodnoty menšie ako 2 značia tiež koreláciu s reálnymy dátamy.
+Výsledná hodnota KLDIV je 1.602 je nižsia ako 2, preto aj metrika KLDIV úspešne validuje náš model vrámci datasetu.
+\subsubsection{ASCMN - NSS}
+Výsledná hodnota NSS je 0.680.
+
 \\
 Dataset: coutrot1\cite{accv}
 @TODO images\\
@@ -217,30 +242,63 @@ Dataset: coutrot2\cite{accv}
 \subsection{Porovnávanie s konkurenčnýmy modelmy pozornosti}
 Porovnanie s konkurenciou nám poskytne dalšie relevantné poznatky.
 Budeme sa konkrétne snažiť dokázať ze efektivita našeho nového modelu je vyššia ako povodného horn-struck algoritmu\cite{horn-schunck}, používaného na extrakciu dynamickej zložky príznakov.
-Zároveň sa budeme snažiť o dôkaz, že algoritmus je efektívnejší aj ako samotná statická zložka ktorá je vypočítavaná pomocou Spektralnych rezidual\cite{spectral-rezidual}.
+Zároveň sa budem snažiť o dôkaz, že algoritmus je efektívnejší aj ako samotná statická zložka ktorá je vypočítavaná pomocou modelu Spektralnych rezidual\cite{spectral-rezidual}.
+Pre tento účel som uskutočnil benchmark obsahujúci nasledovné algoritmy:
+\begin{enumerate}
+  \item\textbf{AttentionSimpleGlobalRarity\cite{global-rarity}}
+  \item\textbf{AttentionSimpleLocalContrast\cite{global-rarity}}
+  \item\textbf{FES\cite{fes}}
+  \item\textbf{RARE\cite{rare-1}}
+  \item\textbf{Horn-struck\cite{horn-schunck}}
+  \item\textbf{Lucas-Kanade\cite{lucas-kanade}}
+  \item\textbf{Spektralne rezidua\cite{spectral-rezidual}}
+\end{enumerate}
+na všetkých datasetoch.
+Ku každému datasetu uvedieme 2 súhrnné štatistiky.
+Prvá vyjadruje porovnanie priemernej hodnoty každej z metrík pre kažkdé video samostatne, druhá obsahuje priemerné hodnoty všetkých videií, pre všetky testované medódy.
 
-Dataset: ACCV 2012\cite{accv}
 \begin{figure}[H]
-  \includegraphics[width=15cm]{pics/porovnanie-accv.jpg}
-  \caption{Vyzualizácia porovnania pre dataset ACCV 2012\cite{accv}}
+  \includegraphics[width=15cm]{pics/porovnanie-accv-global-new.png}
+  \caption{Vyzualizácia porovnania pre dataset ASCMN\cite{accv}}
 \end{figure}
 
-\subsubsection{ACCV 2012 - AUCROC}
-Podla tejto metriky ...
-\subsubsection{ACCV 2012 - KLDIV}
-Podla tejto metriky ...
-\subsubsection{ACCV 2012 - NSS}
-Podla tejto metriky ...
+\subsubsection{ASCMN}
+\begin{figure}[H]
+  \includegraphics[angle=90, width=14cm]{pics/porovnanie-accv-new.png}
+  \caption{Vyzualizácia porovnania pre dataset ASCMN\cite{accv}}
+\end{figure}
 
-\\
-\\
-\\
-Dataset: coutrot1\cite{accv}
-@TODO images\\
-Dataset: coutrot2\cite{accv}
-@TODO \\
+\subsubsection{Coutrot #1}
+@TODO generate images
+
+\subsubsection{Coutrot #2}
+\begin{figure}[H]
+  \includegraphics[angle=90, width=15cm]{pics/porovnanie-coutrot2.png}
+  \caption{Vyzualizácia porovnania pre dataset ASCMN\cite{accv}}
+\end{figure}
+
+\begin{figure}[H]
+  \includegraphics[width=15cm]{pics/porovnanie-coutrot2-global.png}
+  \caption{Vyzualizácia porovnania pre dataset ASCMN\cite{accv}}
+\end{figure}
 
 \subsection{Zhrnutie validacie}
+Všetky metriky potvrdzuju tvrdenie, že narvhovaný model ma značnú koreláciu k skutočným dátam nameraných na reálnych užívateľoch.
+Zároveň validácia bola prevedená na typovo rozdielnych videách, keďže videá obsahujú pohybujúcu sa kameru aj statickú pozíciu kamery, konverzačné scény aj scény s prírodnýmy motívamy.
+Zároveň na základe vypracovaného benchmarku možeme tvrdiť, že nová metóda je efektívnejšia ako základné metódy použité na získanie dynamických aj statických príznakov.
 
 \section{Možnosti pre zlepšenie}
+Možnosť na zlepšenie algoritmu vidieť, v benchmarku kde model Rare\cite{rare-1} dosahoval výrazne lepšie výsledky aj napriek používaniu iba statických príznakov.
+Daľšia možnosť ako vylepšiť je v rýchlosti spracovania ktorá nie je použiteľná na realtime spracovanie obrazu.
+Algoritmus je svojou časovou náročnostou vhodný na spracovanie videan v nízkej obrazovej kvalite.
+Avšak pri vysokej obrazovej kvalite, algoritmus nevykazoval vyššiu efektovitu (otestované na datasete savam\cite{savam} ktorý poskytuje videá vo vysokej kvalite).
+Ale výpočet trval výrazne dlhšie ako v porovnaní s videom s nízkou obrazovou kvalitou.
+Daľšiu možnosť pre zlepšenie odhaluje validácia datasetu Coutrot #2, kde pôvodný algotritmus horn-struck dosiahol hodnotenie porovnateľné v navrhovaným modelom.
+Takéto výsledky sú spôsobené výberom rozostupu frameov (podla ktorých sa počíta dynamická zložka).
+Keďže rozpetie bolo zvolené na každú dvojicu framov pri týchto videách sa často stávalo, že algoritmus detekoval iba minimálny pohyb.
+Čo bolo považované za šum a z toho dôvodu bola dymamická zložka potlačená alebo úplne eliminovaná (čo bolo v tomto prípade chybné).
+Riešením by bolo porovnávanie viacej framov a následná extrakcia pohybu všetkých dvojíc dokopy.
+Tento postup by už nebol považovaný za šum a dynamická zložka by nebola elliminovaná.
+
 \section{Diskusia}
+????
