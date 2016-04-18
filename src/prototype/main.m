@@ -380,9 +380,14 @@ if strcmp(databaseName, 'ACCV2012_database')
     Evaluation(functionName{1});
 end
 
-if strcmp(databaseName, 'Coutrot')
+if strcmp(databaseName, 'coutrot')
     disp(strcat('Evaluation of: ',functionName{1}, ' on ',databaseName{1})); 
     EvaluationCoutrot(functionName{1});
+end
+
+if strcmp(databaseName, 'coutrot2')
+    disp(strcat('Evaluation of: ',functionName{1}, ' on ',databaseName{1})); 
+    EvaluationCoutrot2(functionName{1});
 end
 
 % % SAVAM
@@ -423,7 +428,18 @@ function pushbutton12_Callback(hObject, eventdata, handles)
 index=get(handles.listbox3,'value');
 list=get(handles.listbox3,'string');
 databaseName = cellstr(list(index));
-showResults(databaseName);
+
+if (strcmp(databaseName,'coutrot'))
+    numOfVideos = 5;
+end
+if (strcmp(databaseName,'coutrot2'))
+    numOfVideos = 15;
+end
+if (strcmp(databaseName,'ACCV2012_database'))
+    numOfVideos = 24;
+end
+
+showResults(databaseName, numOfVideos);
 
 % --- Executes on key press with focus on pushbutton12 and none of its controls.
 function pushbutton12_KeyPressFcn(hObject, eventdata, handles)
