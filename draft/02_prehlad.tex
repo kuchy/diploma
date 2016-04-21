@@ -213,7 +213,7 @@ Poslednou charakteristikou datasetu je množsto ľudí na ktorých boli dané vi
 \begin{itemize}
 	\item \textbf{RSD}\cite{rsd}
 	\item \textbf{SAVAM}\cite{savam}
-	\item \textbf{AUDITORY DATASET}\cite{courot-dataset}
+	\item \textbf{Coutrot datasets}\cite{courot-dataset}
   \item \textbf{ASCMN}\cite{accv}
 \end{itemize}
 
@@ -243,12 +243,12 @@ Dokopy obsahuje 13minút videa, ktoré bolo otestované na 50 používateľoch r
 Dataset je rozdelený na videá z filmov, ukážky z komerčných videí a stereoskopické videá.
 SAVAM taktiež poskytuje všetky raw dáta z eyetrackere ako aj vizualizácie daných dát\cite{savam}.
 
-\subsection{ASCMN DATASET}
+\subsection{ASCMN dataset}
 ASCMN nazvaný podľa rozčlenenia do 5 skupín videa: Abnormálne, bezpečnostné, videá s davom, videá s pohybom a videá s chybamy v obraze (z anglckých názvou: Abnormal, Surveillance, Crowd, Moving, Noise).
 Spolu obsahuje 24 videjí, každé video bolo namerané na 10 rôznych používateľoch.
-K datasetu je taktiež dostupný validačný kód\cite{accv} vypočítavajúci hodnotiace metriky.
+K datasetu je taktiež dostupný validačný kód\cite{accv} vypočítavajúci hodnotiace metriky na lubovolnom modeli pozornosti.
 
-\subsection{Coutrot DATASETS}
+\subsection{Coutrot dataset}
 Ide 2 rôzne datasety, oba sú nazvané podľa jeho authora, Antoine Coutrota.
 Prvý dataset\cite{sound-1} obsahuje videá s dynamickou povahou scény.
 Je rozčlenený do 4 vyzuálne rozličných kategórií.
@@ -260,12 +260,12 @@ Je rozčlenený do 4 vyzuálne rozličných kategórií.
 \end{itemize}
 Tento dataset obsahuje dokopy 60 videí, ktoré sledovalo vždy 18 rôznych používateľov.
 Všetky videá boli zaznamenanávnané v 4 rôznych zvukových zvukových podmienkach (využívať budeme iba dáta s pôdvodnou zvukovou stopou). \\
-Druhý dataset \cite{coutrot-database-2} bol obsahuje 15 videí.
-Všetky videá obsahujú nahraté stretnutie 4 konverzujúcich ludí so statickou kamerou.
+Druhý dataset \cite{coutrot-database-2} obsahuje 15 videí.
+Všetky videá obsahujú nahraté stretnutie 4 konverzujúcich ludí so statickou kamerou, dataset nieje členený do žiadnych kategorií.
 Dáta oboch datasetou boli nahrávané pomocou eyetrackera EyeLink 1000 pri 1000Hz, pričom používatelia sedeli 57cm od monitoru.
-Eyetracker nahrával iba dáta z dominantného oka.
+Eyetracker nahrával iba dáta z dominantného oka pre daného používateľa.
 
 \section{Porovnanie štandardných Metód}
 Porovnávanie metód je štandardne publikované formou ucelených benchmarkov.
-Príkladom takéhoto banchmarku je mit saliency benchmark\cite{mit-saliency-benchmark}, ktorý sa snaží zgrupovať a porovnávať obrazové modeli pozornosti.
-Pre účeli validácie bude vypracovaný podobný benchmark určený pre porovnanie na rozvnakých vstupoch a validáciu
+Príkladom takéhoto banchmarku je mit saliency benchmark\cite{mit-saliency-benchmark}, ktorý sa snaží zgrupovať a porovnávať obrazové modeli pozornosti a zverejnovať referencie na dalšie podobné projekty.
+Pre účeli validácie bude vypracovaný podobný benchmark určený pre porovnanie rôznych modelov pozornosti na typovo rôznych datasetoch.
