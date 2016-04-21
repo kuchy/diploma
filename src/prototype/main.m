@@ -430,7 +430,7 @@ list=get(handles.listbox3,'string');
 databaseName = cellstr(list(index));
 
 if (strcmp(databaseName,'coutrot'))
-    numOfVideos = 5;
+    numOfVideos = 60;
 end
 if (strcmp(databaseName,'coutrot2'))
     numOfVideos = 15;
