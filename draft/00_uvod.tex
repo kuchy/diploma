@@ -1,16 +1,16 @@
 
 Ľudské oko je schopné spracovať \begin{math}10^8\end{math} až \begin{math}10^9\end{math} bitov obrazových dát za sekundu.
-Ludský mozog nie je schopný spracovať také možstov dát naraz, preto sa získané informácie filtrujú pomocou ľudského vizuálneho systému\cite{Fmph-videnie}.
-Ľudský vizuálny systém je pravdepodobne najzložitejším mechanizom akým človek disponuje.
+Ľudský mozog nie je schopný spracovať také množstvo dát naraz, preto sa získané informácie filtrujú pomocou ľudského vizuálneho systému\cite{Fmph-videnie}.
+Ľudský vizuálny systém je pravdepodobne najzložitejším mechanizmom akým človek disponuje.
 Je natoľko klúčovým pre fungovanie spoločnosti či jedinca, že psychológovia sa zaoberajú jeho výskumom.
-Už viacero dekád študujú vlastnosti tohoto mechanizmu z pohladu psychológie, fyziológie alebo neurobiológie.
+Už viacero dekád študujú vlastnosti tohoto mechanizmu z pohľadu psychológie, fyziológie alebo neurobiológie.
 \\
-Vyfiltrované oblasti obrazu už je možne spracovať v výrazne rýchlejšie ako nefiltrované, ideálne v reálnom čase.
-Takéto oblasti sa nazívajú význammné alebo charakteristické (v literatúre salient - prebrané v angličtiny).
-Významné oblasti su vyberané pomocou mnoha faktorov.
-Najznámejšímy su prechody vo farbe, intenzite alebo orientácií.
+Vyfiltrované oblasti obrazu už je možne spracovať vo výrazne rýchlejšom čase ako nefiltrované, ideálne v reálnom čase.
+Takéto oblasti sa nazývajú význammné alebo charakteristické (v literatúre salient - prebrané z angličtiny).
+Významné oblasti sú vyberané pomocou mnohých faktorov.
+Najznámejšími sú prechody vo farbe, intenzite alebo orientácii.
 Ľudský vizuálný systém taktiež využíva skúsenosti pri pozorovaní.
-Oblasti takto vyfiltrované nesú pre pozorovateľa viac potencionálnych informácií ako ostatné oblasti obrazu a preto sa stávajú salietnýmy.
+Oblasti takto vyfiltrované nesú pre pozorovateľa viac potencionálnych informácií ako ostatné oblasti obrazu a preto sa stávajú salietnými.
 \\
 V systémoch počítačového videnia sa snažíme využívať primárne tieto oblasti pre pridelenie väčšej časti zdrojov.
 Z tohoto dôvodu je zistenie zaujímavých oblasti častým prvým krokom mnohých algoritmov v oblasti počítačového videnia.
@@ -18,20 +18,20 @@ Z tohoto dôvodu je zistenie zaujímavých oblasti častým prvým krokom mnohý
 Algoritmy na detekciu význammných oblastí sa delia do 3 skupín podľa princípu akým spracovávajú dáta\cite{brief-survey}
 
   \begin{enumerate}
-          \item Zdola-nahor: Prístup je cielený na nezávyslosť od používateľa.
-          Zameriava sa fyziologicky významné oblasti vizuálneho systému ako výrazné zmeny v tvare, jase alebo farbe.
+          \item Zdola-nahor: Prístup je cielený na nezávislosť od používateľa.
+          Zameriava sa na fyziologicky významné oblasti vizuálneho systému ako výrazné zmeny v tvare, jase alebo farbe.
           \item Zhora-nadol: Prístup je založený na čiastočnom riadení zo strany používateľa (konanie je podmienené úlohou).
-          Riadenie je prínosom pretože obsajuhe aj informáciu používatela a jeho prechádzajúcich vedomostí či skúsenosti, ktoré ovplyvnujú vnímanie.
+          Riadenie je prínosom, pretože obsajuhe aj informáciu používateľa a jeho predchádzajúcich vedomostí či skúseností, ktoré ovplyvňujú vnímanie.
           \item Algoritmy využívajúce neurónové siete.
   \end{enumerate}
 
-Cieľom práce je štúdium a výskum nových metód na detekciu významných oblastí vo videu.
-Následne porovnanie nových métod s existujúcimi v rôznych štandardnych oblastiach ako aj v rýchlosti výpočtu.
+Cieľom práce, je štúdium a výskum nových metód na detekciu významných oblastí vo videu.
+Následne porovnanie nových métod s existujúcimi v rôznych štandardných oblastiach ako aj v rýchlosti výpočtu.
 \\
-V prvej časti sa nachádza prehľad metód na detekciu významných oblastí vo videu, alebo metód na detekciu v statických obrazoch ktoré majú potenciál pre použitie aj vo videu.
-Ďalej detailné vysvetlenie fungovania metód ktoré budú použité v implementácií zlepšenia.
+V prvej časti sa nachádza prehľad metód na detekciu významných oblastí vo videu alebo metód na detekciu v statických obrazoch, ktoré majú potenciál pre použitie aj vo videu.
+Ďalej detailné vysvetlenie fungovania metód, ktoré budú použité v implementácii zlepšenia.
 \\
 V druhej časti je popísaný postup a princíp zlepšenia a postup implementácie.
-Tretiu časť tvorí validácia výsledkov a porovnanie výsledkov s inýmy modelmy, ktoré posktujú lepšiu predstavu o efektivite algoritmu.
+Tretiu časť tvorí validácia výsledkov a porovnanie výsledkov s inýmy modelmi, ktoré poskytujú lepšiu predstavu o efektivite algoritmu.
 \\
 V závere....
