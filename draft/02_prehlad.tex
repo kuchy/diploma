@@ -22,7 +22,7 @@ Model zakladá na rozložení obrazu na 3 základné charakteristiky obrazu a to
 \begin{figure}[H]
  \centering
  \includegraphics[width=7cm]{pics/itti-1-svk.png}
- \caption{Ucelená vyzualizácia ittiho modelu\cite{itty-98}}\label{wrap-fig:1}
+ \caption{Ucelená vizualizácia ittiho modelu\cite{itty-98}}\label{wrap-fig:1}
 \end{figure}
 \vspace{10mm}
 
@@ -108,7 +108,7 @@ Ako posledný krok preloží cez celú mapu baseline center model popísaný v �
 
 \subsection{Detekcia pohybu}
 V tejto časti sa zmeriame na segmentáciu objektov ktoré sa na scéne pohybujú.
-Metódy tohoto typu sa snažia vyzualizovať 3D prostredia (v našom prípade disponujeme výskou, širkou, časom) na 2D výstup (obrazový výstup).
+Metódy tohoto typu sa snažia vizualizovať 3D prostredia (v našom prípade disponujeme výskou, širkou, časom) na 2D výstup (obrazový výstup).
 Takáto informácia dokáže priblížíť výpočtové modely bližšie k realite.
 Ľudský vyzuálny systém totiž nepoužíva iba 2d vstup (ako to prebieha vo drvivej vetšine metód na výpočet významných oblastí).
 Taktéto obrazy sú v ľudskom vyzuálnom systéme vysoko hodnotené.
@@ -139,7 +139,7 @@ Pomocou takejto úpravu naivného algortimu sa časová zložitosť zlepšila na
 \begin{figure}[H]
   \centering
   \includegraphics[width=10cm]{pics/lukas-kanade.jpg}
-  \caption{Vyzualizacie výsledkov algoritmu Lucas-Kanade vždy po 1 iterácií\cite{lucas-kanade}}
+  \caption{Vizualizácie výsledkov algoritmu Lucas-Kanade vždy po 1 iterácií\cite{lucas-kanade}}
 \end{figure}
 \vspace{10mm}
 
@@ -152,7 +152,7 @@ Počet iterácií určuje dĺžku (počet cyklov) simulácie, vyhladzovacia kon�
 \begin{figure}[H]
   \centering
   \includegraphics[width=7cm]{pics/horn-schunck.png}
-  \caption{Vyzualizácia pracovného postupu metódy Horn-Schunck}
+  \caption{Vizualizácia pracovného postupu metódy Horn-Schunck}
 \end{figure}
 \vspace{10mm}
 
@@ -196,7 +196,7 @@ Metrika je clasická AUC ktorú navrhol Judd \cite{auc-judd}.
 Ako prvé sa pixely označené ako fixácie spočítajú s rovnakým počtom náhodných pixelov vybraných z mapy význačných oblastí a pixely sú nakoniec považované za klasifikátor úspešnosti.
 Následuje prahovanie zvolenou hodnotou, pixely ktoré sú menšie ako prahovacia hodnota sú pokladané za pozadie obrazu a pixely ktoré majú hodnotu vyššiu sú pokladané ako fixácie.
 Pre ľubovolne zvolenú prahovaciu hodnotu sú niektoré výsledné oblasti manuálne označené ako pozitívne (True Positives), pobobne niektoré oblasti ktoré nie sú označené ako fixácie sú manuálne označené ako falošne pozitívne (False Positive).
-Tieto operácie sú zopakované tisíc krát, nakoniec sa vyzualizuje pomocou ROC krivky a plocha pod pod krivkou (Area Under the Curve preto AUC) je výsledným klasifikátorom, ktorého ideálna hodnota je 1.
+Tieto operácie sú zopakované tisíc krát, nakoniec sa vizualizuje pomocou ROC krivky a plocha pod pod krivkou (Area Under the Curve preto AUC) je výsledným klasifikátorom, ktorého ideálna hodnota je 1.
 Hodnota náhodného výberu je 0.5.
 
 \subsection{KL-Div}

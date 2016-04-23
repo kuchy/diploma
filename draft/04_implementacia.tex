@@ -97,10 +97,10 @@ Vďaka svojmu príncípu potlačovania štatisticky opakujúcich sa predmetov na
 Spájanie dynamických a statických príznakov bude prebiehat pomocou sčítania oboch máp, pričom vždy sa použijú v určitom pomere.
 Výpočet pomeru bude určovať pomer výskytu salientných pixelov v mape dynamických príznakov.
 
-@TODO add latex som symbol \\
 \begin{equation}
-  pomer = (sum(P_D} > 0))/Pix_{count}
+pomer = \sum_{n=0}^{Pix_{count}} P_D(n) > 0 / Pix_{count}
 \end{equation}
+\\
 Kde \begin{math}P_D\end{math} reprezentuje mapu dynamických príznakov a \begin{math}Pix_{count}\end{math} je počet všetkých pixelov, ktoré obraz obsahuje.
 
 Ak je vysoký výskyt salientých pixelov, potrebujeme utlmiť zobrazovanie tejto časti príznakov a prioritizovať zobrazovanie statických priznakov, preto zmiešavacia funkcia vyzerá nasledovne:
@@ -122,6 +122,49 @@ Algoritmus je schopný processovať farebné aj čiernobiele obrazové vstupy.
 V prílohe je možné nájsť 2 implementácie a to implementáciu modelu pre applikáciu na porovnávanie modelov načítavajúca kažké 2 posebeidúce obrazové framy.
 Druhá implementácia načítava na vstupe priamo video a na výstup dá video s korešpondujúcim videom význačných oblastí, tátoimplementácia je určená na použitie mimo aplikácie na testovanie.
 Obe implementácie sú dostupné v prílohe na CD alebo voľne dostupné na internete.
+
+\subsection{Ukážky výsledkov}
+V tejto sekcií budem prezentovať výsledky konkrétne prípady videí (framy) zachytené počas testovania a validácie.
+Vždy uvediem po sebe nasledujúce originálne framy videa a vizualizáciu fixácií. Ako príklad uvediem frame 53 z videa č. 23 z datasetu ASCMN\cite{accv}.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=10cm]{pics/ACCV-23-54-compare.png}
+  \caption{Porovnanie výstupu mapy pozornosti a reálnych dát}
+  \label{fig:ASCMN-53-23}
+  \vspace{10mm}
+\end{figure}
+Grafy sú generované pomocou pozmeneného ukážkového scriptu distribuovaného spolu s datasetom ASCMN\cite{accv} a porovnávané s výsledkom navrhovaného modelu pomocou grafu \ref{fig:ASCMN-53-23}.
+V prvom riadku vidíme ako prvý pôdovdný frame (n-1) nasledovaný testovaným framom posledný obrázok zobrazuje fixácie.
+V druhom riadku uvádzam postupne heatmapu pre daný frame, prahovanú heat mapu a ako poslednú výslednú saliency mapu.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=10cm]{pics/ACCV-23-54-AUC_Judd.png}
+  \caption{Vizualizácie metriky AUC-Judd pomocou kódu zverejneného v mit saliency benchmark\cite{mit-saliency-benchmark}}
+  \label{fig:ASCMN-53-23-AUC}
+  \vspace{10mm}
+\end{figure}
+
+Z grafov \ref{fig:ASCMN-53-23} vidno koreláciu dát, čo taktiež povrdzuje metrika vypočítaná na danom frame na grafe \ref{fig:ASCMN-53-23-AUC} reprezentujúca AUC-Judd\cite{auc-judd} krivku.
+
+\subsubsection{Problémové typy videí}
+V tejto sekcií uvediem typové video s rovnakou analýzov ako je uvedená vyššie, iba na typ videa bude nevhodný navhovaný model.
+Typovo videá možno označit ako videá s fixovanou kamerou v pohybe.
+Tj. kamera je fixovaná k sledovanému objektu na scéne, z čoho vyplýva, pozadie obrazu (okolie sledovaného objektu) je pre náš algoritmus v pohybe aj keď reálne sa hýbe kamera a preto je považované za významný objekt.
+Zároveň sledovaný objekt (často aj objekt v pozornosti používateľov) sa vizuálne nepohybuje, z dôvodu, že jeho pohyb je kompenzovaný fixáciou kamery a preto ho navrhovaný algoritmus povazuje za vyzuálne nevýznamný.
+Ako príklad uvediem frame č.80 z videa č. 10 z datasetu coutrot #1.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=10cm]{pics/bad-compare.png}
+  \caption{Porovnanie výstupu mapy pozornosti a reálnych dát}}
+  \label{fig:coutrot-bad}
+  \vspace{10mm}
+\end{figure}
+
+Už podľa grafu \ref{fig:coutrot-bad} nemá výsledok navrhovaného modelu žiadnu koreláciu s reálnymy dátamy.
+Preto nebudeme dalej uvádzať žiadnu metriku.
+Návrh riešenia pre tieto prípady budú rozanalyzované v sekcií \ref{ssec:diskusia}.
 
 \clearpage
 
@@ -263,13 +306,13 @@ Prvá vyjadruje porovnanie priemernej hodnoty každej z metrík pre kažkdé vid
 
 \subsubsection{ASCMN}
 \begin{figure}[H]
-  \includegraphics[angle=90, width=14cm]{pics/porovnanie-accv-new.png}
+  \includegraphics[angle=90, width=13cm]{pics/porovnanie-accv-new.png}
   \caption{Vizualizácia porovnania pre dataset ASCMN\cite{accv}}
 \end{figure}
 
 \subsubsection{Coutrot #1}
 \begin{figure}[H]
-  \includegraphics[angle=90, width=15cm]{pics/porovnanie-coutrot1.png}
+  \includegraphics[angle=90, width=13cm]{pics/porovnanie-coutrot1.png}
   \caption{Vizualizácia porovnania pre dataset ASCMN\cite{accv}}
 \end{figure}
 
@@ -281,7 +324,7 @@ Prvá vyjadruje porovnanie priemernej hodnoty každej z metrík pre kažkdé vid
 
 \subsubsection{Coutrot #2}
 \begin{figure}[H]
-  \includegraphics[angle=90, width=15cm]{pics/porovnanie-coutrot2.png}
+  \includegraphics[angle=90, width=13cm]{pics/porovnanie-coutrot2.png}
   \caption{Vizualizácia porovnania pre dataset ASCMN\cite{accv}}
 \end{figure}
 
@@ -296,6 +339,7 @@ Zároveň validácia bola prevedená na typovo rozdielnych videách, keďže vid
 Zároveň na základe vypracovaného benchmarku možeme tvrdiť, že nová metóda je efektívnejšia ako základné metódy použité na získanie dynamických aj statických príznakov.
 
 \section{Diskusia}
+\label{ssec:diskusia}
 Možnosť na zlepšenie algoritmu vidieť v celom benchmarku, kde model Rare\cite{rare-1} dosahoval výrazne lepšie výsledky aj napriek používaniu iba statických príznakov.
 Ďaľšia možnosť ako vylepšiť je v rýchlosti spracovania, ktorá nie je použiteľná na realtime spracovanie obrazu.
 Algoritmus je svojou časovou náročnosťou vhodný na spracovanie videí v nízkej obrazovej kvalite.
