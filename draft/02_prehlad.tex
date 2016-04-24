@@ -165,7 +165,7 @@ Následne je potrebné vytvoriť mapy fixácií ktorá sa používa ako jeden zo
 Metriky úspešnosti možno rozdeliť do 3 štandardných skupín podľa druhu hodnôt na ktorý porovnávajú reálne dáta (v literatúre nazívané ground truth) s vygenerovanýmy mapamy význačných oblastí\cite{metrics-1}.
 \begin{enumerate}
   \item\textbf{Založené na porovnávaní hodnôt} - NSS, Percentile, Pf
-  \item\textbf{Založené na vyhodnocovaní vzdialenistí} - AUC-Judd, AUC-Zhao, AUC Borji, AUC-Li
+  \item\textbf{Založené na vyhodnocovaní vzdialeností} - AUC-Judd, AUC-Zhao, AUC Borji, AUC-Li
   \item\textbf{Založeneé na distribúcií} - KL-Div, EMD, CC, SRCC
 \end{enumerate}
 
@@ -200,6 +200,11 @@ Tieto operácie sú zopakované tisíc krát, nakoniec sa vizualizuje pomocou RO
 Hodnota náhodného výberu je 0.5.
 
 \subsection{KL-Div}
+V literatúre nazívaná aj Kullback-Leiblerova divergencia je bežne používaná aj mimo oblasti počítačového videnia, ako metóda pre odhad celkovej rozdielnosti medzi dvoma distribúciami.
+Moho authorov saliency modelov používa túto metriku, ako hodnotu straty informácie tj. kolko informácií sa strati po vypočitaní daného saliency modelu voči mape fixácií.
+
+\\
+\\
 
 Každý projekt vytvárajúci model významných oblastí si volí vlastné metriky úspešnosti, podľa ktorých sa určuje úspešnosť daného modelu.
 Pre meranie úspešnosti modelov je okrem samotných algoritmov pre meranie úspešnosti potrebné zabezpečiť dostatočne rôznorodú skupinu testovacích dát tkz.
