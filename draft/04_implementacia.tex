@@ -169,7 +169,7 @@ Návrh riešenia pre tieto prípady budú rozanalyzované v sekcií \ref{ssec:di
 \clearpage
 
 \subsection{Pipeline metódy}
-  Grafický popis metódy obsahujúci príklad zostavenia mapy pozornosti.
+  Grafický popis metódy obsahujúci graf zostavenia mapy pozornosti.
 
   \begin{figure}[H]
     \centering
@@ -250,16 +250,17 @@ Každá metrika bude vyhodnocovaná samostane. Ako prvý budeme analyzovať data
 Ideálna hodnota tejto metriky je 1, čo reálne značí 100\% úspešnosť.
 Náhodná mapa pozornosti má hodnotu 0.5, z toho dôvodu aby sme dokázali správnosť nového modelu potrebujeme dokázať, že model má hodnotu AUC v intervale \interval[{0.5,1}].
 Z grafu \ref{fig:ASCMNOne} vyplýva, že všetky videá spĺňajú vyššie uvedenú podmienku.
-Výsledná priemerná hodnota pre AUC 0.651.
+Výsledná priemerná hodnota pre AUC 0.6515.
 Táto hodnota už priamo dokazuje túto hypotézu, keďže ho tvorí stredná hodnota všekých testovaných videí.
 Kedže je hodnota dostatočne vyššia ako 0.5. hodnota vyhodnocuje náš model ako korelujúci s reálne nameranými dátami na používateľoch zúčastnených sa na tvorbe tohoto datasetu.
 \subsubsection{ASCMN - KLDIV}
 Ideálna hodnota tejto metriky je 0, čo reálne značí že saliency mapa je totožná s ground truth mapou.
 Výsledné hodnoty pre všetky videá sa podľa grafu \ref{fig:ASCMNOne} pohybujú v intervale \interval[{1.5,1.7}].
 Hodnoty menšie ako 2 značia tiež koreláciu s reálnymi dátami.
-Výsledná hodnota KLDIV je 1.602 je nižsia ako 2, preto aj metrika KLDIV úspešne validuje náš model vrámci datasetu.
+Výsledná hodnota KLDIV je 1.6027 je nižsia ako 2, preto aj metrika KLDIV úspešne validuje náš model vrámci datasetu.
 \subsubsection{ASCMN - NSS}
-Výsledná hodnota NSS je 0.680.
+Výsledná hodnota NSS je 0.6809.
+Hodnota NSS metriky odhaluje, že hodnoty v oblastiach fixácií minimálne s normalizovanýmy fixáciamy a model by mal zmeniť hodnoty v oblastiach fixácii.
 
 \subsubsection{Coutrot #1}
 V datasete Coutrot #1 boli z testovania vynaté videá číslo: 10, 15 z dôvodu chybného zdrojového videa alebo fixácií zverejnených jeho autormy.
@@ -269,11 +270,13 @@ V datasete Coutrot #1 boli z testovania vynaté videá číslo: 10, 15 z dôvodu
   \label{fig:coutrotOne}
 \end{figure}
 \subsubsection{Coutrot #1 - AUCROC}
-@TODO
+Výsledná priemerná hodnota pre AUC 0.6086.
+HTakáto hodnota vyhodnocuje náš model ako korelujúci s reálne nameranými dátami na používateľoch zúčastnených sa na tvorbe tohoto datasetu.
 \subsubsection{Coutrot #1 - KLDIV}
-@TODO
+Výsledná hodnota KLDIV je 1.6280, je nižsia ako 2, preto aj metrika KLDIV úspešne validuje náš model vrámci datasetu.
 \subsubsection{Coutrot #1 - NSS}
-@TODO
+Výsledná hodnota NSS je 0.6277.
+Hodnota NSS metriky odhaluje, že hodnoty v oblastiach fixácií korelujú s normalizovanýmy fixáciamy používateľov ale na tomto type videí ma model ešte rezervu.
 
 \subsubsection{Coutrot #2}
 \begin{figure}[H]
@@ -282,14 +285,23 @@ V datasete Coutrot #1 boli z testovania vynaté videá číslo: 10, 15 z dôvodu
   \label{fig:coutrotTwo}
 \end{figure}
 \subsubsection{Coutrot #2 - AUCROC}
-@TODO
+Výsledná priemerná hodnota pre AUC 0.6782.
 \subsubsection{Coutrot #2 - KLDIV}
-@TODO
+Výsledná hodnota KLDIV je 1.8288 je nižsia ako 2, preto aj metrika KLDIV úspešne validuje náš model vrámci datasetu.
 \subsubsection{Coutrot #2 - NSS}
-@TODO
+Výsledná hodnota NSS je 2.2313.
+Vysoká hodnota tejto metriky na tomto type videií je logickým dôvodom typu videa.
+V tomto datasete bola pozornosť podla výstupných meraní užívateľov upriamená na iba málo oblastí v obraze naraz (v tomto prípade tvár alebo ruky účinkujúcich) a tímto oblastiam pridam vysokú hodnotu.
+Navrhovaná métoda postupuje podobne, vyčlení pohybujúce sa oblasti (pre takýto typ videa je pohubúcich oblastí sa málo) a kedže netrovia majoritnú oblasť videa utlačí statické príznaky, čoho dôsledkom je vysoké hodnotenie týchto obastí čo odpovedá vysokej hodnote porovnávajúcej sa v metrike.
 
 \subsubsection{Zhrnutie hodnotenia}
-@TODO
+Pri celkovom hodnotení bude pre nás smerodajná hlavne metriky AUCROC.
+Priemer pre všetky 3 testované datasety má hodnotu 0.6277 z čoho jasne výplýva úspešná validácia korelácie s nameranýmy dátamy.
+Metrika KLDIV dosahuje priemernú hodnotu pre všeky datasety 1.6438. 
+Metrika KLDIV poukazje na fakt ze metóda označuje viacej oblastí ako významných aj keď neboli namerané.
+Metrika NSS dosahuje priemernú hodnotu pre všeky datasety 0.5487.
+Táto metrika validuje, že aj hodnoty v oblastich fixácií korelujú s dátami.
+V tejto metrike však záleží od typu videa viacej ako u iných metrík.
 
 \subsection{Porovnávanie s konkurenčnými modelmi pozornosti}
 Porovnanie s konkurenciou nám poskytne ďalšie relevantné poznatky.
@@ -323,7 +335,7 @@ V ASCMN datasete bolo testovanie uskutočnené na všetkých videách a všetký
 \end{figure}
 
 \subsubsection{Coutrot #1}
-V datasete Coutrot #1 boli z testovania vynaté videá číslo: 10, 15 z dôvodu chybového spracovanie v jednom alebo viacej testovacích modelov.
+V datasete Coutrot #1 boli z testovania vynaté videá číslo: 10, 15 z dôvodu chybového spracovanie v jednom alebo viacerých testovaných modelov.
 \begin{figure}[H]
   \includegraphics[width=15cm]{pics/porovnanie-coutrot1-global.png}
   \caption{Vizualizácia porovnania pre dataset Coutrot #1\cite{coutrot-database}}
@@ -347,7 +359,7 @@ V datasete Coutrot #2 bolo testovanie uskutočnené na všetkých videách a vš
 \end{figure}
 
 \subsubsection{Zhrnutie benchmarku}
-Celkové hodnotenie benchamrku znazorním porovnanním priemerov vsektých datasetov spolu.
+Celkové hodnotenie benchamrku znazorním porovnanním priemerov všetkých datasetov spolu.
 
 \begin{figure}[H]
   \includegraphics[width=15cm]{pics/benchmark.png}
@@ -362,13 +374,21 @@ Zároveň na základe vypracovaného benchmarku možeme tvrdiť, že nová metó
 \section{Diskusia}
 \label{ssec:diskusia}
 Možnosť na zlepšenie algoritmu vidieť v celom benchmarku, kde model Rare\cite{rare-1} dosahoval výrazne lepšie výsledky aj napriek používaniu iba statických príznakov.
-Ďaľšia možnosť ako vylepšiť je v rýchlosti spracovania, ktorá nie je použiteľná na realtime spracovanie obrazu.
+Preto použitie algoritmu Rare\cite{rare-1} by viedlo k zlepšeniu aktuálnych výsledkov.
+
+\\
+
+Ďaľšia možnosť ako vylepšiť je v rýchlosti spracovania, ktorá nie je použiteľná na realtime spracovanie videa v štandardnej kvalite videa.
 Algoritmus je svojou časovou náročnosťou vhodný na spracovanie videí v nízkej obrazovej kvalite.
 Avšak pri vysokej obrazovej kvalite, algoritmus nevykazoval vyššiu efektivitu (otestované na datasete savam\cite{savam} ktorý poskytuje videá vo vysokej kvalite).
 Ale výpočet trval výrazne dlhšie ako v porovnaní s videom s nízkou obrazovou kvalitou.
-Ďaľšiu možnosť pre zlepšenie odhaľuje validácia datasetu Coutrot #2, kde pôvodný algotritmus horn-struck dosiahol hodnotenie porovnateľné s navrhovaným modelom.
+
+\\
+
+Ďaľšiu možnosť pre zlepšenie odhaľuje validácia datasetu Coutrot #2\cite{coutrot-database-2}, kde pôvodný algotritmus horn-struck dosiahol hodnotenie porovnateľné s navrhovaným modelom.
 Takéto výsledky sú spôsobené výberom rozostupu frameov (podľa ktorých sa počíta dynamická zložka).
 Keďže rozpätie bolo zvolené na každú dvojicu framov pri týchto videách sa často stávalo, že algoritmus detekoval iba minimálny pohyb.
 Čo bolo považované za šum a z toho dôvodu bola dymamická zložka potlačená alebo úplne eliminovaná (čo bolo v tomto prípade chybné).
 Riešením by bolo porovnávanie viacej framov a následná extrakcia pohybu všetkých dvojíc dokopy.
 Tento postup by už nebol považovaný za šum a dynamická zložka by nebola elliminovaná.
+Daľšou možnostou je použiť nejakú formu rozloženia videa na dinamicky sa meniace keyframy medzi ktorímy sa bude výpočítavať dinamická žložka mapy, zatiaľ čo statická sa bude generovať počas kažkého framu.
