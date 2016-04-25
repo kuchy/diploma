@@ -2,7 +2,7 @@
 Ľudské oko je schopné spracovať \begin{math}10^8\end{math} až \begin{math}10^9\end{math} bitov obrazových dát za sekundu.
 Ľudský mozog nie je schopný spracovať také množstvo dát naraz, preto sa získané informácie filtrujú pomocou ľudského vizuálneho systému\cite{Fmph-videnie}.
 Ľudský vizuálny systém je pravdepodobne najzložitejším mechanizmom akým človek disponuje.
-Je natoľko klúčovým pre fungovanie spoločnosti či jedinca, že psychológovia sa zaoberajú jeho výskumom.
+Je natoľko kľúčovým pre fungovanie spoločnosti či jedinca, že psychológovia sa zaoberajú jeho výskumom.
 Už viacero dekád študujú vlastnosti tohoto mechanizmu z pohľadu psychológie, fyziológie alebo neurobiológie.
 \\
 Vyfiltrované oblasti obrazu už je možne spracovať vo výrazne rýchlejšom čase ako nefiltrované, ideálne v reálnom čase.
@@ -10,28 +10,29 @@ Takéto oblasti sa nazývajú význammné alebo charakteristické (v literatúre
 Významné oblasti sú vyberané pomocou mnohých faktorov.
 Najznámejšími sú prechody vo farbe, intenzite alebo orientácii.
 Ľudský vizuálný systém taktiež využíva skúsenosti pri pozorovaní.
-Oblasti takto vyfiltrované nesú pre pozorovateľa viac potencionálnych informácií ako ostatné oblasti obrazu a preto sa stávajú salietnými.
+Oblasti takto vyfiltrované nesú pre pozorovateľa viac potencionálnych informácií ako ostatné oblasti obrazu a preto sa stávajú salientnými.
 \\
 V systémoch počítačového videnia sa snažíme využívať primárne tieto oblasti pre pridelenie väčšej časti zdrojov.
-Z tohoto dôvodu je zistenie zaujímavých oblasti častým prvým krokom mnohých algoritmov v oblasti počítačového videnia.
+Z tohoto dôvodu je zistenie významných oblastí častým prvým krokom mnohých algoritmov v oblasti počítačového videnia.
 \\
-Algoritmy na detekciu význammných oblastí sa delia do 3 skupín podľa princípu akým spracovávajú dáta\cite{brief-survey}
+Algoritmy na detekciu význammných oblastí sa delia do troch skupín podľa princípu akým spracovávajú dáta\cite{brief-survey}
 
   \begin{enumerate}
           \item Zdola-nahor: Prístup je cielený na nezávislosť od používateľa.
           Zameriava sa na fyziologicky významné oblasti vizuálneho systému ako výrazné zmeny v tvare, jase alebo farbe.
           \item Zhora-nadol: Prístup je založený na čiastočnom riadení zo strany používateľa (konanie je podmienené úlohou).
-          Riadenie je prínosom, pretože obsajuhe aj informáciu používateľa a jeho predchádzajúcich vedomostí či skúseností, ktoré ovplyvňujú vnímanie.
+          Riadenie je prínosom, pretože obsahuje aj informáciu používateľa a jeho predchádzajúcich vedomostí či skúseností, ktoré ovplyvňujú vnímanie.
           \item Algoritmy využívajúce neurónové siete.
   \end{enumerate}
 
-Cieľom práce, je štúdium a výskum nových metód na detekciu významných oblastí vo videu.
-Následne porovnanie nových métod s existujúcimi v rôznych štandardných oblastiach ako aj v rýchlosti výpočtu.
+Cieľom práce je štúdium a výskum nových metód na detekciu významných oblastí vo videu.
+Následné porovnanie nových métod s existujúcimi v rôznych štandardných oblastiach.
 \\
-V prvej časti sa nachádza prehľad metód na detekciu významných oblastí vo videu alebo metód na detekciu v statických obrazoch, ktoré majú potenciál pre použitie aj vo videu.
+\textbf{V prvej časti} sa nachádza prehľad metód na detekciu významných oblastí vo videu alebo metód na detekciu v statických obrazoch, ktoré majú potenciál pre použitie aj vo videu.
 Ďalej detailné vysvetlenie fungovania metód, ktoré budú použité v implementácii zlepšenia.
 \\
-V druhej časti je popísaný postup a princíp zlepšenia a postup implementácie.
-Tretiu časť tvorí validácia výsledkov a porovnanie výsledkov s inýmy modelmi, ktoré poskytujú lepšiu predstavu o efektivite algoritmu.
+\textbf{V druhej časti} je popísaný postup a princíp zlepšenia a postup implementácie.
+\\
+\textbf{Tretiu časť} tvorí validácia výsledkov a porovnanie výsledkov s inýmy modelmi, ktoré poskytujú lepšiu predstavu o efektivite algoritmu.
 \\
 V závere....
