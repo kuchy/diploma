@@ -4,11 +4,11 @@ Avšak metóda stále zohľadňuje v pozorovanom videu aj aspekty statického ob
 Tieto príznaky sú vypočítavané separátne a nakoniec ich metóda spája do jednej výslednej mapy pozornosti. Výsledkom je postupnosť máp pozornosti pre každý frame videa (podľa vstupnej konfigurácie), ktorý možno spojiť do videa pozornosti pre ľubovolné vstupné video.
 
 \subsection{Dynamické príznaky videa}
-Dynamické príznaky metóda najprv extrahuje pomocou štadardnej metódy Horn-Schunck, (referencia na 2 kapitolu alebo na článok?) ktorá vypočíta optický tok na každých 2 rozdielnych framoch videa, čím vzniká sémantický príznak pohybu rôznych objektov po scéne spolu s smerovými vektormi pohybu daných vektorov.
+Dynamické príznaky metóda najprv extrahuje pomocou metódy Horn-Schunck\cite{horn-struct2}, ktorá vypočíta optický tok na každých 2 rozdielnych framoch videa, čím vzniká sémantický príznak pohybu rôznych objektov po scéne spolu s smerovými vektormi pohybu daných vektorov.
 Získané smerové vektory okamžite spočítavame, aby sme získali celkový obraz optického toku pre danú dvojicu obrazov.
 Obraz sa následne prahuje statickou konštantou kvôly ostráneniu šumu.
 Prahovanie prebieha dynamicky vzľadom na počet nájdených 8-spojitých regiónov tj. výstup optikého toku. V našej implementácií je obmedzený počet regiónov na maximálnu hodnotu 200 regiónov.
-Prahovanie začne s konštantou, ktorú určí pomocou algoritmu Otsu\cite{otsu}, následne určí počet 8-spojitých regiónov. Ak je počet väčší ako maximálna hodnota, zvýši konštantu o 10% z pôvodnej hodnoty.
+Prahovanie začne s konštantou, ktorú určí pomocou algoritmu Otsu\cite{otsu}, následne určí počet 8-spojitých regiónov. Ak je počet väčší ako maximálna hodnota, zvýši konštantu o 10\% z pôvodnej hodnoty.
 Tento proces sa opakuje pokial sa v obraze vyskytuje viac ako maximálny počet regiónov.
 Takéto prahovanie je nutné pre optimalizáciu výkonu algoritmu, pretože v prípadoch keď obraz obsahuje veľké množtvo regiónov, výpočtová rýchlosť algoritmu je maximálne neúčinná.
 Pixely s valídnou honotou sa rozdelia na regióny podľa spojitosti a podobnosti štandardným spôsobom.
@@ -125,7 +125,7 @@ Obe implementácie sú dostupné v prílohe na CD alebo voľne dostupné na inte
 
 \subsection{Ukážky výsledkov}
 V tejto sekcií budem prezentovať výsledky konkrétne prípady videí (framy) zachytené počas testovania a validácie.
-Vždy uvediem po sebe nasledujúce originálne framy videa a vizualizáciu fixácií. Ako príklad uvediem frame 53 z videa č. 23 z datasetu ASCMN\cite{accv}.
+Uvediem po sebe nasledujúce originálne framy videa a vizualizáciu fixácií. Ako príklad uvediem frame 53 z videa č. 23 z datasetu ASCMN\cite{accv}.
 \begin{figure}[H]
   \centering
   \includegraphics[width=10cm]{pics/ACCV-23-54-compare.png}
@@ -134,7 +134,7 @@ Vždy uvediem po sebe nasledujúce originálne framy videa a vizualizáciu fixá
   \vspace{10mm}
 \end{figure}
 Grafy sú generované pomocou pozmeneného ukážkového scriptu distribuovaného spolu s datasetom ASCMN\cite{accv} a porovnávané s výsledkom navrhovaného modelu pomocou grafu \ref{fig:ASCMN-53-23}.
-V prvom riadku vidíme ako prvý pôdovdný frame (n-1) nasledovaný testovaným framom posledný obrázok zobrazuje fixácie.
+V prvom riadku vidíme ako prvý pôdovdný frame (n-1) nasledovaný testovaným framom a posledný obrázok zobrazuje fixácie.
 V druhom riadku uvádzam postupne heatmapu pre daný frame, prahovanú heat mapu a ako poslednú výslednú saliency mapu.
 
 \begin{figure}[H]
@@ -229,11 +229,6 @@ Validácia vyššie spomínaného modelu prebiahala pomocou automatického testo
 Prezentovať budem výsledky z nasledujúch datasetov: \textbf{ASCMN\cite{accv}}, \textbf{Coutrot #1\cite{coutrot-database}}, \textbf{Coutrot #2\cite{coutrot-database-2}}.
 Výsledky budem hodnotiť pomocou nasledujúcich metrík: \textbf{AUCROC\cite{metrics-1}}, \textbf{KLDIV\cite{metrics-1}}, \textbf{NSS\cite{metrics-1}}.
 V nasledujúcich sekciách budem prezentovať výsledky validácie pre navrhovaný model a ďalej vyhodnocovať vytvorený benchmark.
-\\
-\\
-@TODO screens+postup of validation???
-\\
-\\
 \subsection{Analýza výsledkov}
 V tejto sekcii budem prezentovať výsledky všetkých datasetov vzhľadom na navrhovaný model.
 Výsledky budem vizualizovať pomocou charakteristiky vzniknutej zo strednej hodnoty framov, jednotlivých videí.
@@ -263,14 +258,14 @@ Výsledná hodnota NSS je 0.6809.
 Hodnota NSS metriky odhaluje, že hodnoty v oblastiach fixácií minimálne s normalizovanýmy fixáciamy a model by mal zmeniť hodnoty v oblastiach fixácii.
 
 \subsubsection{Coutrot #1}
-V datasete Coutrot #1 boli z testovania vynaté videá číslo: 10, 15 z dôvodu chybného zdrojového videa alebo fixácií zverejnených jeho autormy.
+V datasete Coutrot #1 boli z testovania vynaté videá číslo: 34, 39, 51, 5 z dôvodu chybného zdrojového videa alebo fixácií zverejnených jeho autormy, alebo nevalídnimy výsledkamy v nejakej z vypočítavaných metrík.
 \begin{figure}[H]
   \includegraphics[width=15cm]{pics/single-coutrot1.png}
   \caption{Vizualizácia všetkých testovaných metrík pre dataset Coutrot #1\cite{coutrot-database} pre jednotlivé videá}
   \label{fig:coutrotOne}
 \end{figure}
 \subsubsection{Coutrot #1 - AUCROC}
-Výsledná priemerná hodnota pre AUC 0.6086.
+Výsledná priemerná hodnota pre AUC je 0.6086.
 HTakáto hodnota vyhodnocuje náš model ako korelujúci s reálne nameranými dátami na používateľoch zúčastnených sa na tvorbe tohoto datasetu.
 \subsubsection{Coutrot #1 - KLDIV}
 Výsledná hodnota KLDIV je 1.6280, je nižsia ako 2, preto aj metrika KLDIV úspešne validuje náš model vrámci datasetu.
@@ -285,7 +280,7 @@ Hodnota NSS metriky odhaluje, že hodnoty v oblastiach fixácií korelujú s nor
   \label{fig:coutrotTwo}
 \end{figure}
 \subsubsection{Coutrot #2 - AUCROC}
-Výsledná priemerná hodnota pre AUC 0.6782.
+Výsledná priemerná hodnota pre AUC je 0.6782.
 \subsubsection{Coutrot #2 - KLDIV}
 Výsledná hodnota KLDIV je 1.8288 je nižsia ako 2, preto aj metrika KLDIV úspešne validuje náš model vrámci datasetu.
 \subsubsection{Coutrot #2 - NSS}
@@ -335,7 +330,7 @@ V ASCMN datasete bolo testovanie uskutočnené na všetkých videách a všetký
 \end{figure}
 
 \subsubsection{Coutrot #1}
-V datasete Coutrot #1 boli z testovania vynaté videá číslo: 10, 15 z dôvodu chybového spracovanie v jednom alebo viacerých testovaných modelov.
+V datasete Coutrot #1 boli z testovania vynaté niektoré videá z dôvodu chybového spracovanie v jednom alebo viacerých testovaných modelov.
 \begin{figure}[H]
   \includegraphics[width=15cm]{pics/porovnanie-coutrot1-global.png}
   \caption{Vizualizácia porovnania pre dataset Coutrot #1\cite{coutrot-database}}
@@ -354,7 +349,7 @@ V datasete Coutrot #1 boli z testovania vynaté videá číslo: 10, 15 z dôvodu
 
 V datasete Coutrot #2 bolo testovanie uskutočnené na všetkých videách a všetkých vyššie uvedených modeloch.
 \begin{figure}[H]
-  \includegraphics[angle=90, width=13cm]{pics/porovnanie-coutrot2.png}
+  \includegraphics[angle=90, width=12cm]{pics/porovnanie-coutrot2.png}
   \caption{Vizualizácia porovnania pre dataset Coutrot #2\cite{coutrot-database-2}}
 \end{figure}
 

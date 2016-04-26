@@ -55,7 +55,7 @@ Odčítaním od pôvodnej amplitúdovej zložky dostaneme iba časti obrazu, kto
 Sun model (Saliency Using Natural statistics) sa snaží simulovať potencionálne ciele sledovania ludského vizuálneho systému.
 Model aktívne hodnotí tieto ciele odhadom pravdepodobnosti vzhľadom na všetky pozorované charakteristiky.
 Charakteristiky sú spracovávané separátne a teda model nepočíta s chrakteristikami navzájom sa ovplyvňujúcimi.
-Údaje získané zo všetkćyh charakteristík  následne spracuje šatisticky.
+Údaje získané zo všetkćyh charakteristík  následne spracuje štatisticky.
 Model zakladá hlavne na Bayesovom pravidle.
 Za výsledok hľadania potom udáva asymetrie v týchto štatistických štruktúrach\cite{sun-1}.
 \subsection{Rare Model}
@@ -89,7 +89,7 @@ Tieto pokusy viedli aj k zostaveniu modelov zohladňujúc zvukovú stopu ako sam
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=10cm]{pics/courot-1.png}
+  \includegraphics[width=9.5cm]{pics/courot-1.png}
   \caption{Vizualizácia audiovizuálneho modulu\cite{sound-courot-2}}\label{wrap-fig:4}
 \end{figure}
 \vspace{10mm}
@@ -138,7 +138,7 @@ Pomocou takejto úpravu naivného algortimu sa časová zložitosť zlepšila na
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=10cm]{pics/lukas-kanade.jpg}
+  \includegraphics[width=7cm]{pics/lukas-kanade.jpg}
   \caption{Vizualizácie výsledkov algoritmu Lucas-Kanade vždy po 1 iterácií\cite{lucas-kanade}}
 \end{figure}
 \vspace{10mm}
@@ -170,11 +170,8 @@ Metriky úspešnosti možno rozdeliť do 3 štandardných skupín podľa druhu h
 \end{enumerate}
 
 \subsection{NSS}
-NSS (Normalized Scanpath Saliency) metrika narvrhnutá v roku 2005 ktorej autormi sú R.
-J.
-Peters a L.
-Itti.
-Metrika zakladá na ohodnotení salientných oblastí vzľadom na pozíciu fixácií samostatne a následná normalizácia podľa počtu fixácií.
+NSS (Normalized Scanpath Saliency) metrika narvrhnutá v roku 2005 ktorej autormi sú R. J. Peters a L. Itti.
+Metrika zakladá na ohodnotení salientných oblastí vzľadom na pozíciu fixácií samostatne a následne hodnotu normalizuje vzhľadom na počet fixácií v celom obraze\cite{metrics-1}.
 \\
 Pre každú fixáciu používa vzťah
   \begin{equation}
@@ -183,7 +180,7 @@ Pre každú fixáciu používa vzťah
 Kde SM je mapa význačných oblastí a p je bod danej fixácie pre ktorú sa hodnota vypočítava.
 
 Pričom mapa fixácií SM je normalizovaná tak aby nadobúdala nulovú strednú hodnotu a zároveň jednotkovú štandardnú dochýlku.
-Metrika NSS nadhodnocuje ak je saliency mape minimálna rozmanitosť hodnôt (malý rozdiel medzi hodnotami fixácií a strednou hodnotou), pretože v takomto prípade nebude model dostatocne odhonotený, ak nájde presné pozície v prípade, že odchýlka je malá, alebo
+Metrika NSS nadhodnocuje ak je na výslednej saliency mape minimálna rozmanitosť hodnôt (malý rozdiel medzi hodnotami fixácií a strednou hodnotou), pretože v takomto prípade nebude model dostatocne odhonotený, ak nájde presné pozície v prípade, že odchýlka je malá, alebo
 rozdiel medzi hodnotami fixácie a strednou hodnotou je vysoké.
 Finálna hodnota NSS metriky je určená priemerom hodnôt pre všetky fixácie\cite{metrics-1}.
 
@@ -200,20 +197,16 @@ Tieto operácie sú zopakované tisíc krát, nakoniec sa vizualizuje pomocou RO
 Hodnota náhodného výberu je 0.5.
 
 \subsection{KL-Div}
-V literatúre nazívaná aj Kullback-Leiblerova divergencia je bežne používaná aj mimo oblasti počítačového videnia, ako metóda pre odhad celkovej rozdielnosti medzi dvoma distribúciami.
+V literatúre nazívaná aj Kullback-Leiblerova divergencia\cite{kldiv} je bežne používaná aj mimo oblasti počítačového videnia, ako metóda pre odhad celkovej rozdielnosti medzi dvoma distribúciami.
 Moho authorov saliency modelov používa túto metriku, ako hodnotu straty informácie tj. kolko informácií sa strati po vypočitaní daného saliency modelu voči mape fixácií.
-
-\\
-\\
-
+\\\\
 Každý projekt vytvárajúci model významných oblastí si volí vlastné metriky úspešnosti, podľa ktorých sa určuje úspešnosť daného modelu.
-Pre meranie úspešnosti modelov je okrem samotných algoritmov pre meranie úspešnosti potrebné zabezpečiť dostatočne rôznorodú skupinu testovacích dát tkz.
-datasetov.
+Pre meranie úspešnosti modelov je okrem samotných algoritmov pre meranie úspešnosti potrebné zabezpečiť dostatočne rôznorodú skupinu testovacích dát tkz. datasetov.
 
 \section{Refenčné datasety}
-Dataset je testovacia množina, ktorá sa snaží obsiahnuť dostatočne rôznorodé vzorky vhodné pre komplexné testovanie.
-Pri zostavovaní datasetov sú dôležité nielen videá ale eyetracker data alebo nejakým spôsobom zverejnené fixácie, aby bolo možné výsledky validovať pomocou vyššie uvedených metrík.
-Poslednou charakteristikou datasetu je množsto ľudí na ktorých boli dané viedeá nahrávané.
+Dataset je testovacia množina vstupov, ktorá sa snaží obsiahnuť dostatočne rôznorodé vzorky vhodné pre komplexné testovanie.
+Pri zostavovaní datasetov sú dôležité nielen videá ale eyetracker data alebo nejakým spôsobom zverejnené fixácie (získaný napríklad ja ručným označovaním významných oblastí), aby bolo možné výsledky validovať pomocou vyššie uvedených metrík.
+Daľšou charakteristikou datasetu je množsto ľudí na ktorých boli dané viedeá nahrávané.
 \\ Príklady datasetov:
 \begin{itemize}
 	\item \textbf{RSD}\cite{rsd}
@@ -223,7 +216,8 @@ Poslednou charakteristikou datasetu je množsto ľudí na ktorých boli dané vi
 \end{itemize}
 
 \subsection{RSD}
-Regional Saliency Dataset je zaujímavý o čo najobšírnejšie testovanie je rozdelený do 4 hlavných kategórií: \\
+Regional Saliency Dataset sa snaží o čo najobšírnejšie testovanie a rôznorodé videá.
+Je rozdelený do 4 hlavných kategórií: \\
 \begin{itemize}
 	\item \textbf{bezpečnostné záznamy} - Štadardné záznamy z bezpečnostných kamier obsahujú statické pozadie a salientné pohybujúce sa objekty.
 Pre túto čast datasetu vyžili záznamy z projektu CAVIAR\cite{rsd-caviar}.
@@ -232,7 +226,7 @@ Pre túto čast datasetu vyžili záznamy z projektu CAVIAR\cite{rsd-caviar}.
   \item \textbf{Prirodzené videá} - Videá bez pridaných grafických prvkov, tak ako boli nasnímané kamerou.
 \end{itemize}
 
-Na vyznačenie zaujímavých oblastí nezvolili techniku (eyetracke) ale manuálne vyznačovanie zaujímavých oblastí pomocou používateľov.
+Na vyznačenie zaujímavých oblastí nezvolili techniku (eyetracker) ale manuálne vyznačovanie zaujímavých oblastí pomocou používateľov.
 Výskumu sa zúčastnilo 17 mužov 6 žien medzi 10-23 rokov, na označení každého z videa sa podielalo 10-23 ludí.
 
 \begin{figure}[H]
@@ -244,19 +238,19 @@ Výskumu sa zúčastnilo 17 mužov 6 žien medzi 10-23 rokov, na označení kaž
 
 \subsection{SAVAM}
 SAVAM (Semiautomatic Visual-Attention Modeling) je dataset nahrávaný priamo pomocou eyetrackera pri sledovaní videí v HD rozlíšení pričom každému nahrávanému používateľovy sú pridelené dáta separátne pre kažké oko.
-Dokopy obsahuje 13minút videa, ktoré bolo otestované na 50 používateľoch rôzneho veku.
+Dokopy obsahuje 13 minút videa, ktoré bolo otestované na 50 používateľoch rôzneho veku.
 Dataset je rozdelený na videá z filmov, ukážky z komerčných videí a stereoskopické videá.
 SAVAM taktiež poskytuje všetky raw dáta z eyetrackere ako aj vizualizácie daných dát\cite{savam}.
 
 \subsection{ASCMN dataset}
-ASCMN nazvaný podľa rozčlenenia do 5 skupín videa: Abnormálne, bezpečnostné, videá s davom, videá s pohybom a videá s chybamy v obraze (z anglckých názvou: Abnormal, Surveillance, Crowd, Moving, Noise).
+ASCMN nazvaný podľa rozčlenenia do piatich skupín videa: Abnormálne, bezpečnostné, videá s davom, videá s pohybom a videá s chybamy v obraze (z anglckých názvou: Abnormal, Surveillance, Crowd, Moving, Noise).
 Spolu obsahuje 24 videjí, každé video bolo namerané na 10 rôznych používateľoch.
 K datasetu je taktiež dostupný validačný kód\cite{accv} vypočítavajúci hodnotiace metriky na lubovolnom modeli pozornosti.
 
 \subsection{Coutrot dataset}
-Ide 2 rôzne datasety, oba sú nazvané podľa jeho authora, Antoine Coutrota.
+Ide dva rôzne datasety, oba sú nazvané podľa jeho authora, Antoine Coutrota.
 Prvý dataset\cite{sound-1} obsahuje videá s dynamickou povahou scény.
-Je rozčlenený do 4 vyzuálne rozličných kategórií.
+Je rozčlenený do štyroch vyzuálne rozličných kategórií.
 \begin{itemize}
   \item Jeden pohybyjúci sa objekt
   \item Viacej pohybujúcich sa objektov
@@ -264,9 +258,9 @@ Je rozčlenený do 4 vyzuálne rozličných kategórií.
   \item Konverzačné scény
 \end{itemize}
 Tento dataset obsahuje dokopy 60 videí, ktoré sledovalo vždy 18 rôznych používateľov.
-Všetky videá boli zaznamenanávnané v 4 rôznych zvukových zvukových podmienkach (využívať budeme iba dáta s pôdvodnou zvukovou stopou). \\
+Všetky videá boli zaznamenanávnané v štyroch rôznych zvukových zvukových podmienkach (využívať budeme iba dáta s pôdvodnou zvukovou stopou). \\
 Druhý dataset \cite{coutrot-database-2} obsahuje 15 videí.
-Všetky videá obsahujú nahraté stretnutie 4 konverzujúcich ludí so statickou kamerou, dataset nieje členený do žiadnych kategorií.
+Všetky videá obsahujú nahraté stretnutie štyroch konverzujúcich ludí so statickou kamerou, dataset nieje členený do žiadnych kategorií.
 Dáta oboch datasetou boli nahrávané pomocou eyetrackera EyeLink 1000 pri 1000Hz, pričom používatelia sedeli 57cm od monitoru.
 Eyetracker nahrával iba dáta z dominantného oka pre daného používateľa.
 
