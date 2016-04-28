@@ -1,16 +1,15 @@
 \section{Platforma pre riešenie}
-Ako platfoma pre implementáciu budeme používať programovací jazyk Matlab\textregistered.
-Všetky zdrojové kódy budu poskytnuté výhradne v tomto vývojovjárskom jazyku.
+Ako platfomu pre implementáciu bude použitý používať programovací jazyk Matlab\textregistered.
+Všetky zdrojové kódy budú poskytnuté výhradne v tomto vývojojárskom jazyku.
 \section{Očakávané výsledky}
 Výsledkom práce bude model pozornosti, ktorý zohľadňuje príznaky extrahovateľné iba z videa a nie z čisto obrazovej informácie.
 Pôjde o pohyb objektov na scéne a iné sémantické informácie, ktorými sa video odlišuje od statickej scény.
-Príkladom nového rozmeru videa okrem možnosti pohybu objektov, ktorú musíme počítať pri tvorbe mapy pozornosti.
-Sekundárnym prínosom práce bude vytvorenie jednotnej applikácie pre vizuálne porovnávanie modelov, kde používateľ bude môcť jednoducho pridávať modely, ideálne priamo pouźiť ukážkové zdrojové kódy zverejnené autormi jednotlivých modelov alebo úpravou, ktorá nevyžaduje znalosť logiky stojacej za daným modelom.
+Sekundárnym prínosom práce bude vytvorenie jednotnej aplikácie pre vizuálne porovnávanie modelov, kde používateľ bude môcť jednoducho pridávať modely. Ideálne priamo pouźiť ukážkové zdrojové kódy zverejnené autormi jednotlivých modelov alebo úpravou, ktorá nevyžaduje znalosť logiky stojacej za daným modelom.
 Následne automatický výpočet štadardných metrík na implementovanom datasete, pre jednoduchú validáciu výsledkov na rovnakých dátach, spolu s konkurečnými modelmi z dôvodu jednoduchého ladenia počas vývoja modelu.
-\section{Ideálne Prípady}
-Idálne prípady očakávam v prípade použitia záznamov z bezpečnostných kamier, z dôvodu statickej kamery.
-Vďaka statickému pozadiu sú výsledky detekcie optického toku objektov najrelevantnejšie.
-To predurčuje takého videá k najlepším výsledkom.
-\section{Problémové Prípady}
-Najproblémovejšími vstupmi sú očakávané videá s dynamickým pohybom kamery kombinovaným s pohybom objektov alebo videá s fixovanou kamerov na objekt dynamicky sa pohybúci sa po scéne.
-Vo videách takéhoto charakteru predpokladám chybné označovanie oblastí a z toho vyplývajúce chyby v mapách pozornosti, preto sa budem snažiť v týchto prípadoch utlmovať dynamické príznaky videa a používať iba statické príznaky aktuálneho obrazu.
+\section{Ideálne prípady}
+Idálne prípady sa očakávajú v prípade použitia záznamov z bezpečnostných kamier, z dôvodu statickej kamery.
+Vďaka statickému pozadiu sú výsledky detekcie optického toku objektov najrelevantnejšie, čo predurčuje takého videá k najlepším výsledkom.
+\section{Problémové prípady}
+Najproblémovejšími vstupmi sú očakávané videá s dynamickým pohybom kamery kombinovaným s pohybom objektov, alebo videá s fixovanou kamerov na objekt dynamicky sa pohybúci po scéne.
+Vo videách takéhoto charakteru sa predpokladá chybné označovanie oblastí a z toho vyplývajúce nepresnosti v mapách pozornosti.
+Preto v týchto prípadoch budú utlmované dynamické príznaky videa a budú sa používať iba statické príznaky aktuálneho obrazu.
