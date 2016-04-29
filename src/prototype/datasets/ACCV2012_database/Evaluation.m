@@ -2,7 +2,7 @@
 function evaluation ( ModelName )
 modelFunction = str2func(ModelName);
     % for each video in the database
-    for video = 1:1:24
+    parfor video = 1:1:24
 
      if     video ==1  
                       N_frames = 878;
@@ -129,16 +129,13 @@ modelFunction = str2func(ModelName);
                        [A,Aci] = auc([Iet1,map3],0.05,'hanley');
                        AUROC_score(1,frame) = mean(A);
                        
-%                        % auc mit
-%                        AUC_Judd(map,ET,0,1);
                        movOld =  mov;
-
     end
 
     % for each video, the metrics score are saved in a .mat file
     % you can change the .mat name if needed
     name = strcat(ModelName,num2str(video),'.mat');
-    save(name,'KLDIV_score','NSS_score','AUROC_score');
+    savePfor(name,'KLDIV_score','NSS_score','AUROC_score');
     
 
     end
