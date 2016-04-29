@@ -54,11 +54,11 @@ function showResults (dataset, numOfVideos)
     AUC_min = 0.45;
     AUC_random = [0.5 0.5];
     
-    NSS_max = 3;
+    NSS_max = 1.7;
     NSS_min = 0;
     
-    KLDIV_max = 2.0;
-    KLDIV_min = 1.4;
+    KLDIV_max = 1.75;
+    KLDIV_min = 1.5;
 
     %% plot AUROC_score
     i = 1;
@@ -71,14 +71,14 @@ function showResults (dataset, numOfVideos)
     end
     figure
     subplot(3, 1, 1)
-    title('Results for selected Dataset');
+    title(strcat('Vysledok pre dataset',dataset));
     bar(1:numOfVideos, graph', 1)
     hold on
     plot(xlim, AUC_random, 'color', [0.5 0.5 0.5])
     axis([0 numOfVideos+6 AUC_min AUC_max])
     set(gca, 'XTick', 1:numOfVideos)
     xlabel('Video');
-    ylabel('Score of AUROC_score');
+    ylabel('AUCROC');
     legend(fieldnames(result)');
     clear data;
     clear graph;
@@ -93,12 +93,12 @@ function showResults (dataset, numOfVideos)
         i = i+1;
     end
     subplot(3, 1, 2)
-    title('Results for selected Dataset');
+    title(strcat('Vysledok pre dataset',dataset));
     bar(1:numOfVideos, graph', 1)
     axis([0 numOfVideos+6 KLDIV_min KLDIV_max])
     set(gca, 'XTick', 1:numOfVideos)
     xlabel('Video');
-    ylabel('Score of KLDIV_score');
+    ylabel('KLDIV');
     legend(fieldnames(result)');
     clear data;
     clear graph;
@@ -115,12 +115,12 @@ function showResults (dataset, numOfVideos)
 
     % Show graph
     subplot(3, 1, 3)
-    title('Results for selected Dataset');
+    title(strcat('Vysledok pre dataset',dataset));
     bar(1:numOfVideos, graph', 1)
     axis([0 numOfVideos+6 NSS_min NSS_max])
     set(gca, 'XTick', 1:numOfVideos)
     xlabel('Video');
-    ylabel('Score of NSS_score');
+    ylabel('NSS');
     legend(fieldnames(result)');
     clear data;
     clear graph;
@@ -136,7 +136,7 @@ function showResults (dataset, numOfVideos)
     
     figure
     subplot(3, 1, 1)
-    title('Results for selected Dataset');
+    title(strcat('Vysledok pre dataset',dataset));
     bar(1:i-1, graph', 1)
     hold on
     plot(xlim, AUC_random, 'color', [0.5 0.5 0.5])
@@ -156,7 +156,7 @@ function showResults (dataset, numOfVideos)
     end
     
     subplot(3, 1, 2)
-    title('Results for selected Dataset');
+    title(strcat('Vysledok pre dataset',dataset));
     bar(1:i-1, graph', 1)
     axis([0 i KLDIV_min KLDIV_max])
     set(gca, 'XTick', 1:i-1, 'XTickLabel', fieldnames(result))
@@ -174,7 +174,7 @@ function showResults (dataset, numOfVideos)
     end
     
     subplot(3, 1, 3)
-    title('Results for selected Dataset');
+    title(strcat('Vysledok pre dataset',dataset));
     bar(1:i-1, graph', 1)
     axis([0 i NSS_min NSS_max])
     set(gca, 'XTick', 1:i-1, 'XTickLabel', fieldnames(result))
@@ -187,19 +187,20 @@ function showResults (dataset, numOfVideos)
     graph = extractfield(result.hornSchunckNew.frameMean(:), 'AUROC_score');
     figure
     subplot(3, 1, 1)
-    title('Results for selected Dataset');
+    title(strcat('Vysledok pre dataset',dataset));
     bar(1:size(graph,2), graph, 1)
     hold on
     plot(xlim, AUC_random, 'color', [0.5 0.5 0.5])
     axis([0 size(graph,2)+1 AUC_min AUC_max])
     set(gca, 'XTick', 1:size(graph,2))
     ylabel('AUCROC');
+    mean(graph)
     clear data;
     clear graph;
     
     graph = extractfield(result.hornSchunckNew.frameMean(:), 'KLDIV_score');
     subplot(3, 1, 2)
-    title('Results for selected Dataset');
+    title(strcat('Vysledok pre dataset',dataset));
     bar(1:size(graph,2), graph, 1)    
     axis([0 size(graph,2)+1 KLDIV_min KLDIV_max])
     set(gca, 'XTick', 1:size(graph,2))
@@ -209,10 +210,11 @@ function showResults (dataset, numOfVideos)
     
     graph = extractfield(result.hornSchunckNew.frameMean(:), 'NSS_score');
     subplot(3, 1, 3)
-    title('Results for selected Dataset');
+    title(strcat('Vysledok pre dataset',dataset));
     bar(1:size(graph,2), graph, 1)
     axis([0 size(graph,2)+1 NSS_min NSS_max])
     set(gca, 'XTick', 1:size(graph,2))
+    mean(graph)
     ylabel('NSS');
     clear data;
     clear graph;
