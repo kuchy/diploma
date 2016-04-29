@@ -52,7 +52,8 @@ node_modules
 #matlab
 *~
 #matlab - model section
-src/prototype/models
+src/prototype/models/**
+!src/prototype/models/example.m
 
 #matlab - datasets section
 /src/prototype/datasets/savam
