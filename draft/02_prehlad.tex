@@ -45,7 +45,7 @@ Pomocou nej rozdelí obrázok na amplitúdovú časť a fázovú časť.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=10cm]{pics/spectral-img.png}
+  \includegraphics[width=7cm]{pics/spectral-img.png}
   \caption{Príklad rozloženia typovo rôznych obrazov\cite{spectral-rezidual}}\label{wrap-fig:2}
 \end{figure}
 \vspace{10mm}
@@ -71,7 +71,7 @@ Metóda preskúmala možnosti nesekvenčnej extrakcie príznakov z obrazu, čo b
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=6cm]{pics/rare-1.png}
+  \includegraphics[width=9cm]{pics/rare-1.png}
   \caption{Rare model workflow\cite{rare-1}}\label{wrap-fig:3}
 \end{figure}
 
@@ -90,7 +90,7 @@ Tieto pokusy viedli aj k zostaveniu modelov zohľadňujúc zvukovú stopu ako sa
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=9.5cm]{pics/courot-1.png}
+  \includegraphics[width=8cm]{pics/courot-1.png}
   \caption{Vizualizácia audiovizuálneho modulu\cite{sound-courot-2}}\label{wrap-fig:4}
 \end{figure}
 \vspace{10mm}
@@ -118,7 +118,7 @@ Dôvody, prečo takto ľudský vizuálny systém zvyšuje prioritu práve takým
 Vysvetlenie je jednoduché a to snaha zabezpečiť bezpečné prostredie okolo seba a všetko pohybujúce sa narušuje pocit bezpečnosti.
 V nasledujúcom texte rozoberieme dva najpožívanejšie algoritmy na detekciu oblastí pohybu v obraze a výpočet vektoru posunu.
 Výpočet vektoru posunu je však iba projekcia 3D vstupných dát do 2D obrazu a nemusí vždy reprezentovať iba pohyb.
-Prvým z nich bude LUCAS KANADE\cite{lucas-kanade} a druhým Horn Schunck\cite{horn-schunck}.
+Prvým z nich bude Lucas Kanade\cite{lucas-kanade} a druhým Horn Schunck\cite{hs-original}.
 Obidva tieto algoritmy používajú jeden spoločný predpoklad a to, že jas daného objektu sa časom nemení.
 To znamená, že objekt sa na scéne môže presunúť, ale svoj jas nemôže zmeniť.
 Matematicky vyjadrené I(x(t),y(t),t) je obrazová dvojrozmerná funkcia, ktorá sa mení vzhľadom na čas.
@@ -135,26 +135,26 @@ Z čoho je ľahko odvoditeľné, že:
 Algoritmus Lucas Kanande prvotne vznikol ako návrh pre časovú optimalizáciu problému výpočtu vektora posunu medzi dvomi krivkami.
 Pôvodné primitívne riešenie vyžadovalo \begin{math} O(M^2 * N^2) \end{math} času pre výpočet daného vektora, ak M,N bolo rozlíšenie daného obrazového vzoru.
 Vtedy navrhovaná optimalizácia vyžadovala zadanie rozsahu hľadania, pomocou ktorého sa vypočítali diferencie pre celý obraz a pre ďalšiu iteráciu sa rozsah vypočítal pomocou horolezeckého algoritmu.
-Metóda Lucas Kanade využíva priestorový gradient pre výpočet nových hodnôt a zároveň upravuje hodnotu rozsahu pri výpočte kažkého obrazového pixelu v obraze a nie iba po výpočte celého obrazu.
+Metóda Lucas Kanade využíva priestorový gradient pre výpočet nových hodnôt a zároveň upravuje hodnotu rozsahu pri výpočte každého obrazového pixelu v obraze a nie iba po výpočte celého obrazu.
 Pomocou takejto úpravy naivného algortimu sa časová zložitosť zlepšila na \begin{math} O(M^2 log N) \end{math}\cite{lucas-kanade}.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=7cm]{pics/lukas-kanade.jpg}
+  \includegraphics[width=6cm]{pics/lukas-kanade.jpg}
   \caption{Vizualizácie výsledkov algoritmu Lucas-Kanade vždy po 1 iterácii\cite{lucas-kanade}}
 \end{figure}
 \vspace{10mm}
 
 \subsection{Horn-Schunck}
-Metóda Horn-Schunck bola prvá, kde bola použitá metóda variácie na výpočet optického toku.
+Metóda Horn-Schunck\cite{hs-original} bola prvá, kde bola použitá metóda variácie na výpočet optického toku.
 Táto globálna metóda priniesla výpočet  konštanty pre obmedzenie plynulosti optického toku.
 Algoritmus používa dva základné parametre: počet iterácií a vyhladzovaciu konštantu.
 Počet iterácií určuje dĺžku (počet cyklov) simulácie, vyhladzovacia konštanta je použitá po každom cykle simulácie kvôli zjemneniu prechodov a na výpočet optimálneho optického toku.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=7cm]{pics/horn-schunck.png}
-  \caption{Vizualizácia pracovného postupu metódy Horn-Schunck}
+  \includegraphics[width=8.5cm]{pics/horn-schunck.png}
+  \caption{Vizualizácia pracovného postupu metódy Horn-Schunck\cite{horn-schunck}}
 \end{figure}
 \vspace{10mm}
 
@@ -219,7 +219,7 @@ Pri zostavovaní datasetov sú dôležité nielen videá ale aj eyetracker data 
 \begin{itemize}
 	\item \textbf{RSD}\cite{rsd}
 	\item \textbf{SAVAM}\cite{savam}
-	\item \textbf{Coutrot datasets}\cite{courot-dataset}
+	\item \textbf{Coutrot datasets}\cite{courot-database}
   \item \textbf{ASCMN}\cite{accv}
 \end{itemize}
 
@@ -239,7 +239,7 @@ Výskumu sa zúčastnilo 17 mužov a 6 žien medzi 10-23 rokov veku, na označen
 
 \begin{figure}[H]
  \centering
- \includegraphics[width=7cm]{pics/rsd.png}
+ \includegraphics[width=12cm]{pics/rsd.png}
  \caption{Ukážka z každej kategórie videa s označenými významnými oblasťami}
 \end{figure}
 \vspace{10mm}

@@ -5,7 +5,7 @@ Avšak metóda stále zohľadňuje v pozorovanom videu aj aspekty statického ob
 Tieto príznaky sú vypočítavané separátne a nakoniec ich metóda spája do jednej výslednej mapy pozornosti. Výsledkom je postupnosť máp pozornosti pre každý frame videa (podľa vstupnej konfigurácie), ktorý možno spojiť do videa pozornosti pre ľubovolné vstupné video.
 
 \subsection{Dynamické príznaky videa}
-Dynamické príznaky videa metóda najskôr extrahuje pomocou metódy Horn-Schunck\cite{horn-struct2}, ktorá vypočíta optický tok na každých dvoch po sebe idúcich framoch videa, čím vzniká sémantický príznak pohybu rôznych objektov po scéne spolu so smerovými vektormi pohybu.
+Dynamické príznaky videa metóda najskôr extrahuje pomocou metódy Horn-Schunck\cite{hs-original}, ktorá vypočíta optický tok na každých dvoch po sebe idúcich framoch videa, čím vzniká sémantický príznak pohybu rôznych objektov po scéne spolu so smerovými vektormi pohybu.
 Smerové vektory spočítavame, aby sme získali celkový obraz optického toku pre danú dvojicu obrazov.
 Obraz sa následne prahuje statickou konštantou kvôli ostráneniu šumu.
 Prahovanie prebieha dynamicky vzhľadom na počet nájdených 8-spojitých regiónov, tj. na výstup optikého toku.
@@ -112,6 +112,8 @@ V prípade, že algoritmus nedokáže detekovať žiadny pohyb na scéne, bol by
 Preto v prípade, keď je vyššie spomínaný pomer dynamických pixelov extrémne nízky, použijeme ako výstup algoritmu iba statické príznaky.
 Naopak v prípade, ak kamera je v pohybe Horn-Schunck algoritmus označí ako pohybujúcu sa väčšinovú oblasť obrazu, v tom prípade je potrebné utlmiť dynamické príznaky obrazu a do popredia vystupujú statické príznaky.
 
+\clearpage
+
 \subsection{Zdrojové kódy modelu}
 Zdrojový kód obsahuje jednu metódu, ktorá prijíma na vstupe vždy dva parametre.
 Prvý parameter je aktuálny frame videa a druhý parameter je frame videa určený na extrakciu dynamických príznakov videa pomocou diferencie vzhľadom na prvý obrazový frame.
@@ -128,7 +130,7 @@ V tejto sekcii budem prezentovať výsledky konkrétnych prípadov videí (framo
 Uvediem po sebe nasledujúce originálne framy videa a vizualizáciu fixácií. Ako príklad uvediem frame 53 z videa č. 23 z datasetu ASCMN\cite{accv}.
 \begin{figure}[H]
   \centering
-  \includegraphics[width=10cm]{pics/ACCV-23-54-compare.png}
+  \includegraphics[width=14cm]{pics/ACCV-23-54-compare.png}
   \caption{Porovnanie výstupu mapy pozornosti a reálnych dát}
   \label{fig:ASCMN-53-23}
   \vspace{10mm}
@@ -139,7 +141,7 @@ V druhom riadku uvádzam postupne heat mapu pre daný frame, prahovanú heat map
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=10cm]{pics/ACCV-23-54-AUC_Judd.png}
+  \includegraphics[width=14cm]{pics/ACCV-23-54-AUC_Judd.png}
   \caption{Vizualizácie metriky AUC-Judd pomocou kódu zverejneného v mit saliency benchmark\cite{mit-saliency-benchmark}}
   \label{fig:ASCMN-53-23-AUC}
   \vspace{10mm}
@@ -156,7 +158,7 @@ Ako príklad uvediem frame č. 80 z videa č. 10 z datasetu coutrot #1.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=10cm]{pics/bad-compare.png}
+  \includegraphics[width=13cm]{pics/bad-compare.png}
   \caption{Porovnanie výstupu mapy pozornosti a reálnych dát}}
   \label{fig:coutrot-bad}
   \vspace{10mm}
