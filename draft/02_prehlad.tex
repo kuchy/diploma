@@ -2,7 +2,7 @@
 Saliency a teda detekcia významných oblastí je využívaná v rôznych oblastiach.
 Automatizáciou sú modely významných oblastí (anglicky saliency modelov) ťažiskom pri segmentácii obrazu alebo detekcii špecifických objektov.
 Od saliency modelov sú taktiež závislé aj programy ovládajúce zabezpečovacie zariadenia.
-Tým, že zužujú možnosti a proaktívne upozorňujú na podozrivé situácie pomocou zúženia obrazu na zopár oblastí.
+Pomocou saliency modelov zužujú možnosti a proaktívne upozorňujú na podozrivé situácie pomocou zúženia obrazu na zopár oblastí.
 Saliency model používa aj oblasť reklamy, kde je vizuálna pozornosť kľúčovým parametrom, čo môže rozhodnúť o úspechu produktu.
 Veď aký význam by mala reklama, kde si nevšimnete prezentovaný produkt alebo si všimnete iba jeho 'menej' dokonalé časti.
 \section{Metódy pre statické obrazy}
@@ -23,7 +23,7 @@ Model zakladá na rozložení obrazu na tri základné charakteristiky obrazu a 
 
 \begin{figure}[H]
  \centering
- \includegraphics[width=7cm]{pics/itti-1-svk.png}
+ \includegraphics[width=12cm]{pics/itti-1-svk.png}
  \caption{Ucelená vizualizácia ittiho modelu\cite{itty-98}}\label{wrap-fig:1}
 \end{figure}
 \vspace{10mm}
@@ -61,7 +61,7 @@ Model zakladá hlavne na Bayesovom pravidle.
 Ako výsledok hľadania potom udáva asymetrie v týchto štatistických štruktúrach\cite{sun-1}.
 \subsection{Rare Model}
 Výrazná väčšina modelov pozornosti typu bottom-up funguje ustáleným postupom, kde sa z pôvodného obrazu extrahuje definovaná množina chrakteristík paralelne a tie sa následne kombinujú alebo inak použijú na výpočet výslednej mapy pozornosti.
-Rare model narvhuje sekvenčnú architektúru, kde z pôvodného obrázku extrahuje nízko úrovňové príznaky.
+Rare model narvhuje sekvenčnú architektúru, kde z pôvodného obrazu extrahuje nízko úrovňové príznaky.
 Následne na výsledkoch sériovo vykonáva extrakciu ďalších príznakov (v literatúre nazývané mid-level).
 Nakoniec ako posledný krok spojí a normalizuje výsledné chrakteristiky do konečnej mapy významných oblastí.
 Rare model ako nízkoúrovňové chrakteristiky používa jas a colorimetrické rozdiely (ako farebný model používa YCbCr) a následne na mapách rozložených zložiek farebného modelu detekuje orientáciu pomocou gáborových filtrov\cite{rare-1}.
@@ -71,7 +71,7 @@ Metóda preskúmala možnosti nesekvenčnej extrakcie príznakov z obrazu, čo b
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=6cm]{pics/rare-1-svk.png}
+  \includegraphics[width=6cm]{pics/rare-1.png}
   \caption{Rare model workflow\cite{rare-1}}\label{wrap-fig:3}
 \end{figure}
 
@@ -99,9 +99,9 @@ Model extrahuje video na sekvenciu obrazov (framy) a audio stopu v tvare grafu v
 Potom extrahuje tri typy rôznych chrakteristík.
 Nízkoúrovňové príznaky založené na biologicky inšpirovaných saliency modeloch rozdelených na dynamickú časť a statickú časť.
 Statická časť sa zameriava na najasnejšie a najkontrastnejšie časti obrazu.
-Dynamická časť sa zameriava na relatívny pohyb objektov vhľadom na pozadie (eliminácia pohybu kamery).
+Dynamická časť sa zameriava na relatívny pohyb objektov vzhľadom na pozadie (eliminácia pohybu kamery).
 Tieto dve časti sa nakoniec spoja.
-Ďalšou chrakteritikou použitou v tomto modeli je detekcia tváre.
+Ďalšou charakteritikou použitou v tomto modeli je detekcia tváre.
 Každý objekt klasifikovaný ako tvár je v saliency mape nahradený oválnym objektom.
 Intenzita daných objektov je daná pomocou metódy Speaker Diarization\cite{sound-courot-2}, ktorá detekuje podľa zvukovej stopy objekt, ktorý generuje zvuk.
 Metóda predpokladá striedavú konverzáciu viacerých objektov oddelenú pauzou.
@@ -112,7 +112,7 @@ Ako posledný krok preloží cez celú mapu baseline center model popísaný v �
 Táto časť je zameraná na segmentáciu objektov, ktoré sa na scéne pohybujú.
 Metódy tohoto typu sa snažia vizualizovať 3D prostredia (v našom prípade disponujeme výškou, šírkou a časom) na 2D výstup (obrazový výstup).
 Takáto informácia dokáže priblížiť výpočtové modely bližšie k realite.
-Ľudský vizuálny systém totiž nepoužíva iba 2d vstup (ako to prebieha v drvivej väčšine metód na výpočet významných oblastí).
+Ľudský vizuálny systém totiž nepoužíva iba 2D vstup (ako to prebieha v drvivej väčšine metód na výpočet významných oblastí).
 Takéto obrazy sú v ľudskom vizuálnom systéme vysoko hodnotené.
 Dôvody, prečo takto ľudský vizuálny systém zvyšuje prioritu práve takýmto oblastiam môžeme nájsť v antropológii.
 Vysvetlenie je jednoduché a to snaha zabezpečiť bezpečné prostredie okolo seba a všetko pohybujúce sa narušuje pocit bezpečnosti.
@@ -132,8 +132,8 @@ Z čoho je ľahko odvoditeľné, že:
 \end{equation}
 
 \subsection{Lucas Kanande}
-Algoritmus prvotne vznikol ako návrh pre časovú optimalizáciu problému výpočtu vektora posunu medzi dvomi krivkami.
-Pôvodné primitívne riešenie vyžadovalo \begin{math} O(M^2 * N^2) \end{math} času pre výpočet daného vektora ak M,N bolo rozlíšenie daného obrazového vzoru.
+Algoritmus Lucas Kanande prvotne vznikol ako návrh pre časovú optimalizáciu problému výpočtu vektora posunu medzi dvomi krivkami.
+Pôvodné primitívne riešenie vyžadovalo \begin{math} O(M^2 * N^2) \end{math} času pre výpočet daného vektora, ak M,N bolo rozlíšenie daného obrazového vzoru.
 Vtedy navrhovaná optimalizácia vyžadovala zadanie rozsahu hľadania, pomocou ktorého sa vypočítali diferencie pre celý obraz a pre ďalšiu iteráciu sa rozsah vypočítal pomocou horolezeckého algoritmu.
 Metóda Lucas Kanade využíva priestorový gradient pre výpočet nových hodnôt a zároveň upravuje hodnotu rozsahu pri výpočte kažkého obrazového pixelu v obraze a nie iba po výpočte celého obrazu.
 Pomocou takejto úpravy naivného algortimu sa časová zložitosť zlepšila na \begin{math} O(M^2 log N) \end{math}\cite{lucas-kanade}.
@@ -159,12 +159,12 @@ Počet iterácií určuje dĺžku (počet cyklov) simulácie, vyhladzovacia kon�
 \vspace{10mm}
 
 \section{Metriky úspešnosti}
-Metriky úspešnosti sú algoritmy na čo najpresnejšie vyjadrenie presnosti modelov v meratelných jednotkách.
+Metriky úspešnosti sú algoritmy na čo najpresnejšie vyjadrenie presnosti modelov v merateľných jednotkách.
 Takýto algoritmus dostáva na vstupe čisté dáta z eye trackera.
 Tieto je potrebné predspracovať z dôvodu, že každý výrobca poskytuje iné zariadenia na hardwarovej úrovni a výrobcovia neštandardizujú výstup do jednotnej formy.
 Následne je potrebné vytvoriť mapu fixácií, ktorá sa používa ako jeden zo vstupných parametrov v algoritmoch počítajúcich metriky úspešnosti.
 \\
-Metriky úspešnosti možno rozdeliť do troch štandardných skupín podľa druhu hodnôt, na ktoré porovnávajú reálne dáta (v literatúre nazývané ground truth) s vygenerovanými mapami význačných oblastí\cite{metrics-1}.
+Metriky úspešnosti možno rozdeliť do troch štandardných skupín podľa druhu hodnôt, na ktoré porovnávajú reálne dáta (v literatúre nazývané ground truth) s vygenerovanými mapami významných oblastí\cite{metrics-1}.
 \begin{enumerate}
   \item\textbf{Založené na porovnávaní hodnôt} - NSS, Percentile, Pf
   \item\textbf{Založené na vyhodnocovaní vzdialeností} - AUC-Judd, AUC-Zhao, AUC Borji, AUC-Li
@@ -175,9 +175,10 @@ Metriky úspešnosti možno rozdeliť do troch štandardných skupín podľa dru
 NSS (Normalized Scanpath Saliency) je metrika narvrhnutá v roku 2005, ktorej autormi sú R. J. Peters a L. Itti.
 Metrika zakladá na ohodnotení salientných oblastí vzhľadom na pozíciu fixácií samostatne a následne hodnotu normalizuje vzhľadom na počet fixácií v celom obraze\cite{metrics-1}.
 \\
-Pre každú fixáciu používa vzťah
+Pre každú fixáciu používa vzťah:
   \begin{equation}
     NSS(p) =  (SM(p)-\SI{}{\micro}_{SM}) / 	\sigma_{SM}
+    \label{equation:nss}
   \end{equation}
 Kde SM je mapa význačných oblastí, p je bod danej fixácie, pre ktorú sa hodnota vypočítava.
 
@@ -185,32 +186,35 @@ Mapa fixácií SM je normalizovaná tak, aby nadobúdala nulovú strednú hodnot
 Metrika NSS nadhodnocuje, ak je na výslednej saliency mape minimálna rozmanitosť hodnôt (malý rozdiel medzi hodnotami fixácií a strednou hodnotou), pretože v takomto prípade nebude model dostatočne ohodnotený.
 Ak hodnotený model nájde presné pozície a odchýlka je malá, alebo rozdiel medzi hodnotami fixácie a strednou hodnotou je vysoký.
 Potom finálna hodnota NSS metriky je určená priemerom hodnôt pre všetky fixácie\cite{metrics-1}.
+Vzťah možno vyjadriť nasledovne:
 
 \begin{equation}
-  NSS = 1/N * \sum_{p=1}^{N}NSS(p)
+  NSS = 1/N * \sum_{p=1}^{N}NSS(p)  
 \end{equation}
+Kde p je počet fixácií a NSS(p) je výsledok vzťahu \ref{equation:nss}.
 
 \subsection{AUC-Judd}
 Metrika je clasická AUC, ktorú navrhol Judd \cite{auc-judd}.
-Ako prvé sa pixely označené ako fixácie spočítajú s rovnakým počtom náhodných pixelov vybraných z mapy význačných oblastí a nakoniec sú považované za klasifikátor úspešnosti.
+Ako prvé sa pixely označené ako fixácie spočítajú s rovnakým počtom náhodných pixelov vybraných z mapy významných oblastí a nakoniec sú považované za klasifikátor úspešnosti.
 Nasleduje prahovanie zvolenou hodnotou.
-Pixely, ktoré sú menšie ako prahovacia hodnota sú pokladané za pozadie obrazu a pixely, ktoré majú hodnotu vyššiu sú pokladané ako fixácie.
+Pixely, ktoré sú menšie ako prahovacia hodnota sú pokladané za pozadie obrazu a pixely, ktoré majú hodnotu vyššiu sú pokladané za fixácie.
 Pre ľubovolne zvolenú prahovaciu hodnotu sú niektoré výsledné oblasti manuálne označené ako pozitívne (True Positives).
 Pobobne niektoré oblasti, ktoré nie sú označené ako fixácie, sú manuálne označené ako falošne pozitívne (False Positive).
-Tieto operácie sú zopakované tisíckrát, nakoniec sa vizualizuje pomocou ROC krivky a plocha pod krivkou (Area Under the Curve preto AUC) je výsledným klasifikátorom, ktorého ideálna hodnota je 1.
+Tieto operácie sú zopakované tisíckrát.
+Nakoniec sa vizualizuje pomocou ROC krivky a plocha pod krivkou (Area Under the Curve preto AUC) je výsledným klasifikátorom, ktorého ideálna hodnota je 1.
 Hodnota náhodného výberu je 0.5.
 
 \subsection{KL-Div}
 KL-Div v literatúre nazývaná aj Kullback-Leiblerova divergencia\cite{kldiv} je bežne používaná aj mimo oblasti počítačového videnia, ako metóda pre odhad celkovej rozdielnosti medzi dvoma distribúciami.
-Mnoho autorov saliency modelov používa túto metriku, ako hodnotu straty informácie tj. koľko informácií sa stratí po vypočítaní daného saliency modelu voči mape fixácií.
+Mnoho autorov saliency modelov používa túto metriku ako hodnotu straty informácie, tj. koľko informácií sa stratí po vypočítaní daného saliency modelu voči mape fixácií.
 \\\\
 Každý projekt vytvárajúci model významných oblastí si volí vlastné metriky úspešnosti, podľa ktorých sa určuje úspešnosť daného modelu.
 Pre meranie úspešnosti modelov je okrem samotných algoritmov potrebné zabezpečiť dostatočne rôznorodú skupinu testovacích dát tzv. datasetov.
 
 \section{Referenčné datasety}
 Dataset je testovacia množina vstupov, ktorá sa snaží obsiahnuť dostatočne rôznorodé vzorky vhodné pre komplexné testovanie.
-Pri zostavovaní datasetov sú dôležité nielen videá ale eyetracker data alebo nejakým spôsobom zverejnené fixácie (získané napríklad aj ručným označovaním významných oblastí), aby bolo možné výsledky validovať pomocou vyššie uvedených metrík.
-Ďalšou charakteristikou datasetu je množsto ľudí na, ktorých boli dané viedeá nahrávané.
+Pri zostavovaní datasetov sú dôležité nielen videá ale aj eyetracker data alebo nejakým spôsobom zverejnené fixácie (získané napríklad aj ručným označovaním významných oblastí), aby bolo možné výsledky validovať pomocou vyššie uvedených metrík.
+Ďalšou charakteristikou datasetu je množsto ľudí, na ktorých boli dané viedeá nahrávané.
 \\ Príklady datasetov:
 \begin{itemize}
 	\item \textbf{RSD}\cite{rsd}
@@ -220,23 +224,23 @@ Pri zostavovaní datasetov sú dôležité nielen videá ale eyetracker data ale
 \end{itemize}
 
 \subsection{RSD}
-Regional Saliency Dataset sa snaží o čo najobšírnejšie testovanie a rôznorodosť videií.
+Regional Saliency Dataset sa snaží o čo najobšírnejšie testovanie a o rôznorodosť videií.
 Je rozdelený do 4 hlavných kategórií:
 \begin{itemize}
 	\item \textbf{bezpečnostné záznamy} - Štadardné záznamy z bezpečnostných kamier obsahujú statické pozadie a salientné pohybujúce sa objekty.
 Pre túto časť datasetu boli využité záznamy z projektu CAVIAR\cite{rsd-caviar}.
 	\item \textbf{Grafika} - Použité animované filmy/seriály ktoré obsahujú 2D aj 3D grafiku.
-  \item \textbf{Prirodzené videá s prvkami grafiky} - Prirodzené videá  podobné bezpečnostným videám ale s prvkami umelo vloženými priamo do obrazového kanálu.
+  \item \textbf{Prirodzené videá s prvkami grafiky} - Videá podobné bezpečnostným videám ale s prvkami umelo vloženými priamo do obrazového kanálu.
   \item \textbf{Prirodzené videá} - Videá bez pridaných grafických prvkov, tak ako boli nasnímané kamerou.
 \end{itemize}
 
-Na vyznačenie zaujímavých oblastí nebola zvolená technika (eyetracker) ale manuálne vyznačovanie zaujímavých oblastí pomocou používateľov.
-Výskumu sa zúčastnilo 17 mužov 6 žien medzi 10-23 rokov veku, na označení každého z videa sa podielalo 10-23 ludí.
+Na vyznačenie významných oblastí nebola zvolená technika (eyetracker) ale manuálne vyznačovanie zaujímavých oblastí pomocou používateľov.
+Výskumu sa zúčastnilo 17 mužov a 6 žien medzi 10-23 rokov veku, na označení každého z videa sa podielalo 10-23 ludí.
 
 \begin{figure}[H]
  \centering
  \includegraphics[width=7cm]{pics/rsd.png}
- \caption{Ukážka z každej kategórie videa s oznčenými významnými oblasťami}
+ \caption{Ukážka z každej kategórie videa s označenými významnými oblasťami}
 \end{figure}
 \vspace{10mm}
 
