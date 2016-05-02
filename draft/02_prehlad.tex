@@ -124,15 +124,19 @@ To znamená, že objekt sa na scéne môže presunúť, ale svoj jas nemôže zm
 Matematicky vyjadrené I(x(t),y(t),t) je obrazová dvojrozmerná funkcia, ktorá sa mení vzhľadom na čas.
 Keďže sa jas obrazu nemení môžeme povedať, že platí:
 \begin{equation}
-  I(x + dx/dt \sigmat ,y + dy/dt \sigmat, t + \sigmat) = I(x,y,t)
+  I(x,y,t) = I(x + \Delta x ,y + \Delta y, t + \Delta t) 
 \end{equation}
-Z čoho je ľahko odvoditeľné, že:
+Z čoho je ľahko odvoditeľné, pomocou Taylorovho rozvoja, že:
+\begin{equation}  
+  \frac{\sigma I}{\sigma x}dx + \frac{\sigma I}{\sigma y}dy + \frac{\sigma I}{\sigma t}dt = 0
+\end{equation}
+A po jednodychých úpravách dostávame výsledný tvar rovnice:
 \begin{equation}
-  dI/dt = \sigmai/\sigmax dx/dt + \sigmai/\sigmay dy/dt + dI/dt  =  0
+- \frac{\sigma I}{\sigma t} = \frac{\sigma I}{\sigma x}u + \frac{\sigma I}{\sigma y}
 \end{equation}
 
 \subsection{Lucas Kanande}
-Algoritmus Lucas Kanande prvotne vznikol ako návrh pre časovú optimalizáciu problému výpočtu vektora posunu medzi dvomi krivkami.
+Algoritmus Lucas Kanande\cite{lucas-kanade} prvotne vznikol ako návrh pre časovú optimalizáciu problému výpočtu vektora posunu medzi dvomi krivkami.
 Pôvodné primitívne riešenie vyžadovalo \begin{math} O(M^2 * N^2) \end{math} času pre výpočet daného vektora, ak M,N bolo rozlíšenie daného obrazového vzoru.
 Vtedy navrhovaná optimalizácia vyžadovala zadanie rozsahu hľadania, pomocou ktorého sa vypočítali diferencie pre celý obraz a pre ďalšiu iteráciu sa rozsah vypočítal pomocou horolezeckého algoritmu.
 Metóda Lucas Kanade využíva priestorový gradient pre výpočet nových hodnôt a zároveň upravuje hodnotu rozsahu pri výpočte každého obrazového pixelu v obraze a nie iba po výpočte celého obrazu.
@@ -140,7 +144,7 @@ Pomocou takejto úpravy naivného algortimu sa časová zložitosť zlepšila na
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=6cm]{pics/lukas-kanade.jpg}
+  \includegraphics[width=4cm]{pics/lukas-kanade.jpg}
   \caption{Vizualizácie výsledkov algoritmu Lucas-Kanade vždy po 1 iterácii\cite{lucas-kanade}}
 \end{figure}
 \vspace{10mm}
@@ -166,7 +170,7 @@ Následne je potrebné vytvoriť mapu fixácií, ktorá sa používa ako jeden z
 \\
 Metriky úspešnosti možno rozdeliť do troch štandardných skupín podľa druhu hodnôt, na ktoré porovnávajú reálne dáta (v literatúre nazývané ground truth) s vygenerovanými mapami významných oblastí\cite{metrics-1}.
 \begin{enumerate}
-  \item\textbf{Založené na porovnávaní hodnôt} - NSS, Percentile, Pf
+  \item\textbf{Založené na porovnávaní hodnôt} - NSS, Percentile
   \item\textbf{Založené na vyhodnocovaní vzdialeností} - AUC-Judd, AUC-Zhao, AUC Borji, AUC-Li
   \item\textbf{Založené na distribúcii} - KL-Div, EMD, CC, SRCC
 \end{enumerate}
@@ -177,10 +181,10 @@ Metrika zakladá na ohodnotení salientných oblastí vzhľadom na pozíciu fix�
 \\
 Pre každú fixáciu používa vzťah:
   \begin{equation}
-    NSS(p) =  (SM(p)-\SI{}{\micro}_{SM}) / 	\sigma_{SM}
+    NSS(p_i) =  (SM(p_i)-\SI{}{\micro}_{SM}) / 	\sigma_{SM}
     \label{equation:nss}
   \end{equation}
-Kde SM je mapa význačných oblastí, p je bod danej fixácie, pre ktorú sa hodnota vypočítava.
+Kde SM je mapa význačných oblastí, \begin{math}p_i\end{math} je bod danej fixácie, pre ktorú sa hodnota vypočítava.
 
 Mapa fixácií SM je normalizovaná tak, aby nadobúdala nulovú strednú hodnotu a zároveň jednotkovú štandardnú dochýlku.
 Metrika NSS nadhodnocuje, ak je na výslednej saliency mape minimálna rozmanitosť hodnôt (malý rozdiel medzi hodnotami fixácií a strednou hodnotou), pretože v takomto prípade nebude model dostatočne ohodnotený.
@@ -189,9 +193,9 @@ Potom finálna hodnota NSS metriky je určená priemerom hodnôt pre všetky fix
 Vzťah možno vyjadriť nasledovne:
 
 \begin{equation}
-  NSS = 1/N * \sum_{p=1}^{N}NSS(p)  
+  NSS = 1/N * \sum_{i=1}^{N}NSS(i)  
 \end{equation}
-Kde p je počet fixácií a NSS(p) je výsledok vzťahu \ref{equation:nss}.
+Kde n je počet fixácií a NSS(i) je výsledok vzťahu \ref{equation:nss}.
 
 \subsection{AUC-Judd}
 Metrika je clasická AUC, ktorú navrhol Judd \cite{auc-judd}.
@@ -219,13 +223,13 @@ Pri zostavovaní datasetov sú dôležité nielen videá ale aj eyetracker data 
 \begin{itemize}
 	\item \textbf{RSD}\cite{rsd}
 	\item \textbf{SAVAM}\cite{savam}
-	\item \textbf{Coutrot datasets}\cite{courot-database}
+	\item \textbf{Coutrot datasets}\cite{coutrot-database}
   \item \textbf{ASCMN}\cite{accv}
 \end{itemize}
 
 \subsection{RSD}
 Regional Saliency Dataset sa snaží o čo najobšírnejšie testovanie a o rôznorodosť videií.
-Je rozdelený do 4 hlavných kategórií:
+Je rozdelený do štyroch hlavných kategórií:
 \begin{itemize}
 	\item \textbf{bezpečnostné záznamy} - Štadardné záznamy z bezpečnostných kamier obsahujú statické pozadie a salientné pohybujúce sa objekty.
 Pre túto časť datasetu boli využité záznamy z projektu CAVIAR\cite{rsd-caviar}.
@@ -276,5 +280,5 @@ Eyetracker nahrával iba dáta z dominantného oka pre daného používateľa.
 
 \section{Porovnanie štandardných metód}
 Porovnávanie metód je štandardne publikované formou ucelených benchmarkov.
-Príkladom takéhoto banchmarku je mit saliency benchmark\cite{mit-saliency-benchmark}, ktorý sa snaží zgrupovať a porovnávať obrazové modely pozornosti a zverejňovať referencie na ďalšie podobné projekty.
+Príkladom takéhoto banchmarku je MIT saliency benchmark\cite{mit-saliency-benchmark}, ktorý sa snaží zgrupovať a porovnávať obrazové modely pozornosti a zverejňovať referencie na ďalšie podobné projekty.
 Na účely validácie bude vypracovaný podobný benchmark určený pre porovnanie rôznych modelov pozornosti na typovo rôznych datasetoch.

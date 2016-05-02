@@ -28,16 +28,16 @@ Charakteristika sa vypočítava zo smerových horizontálnych vektorov metódy H
 Pre každý región sa vypočíta maximálna hodnota z indexov daného regiónu.
 Následne sa za hodnotu chrakteristiky považuje absolútna hodnota rozdielu týchto hodnôt pre každý región.
 \begin{equation}
-  H_A = max(HS(i_A))
+  H_A = \max(HS(i_A))
 \end{equation}
 \begin{equation}
-  H_B = max(HS(i_B))
+  H_B = \max(HS(i_B))
 \end{equation}
 \begin{equation}
-  R_{H} = abs(H_A-H_B)
+  R_{H} = \left|H_A-H_B\right|
 \end{equation}
 Kde A, B reprezentujú všetky dvojice regiónov, ktoré sa nachádzajú v obraze.
-\begin{math}V_a, V_b\end{math} je maximálna hodnota horizontálnych smerových vektorov z výsledku Horn-Schunck algoritmu pre všetky oblasti patriace danému regiónu.
+\begin{math}H_a, H_b\end{math} je maximálna hodnota horizontálnych smerových vektorov z výsledku Horn-Schunck algoritmu (HS()) pre všetky oblasti patriace danému regiónu.
 \begin{math}R_{H}\end{math} je výsledná hodnota charakteristiky.
 
 \subsubsection{Rozdiel smerových vektorov vo vertikálnom smere}
@@ -46,13 +46,13 @@ Pre každý región sa vypočíta maximálna hodnota z indexov daného regiónu.
 Následne sa za hodnotu chrakteristiky považuje absolútna hodnota rozdielu týchto hodnôt.
 
 \begin{equation}
-  H_A = max(HS(i_A))
+  H_A = \max(HS(i_A))
 \end{equation}
 \begin{equation}
-  H_B = max(HS(i_B))
+  H_B = \max(HS(i_B))
 \end{equation}
 \begin{equation}
-  R_{V} = abs(H_A-H_B)
+  R_{V} = \left|H_A-H_B\right|
 \end{equation}
 Kde A, B reprezentujú všetky dvojice regiónov, ktoré sa nachádzajú v obraze.
 \begin{math}V_a, V_b\end{math} je maximálna hodnota vertikálnych smerových vektorov z výsledku Horn-Schunck algoritmu pre všetky oblasti patriace danému regiónu.
@@ -96,7 +96,7 @@ Výpočet pomeru bude určovať pomer výskytu salientných pixelov v mape dynam
 Vzťah možno vyjadriť nasledovne:
 
 \begin{equation}
-pomer = \sum_{n=0}^{Pix_{count}} P_D(n) > 0 / Pix_{count}
+  pomer = \sum_{n=0}^{Pix_{count}} \frac{\{\left|P_D(n) > 0\right|\}}{Pix_{count}} 
 \end{equation}
 \\
 Kde \begin{math}P_D\end{math} reprezentuje mapu dynamických príznakov a \begin{math}Pix_{count}\end{math} je počet všetkých pixelov, ktoré obraz obsahuje.
@@ -142,7 +142,7 @@ V druhom riadku uvádzam postupne heat mapu pre daný frame, prahovanú heat map
 \begin{figure}[H]
   \centering
   \includegraphics[width=14cm]{pics/ACCV-23-54-AUC_Judd.png}
-  \caption{Vizualizácie metriky AUC-Judd pomocou kódu zverejneného v mit saliency benchmark\cite{mit-saliency-benchmark}}
+  \caption{Vizualizácie metriky AUC-Judd pomocou kódu zverejneného v MIT saliency benchmark\cite{mit-saliency-benchmark}}
   \label{fig:ASCMN-53-23-AUC}
   \vspace{10mm}
 \end{figure}
