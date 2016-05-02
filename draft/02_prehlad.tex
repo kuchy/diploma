@@ -1,6 +1,6 @@
 \section{Úvod do problematiky}
 Saliency a teda detekcia významných oblastí je využívaná v rôznych oblastiach.
-Automatizáciou sú modely významných oblastí (anglicky saliency modelov) ťažiskom pri segmentácii obrazu alebo detekcii špecifických objektov.
+Automatizáciou sú modely významných oblastí (anglicky saliency modelov) ťažiskom pri~segmentácii obrazu alebo detekcii špecifických objektov.
 Od saliency modelov sú taktiež závislé aj programy ovládajúce zabezpečovacie zariadenia.
 Pomocou saliency modelov zužujú možnosti a proaktívne upozorňujú na podozrivé situácie pomocou zúženia obrazu na zopár oblastí.
 Saliency model používa aj oblasť reklamy, kde je vizuálna pozornosť kľúčovým parametrom, čo môže rozhodnúť o úspechu produktu.
@@ -16,9 +16,9 @@ Nezachytáva však žiadne sémantické aspekty videa, ako ani podvedomé inform
 Skupinu algoritmov využívajúcu význačné prechody v obraze inak nazývame hrany.
 Metódy tohoto typu sú vyžívané hlavne v prírodných scénach, kde nie je (sémanticky) význačný objekt.
 Takéto metódy sa zakladajú priamo na štúdiu fyziologických vlastností ľudského vizuálneho systému.
-Následná imitácia procesov odohrávajúcich sa na sietnici viedla ku vzniku saliency modelov generujúcich plausibilné výsledky\cite{edges-1}.
+Následná imitácia procesov odohrávajúcich sa na sietnici viedla ku~vzniku saliency modelov generujúcich plausibilné výsledky\cite{edges-1}.
 \subsection{Ittiho model}
-Najznámejším modelom pre výpočet významných oblastí pre statické farebné obrazy je ittiho model navrhnutý v roku 1998.
+Najznámejším modelom pre výpočet významných oblastí pre statické farebné obrazy je Ittiho model navrhnutý v roku 1998.
 Model zakladá na rozložení obrazu na tri základné charakteristiky obrazu a to na farbu, intenzitu a orientáciu.
 
 \begin{figure}[H]
@@ -62,10 +62,10 @@ Ako výsledok hľadania potom udáva asymetrie v týchto štatistických štrukt
 \subsection{Rare Model}
 Výrazná väčšina modelov pozornosti typu bottom-up funguje ustáleným postupom, kde sa z pôvodného obrazu extrahuje definovaná množina chrakteristík paralelne a tie sa následne kombinujú alebo inak použijú na výpočet výslednej mapy pozornosti.
 Rare model narvhuje sekvenčnú architektúru, kde z pôvodného obrazu extrahuje nízkoúrovňové príznaky.
-Následne na výsledkoch sériovo vykonáva extrakciu ďalších príznakov (v literatúre nazývané mid-level).
+Následne na výsledkoch sériovo vykonáva extrakciu ďalších príznakov (v~literatúre nazývané mid-level).
 Nakoniec ako posledný krok spojí a normalizuje výsledné chrakteristiky do konečnej mapy významných oblastí.
 Rare model ako nízkoúrovňové chrakteristiky používa jas a colorimetrické rozdiely (ako farebný model používa YCbCr) a následne na mapách rozložených zložiek farebného modelu detekuje orientáciu pomocou gáborových filtrov\cite{rare-1}.
-Po extrakcii všetkých charakteristík použije iteratívnu metódu pre optimálne kvantovanie založenú na metóde Otsu\cite{otsu}.
+Po extrakcii všetkých charakteristík použije iteratívnu metódu pre~optimálne kvantovanie založenú na metóde Otsu\cite{otsu}.
 Na takto upravenom vstupe sa následne vyhľadávajú vzácne (z angl. rare) oblasti obrazu.
 Metóda preskúmala možnosti nesekvenčnej extrakcie príznakov z obrazu, čo bolo novým prístupom v oblasti modelov pozornosti.
 
@@ -85,8 +85,8 @@ Majoritná väčšina saliency modelov využíva iba obrazovú zložku, pričom 
 Použitie zvuku je známym trikom filmovej scény už desatročia.
 Režiséri posilňujú kontrolu nad diváckou pozornosťou práve pomocou zvukového doprovodu.
 Prvé štúdie sa zaoberali detekciou reči a tváre, kde je spojitosť jednoznačná \cite{sound-1}.
-Neskoršie štúdie dokazujú korelácie aj na všeobecnejšej úrovni a pokusy o extrakciu samotnej charakteristiky zo zvukovej stopy\cite{sound-coutrot-1}.
-Tieto pokusy viedli aj k zostaveniu modelov zohľadňujúc zvukovú stopu ako samostatnú charakteristiku spolu s kombináciou nízkoúrovňových príznakov obrazu \cite{sound-courot-2}.
+Neskoršie štúdie dokazujú korelácie aj na všeobecnejšej úrovni a pokusy o~extrakciu samotnej charakteristiky zo zvukovej stopy\cite{sound-coutrot-1}.
+Tieto pokusy viedli aj k~zostaveniu modelov zohľadňujúc zvukovú stopu ako samostatnú charakteristiku spolu s~kombináciou nízkoúrovňových príznakov obrazu \cite{sound-courot-2}.
 
 \begin{figure}[H]
   \centering
@@ -101,19 +101,19 @@ Nízkoúrovňové príznaky založené na biologicky inšpirovaných saliency mo
 Statická časť sa zameriava na najasnejšie a najkontrastnejšie časti obrazu.
 Dynamická časť sa zameriava na relatívny pohyb objektov vzhľadom na pozadie (eliminácia pohybu kamery).
 Tieto dve časti sa nakoniec spoja.
-Ďalšou charakteritikou použitou v tomto modeli je detekcia tváre.
+Ďalšou charakteritikou použitou v~tomto modeli je detekcia tváre.
 Každý objekt klasifikovaný ako tvár je v saliency mape nahradený oválnym objektom.
 Intenzita daných objektov je daná pomocou metódy Speaker Diarization\cite{sound-courot-2}, ktorá detekuje podľa zvukovej stopy objekt, ktorý generuje zvuk.
 Metóda predpokladá striedavú konverzáciu viacerých objektov oddelenú pauzou.
 Následne spojí vyššie spomínané charakteristiky do jednej výslednej mapy.
-Ako posledný krok preloží cez celú mapu baseline center model popísaný v časti \ref{section:caseline-center}.
+Ako posledný krok preloží cez~celú mapu baseline center model popísaný v časti \ref{section:caseline-center}.
 
 \subsection{Detekcia pohybu}
 Táto časť je zameraná na segmentáciu objektov, ktoré sa na scéne pohybujú.
 Metódy tohoto typu sa snažia vizualizovať 3D prostredia (v našom prípade disponujeme výškou, šírkou a časom) na 2D výstup (obrazový výstup).
 Takáto informácia dokáže priblížiť výpočtové modely bližšie k realite.
-Ľudský vizuálny systém totiž nepoužíva iba 2D vstup (ako to prebieha v drvivej väčšine metód na výpočet významných oblastí).
-Takéto obrazy sú v ľudskom vizuálnom systéme vysoko hodnotené.
+Ľudský vizuálny systém totiž nepoužíva iba 2D vstup (ako to prebieha v~drvivej väčšine metód na~výpočet významných oblastí).
+Takéto obrazy sú v~ľudskom vizuálnom systéme vysoko hodnotené.
 Dôvody, prečo takto ľudský vizuálny systém zvyšuje prioritu práve takýmto oblastiam môžeme nájsť v antropológii.
 Vysvetlenie je jednoduché a to snaha zabezpečiť bezpečné prostredie okolo seba a všetko pohybujúce sa narušuje pocit bezpečnosti.
 V nasledujúcom texte rozoberieme dva najpožívanejšie algoritmy na detekciu oblastí pohybu v obraze a výpočet vektoru posunu.
@@ -139,7 +139,7 @@ A po jednodychých úpravách dostávame výsledný tvar rovnice:
 Algoritmus Lucas Kanande\cite{lucas-kanade} prvotne vznikol ako návrh pre časovú optimalizáciu problému výpočtu vektora posunu medzi dvomi krivkami.
 Pôvodné primitívne riešenie vyžadovalo \begin{math} O(M^2 * N^2) \end{math} času pre výpočet daného vektora, ak M,N bolo rozlíšenie daného obrazového vzoru.
 Vtedy navrhovaná optimalizácia vyžadovala zadanie rozsahu hľadania, pomocou ktorého sa vypočítali diferencie pre celý obraz a pre ďalšiu iteráciu sa rozsah vypočítal pomocou horolezeckého algoritmu.
-Metóda Lucas Kanade využíva priestorový gradient pre výpočet nových hodnôt a zároveň upravuje hodnotu rozsahu pri výpočte každého obrazového pixelu v obraze a nie iba po výpočte celého obrazu.
+Metóda Lucas Kanade využíva priestorový gradient pre~výpočet nových hodnôt a zároveň upravuje hodnotu rozsahu pri výpočte každého obrazového pixelu v obraze a nie iba po výpočte celého obrazu.
 Pomocou takejto úpravy naivného algortimu sa časová zložitosť zlepšila na \begin{math} O(M^2 log N) \end{math}\cite{lucas-kanade}.
 
 \begin{figure}[H]
@@ -153,7 +153,7 @@ Pomocou takejto úpravy naivného algortimu sa časová zložitosť zlepšila na
 Metóda Horn-Schunck\cite{hs-original} bola prvá, kde bola použitá metóda variácie na výpočet optického toku.
 Táto globálna metóda priniesla výpočet  konštanty pre obmedzenie plynulosti optického toku.
 Algoritmus používa dva základné parametre: počet iterácií a vyhladzovaciu konštantu.
-Počet iterácií určuje dĺžku (počet cyklov) simulácie, vyhladzovacia konštanta je použitá po každom cykle simulácie kvôli zjemneniu prechodov a na výpočet optimálneho optického toku.
+Počet iterácií určuje dĺžku (počet cyklov) simulácie, vyhladzovacia konštanta je použitá po~každom cykle simulácie kvôli zjemneniu prechodov a na výpočet optimálneho optického toku.
 
 \begin{figure}[H]
   \centering
@@ -163,10 +163,10 @@ Počet iterácií určuje dĺžku (počet cyklov) simulácie, vyhladzovacia kon�
 \vspace{10mm}
 
 \section{Metriky úspešnosti}
-Metriky úspešnosti sú algoritmy na čo najpresnejšie vyjadrenie presnosti modelov v merateľných jednotkách.
+Metriky úspešnosti sú algoritmy na čo najpresnejšie vyjadrenie presnosti modelov v~merateľných jednotkách.
 Takýto algoritmus dostáva na vstupe čisté dáta z eye trackera.
-Tieto je potrebné predspracovať z dôvodu, že každý výrobca poskytuje iné zariadenia na hardwarovej úrovni a výrobcovia neštandardizujú výstup do jednotnej formy.
-Následne je potrebné vytvoriť mapu fixácií, ktorá sa používa ako jeden zo vstupných parametrov v algoritmoch počítajúcich metriky úspešnosti.
+Tieto je potrebné predspracovať z dôvodu, že každý výrobca poskytuje iné zariadenia na~hardwarovej úrovni a výrobcovia neštandardizujú výstup do jednotnej formy.
+Následne je~potrebné vytvoriť mapu fixácií, ktorá sa používa ako jeden zo vstupných parametrov v~algoritmoch počítajúcich metriky úspešnosti.
 \\
 Metriky úspešnosti možno rozdeliť do troch štandardných skupín podľa druhu hodnôt, na ktoré porovnávajú reálne dáta (v literatúre nazývané ground truth) s vygenerovanými mapami významných oblastí\cite{metrics-1}.
 \begin{enumerate}
@@ -177,7 +177,7 @@ Metriky úspešnosti možno rozdeliť do troch štandardných skupín podľa dru
 
 \subsection{NSS}
 NSS (Normalized Scanpath Saliency) je metrika narvrhnutá v roku 2005, ktorej autormi sú R. J. Peters a L. Itti.
-Metrika zakladá na ohodnotení salientných oblastí vzhľadom na pozíciu fixácií samostatne a následne hodnotu normalizuje vzhľadom na počet fixácií v celom obraze\cite{metrics-1}.
+Metrika zakladá na ohodnotení salientných oblastí vzhľadom na~pozíciu fixácií samostatne a následne hodnotu normalizuje vzhľadom na počet fixácií v~celom obraze\cite{metrics-1}.
 \\
 Pre každú fixáciu používa vzťah:
   \begin{equation}
@@ -199,13 +199,13 @@ Kde n je počet fixácií a NSS(i) je výsledok vzťahu \ref{equation:nss}.
 
 \subsection{AUC-Judd}
 Metrika je clasická AUC, ktorú navrhol Judd \cite{auc-judd}.
-Ako prvé sa pixely označené ako fixácie spočítajú s rovnakým počtom náhodných pixelov vybraných z mapy významných oblastí a nakoniec sú považované za klasifikátor úspešnosti.
+Ako prvé sa pixely označené ako~fixácie spočítajú s rovnakým počtom náhodných pixelov vybraných z mapy významných oblastí a nakoniec sú považované za klasifikátor úspešnosti.
 Nasleduje prahovanie zvolenou hodnotou.
 Pixely, ktoré sú menšie ako prahovacia hodnota sú pokladané za pozadie obrazu a pixely, ktoré majú hodnotu vyššiu sú pokladané za fixácie.
 Pre ľubovolne zvolenú prahovaciu hodnotu sú niektoré výsledné oblasti manuálne označené ako pozitívne (True Positives).
 Pobobne niektoré oblasti, ktoré nie sú označené ako fixácie, sú manuálne označené ako falošne pozitívne (False Positive).
 Tieto operácie sú zopakované tisíckrát.
-Nakoniec sa vizualizuje pomocou ROC krivky a plocha pod krivkou (Area Under the Curve preto AUC) je výsledným klasifikátorom, ktorého ideálna hodnota je 1.
+Nakoniec sa~vizualizuje pomocou ROC krivky a plocha pod krivkou (Area Under the Curve preto AUC) je výsledným klasifikátorom, ktorého ideálna hodnota je 1.
 Hodnota náhodného výberu je 0.5.
 
 \subsection{KL-Div}
@@ -229,12 +229,12 @@ Pri zostavovaní datasetov sú dôležité nielen videá ale aj eyetracker data 
 
 \subsection{RSD}
 Regional Saliency Dataset sa snaží o čo najobšírnejšie testovanie a o rôznorodosť videií.
-Je rozdelený do štyroch hlavných kategórií:
+Je~rozdelený do štyroch hlavných kategórií:
 \begin{itemize}
 	\item \textbf{bezpečnostné záznamy} - Štadardné záznamy z bezpečnostných kamier obsahujú statické pozadie a salientné pohybujúce sa objekty.
 Pre túto časť datasetu boli využité záznamy z projektu CAVIAR\cite{rsd-caviar}.
 	\item \textbf{Grafika} - Použité animované filmy/seriály ktoré obsahujú 2D aj 3D grafiku.
-  \item \textbf{Prirodzené videá s prvkami grafiky} - Videá podobné bezpečnostným videám ale s prvkami umelo vloženými priamo do obrazového kanálu.
+  \item \textbf{Prirodzené videá s prvkami grafiky} - Videá podobné bezpečnostným videám ale s~prvkami umelo vloženými priamo do obrazového kanálu.
   \item \textbf{Prirodzené videá} - Videá bez pridaných grafických prvkov, tak ako boli nasnímané kamerou.
 \end{itemize}
 
@@ -262,7 +262,7 @@ K datasetu je taktiež dostupný validačný kód\cite{accv} počítavajúci hod
 
 \subsection{Coutrot dataset}
 Ide o dva rôzne datasety, obidva sú nazývané podľa authora Antoine Coutrota.
-\textbf{Prvý dataset\cite{sound-1}} obsahuje videá s dynamickou povahou scény.
+\textbf{Prvý~dataset\cite{sound-1}} obsahuje videá s dynamickou povahou scény.
 Je rozčlenený do štyroch vizuálne rozličných kategórií:
 \begin{itemize}
   \item Jeden pohybujúci sa objekt
@@ -276,7 +276,7 @@ Všetky videá boli zaznamenávané v štyroch rôznych zvukových podmienkach (
 Všetky videá obsahujú nahraté stretnutie štyroch konverzujúcich ľudí so statickou kamerou.
 Dataset nie je členený do žiadnych kategórií.
 Dáta oboch datasetov boli nahrávané pomocou eyetrackera EyeLink 1000 pri 1000Hz, pričom používatelia sedeli 57 cm od monitoru.
-Eyetracker nahrával iba dáta z dominantného oka pre daného používateľa.
+Eyetracker nahrával iba dáta z dominantného oka pre~daného používateľa.
 
 \section{Porovnanie štandardných metód}
 Porovnávanie metód je štandardne publikované formou ucelených benchmarkov.

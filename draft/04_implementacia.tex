@@ -2,19 +2,19 @@
 Navrhovaná metóda zohľadnuje vlastnosti, ktoré nie je možné získať iba zo statického obrazu.
 Budem ich nazývať dynamické príznaky videa.
 Avšak metóda stále zohľadňuje v pozorovanom videu aj aspekty statického obrazu, ktoré sa budú nazývať statickými príznakmi videa.
-Tieto príznaky sú vypočítavané separátne a nakoniec ich metóda spája do jednej výslednej mapy pozornosti. Výsledkom je postupnosť máp pozornosti pre každý frame videa (podľa vstupnej konfigurácie), ktorý možno spojiť do videa pozornosti pre ľubovolné vstupné video.
+Tieto príznaky sú vypočítavané separátne a nakoniec ich metóda spája do jednej výslednej mapy pozornosti. Výsledkom je postupnosť máp pozornosti pre~každý frame videa (podľa vstupnej konfigurácie), ktorý možno spojiť do videa pozornosti pre~ľubovolné vstupné video.
 
 \subsection{Dynamické príznaky videa}
 Dynamické príznaky videa metóda najskôr extrahuje pomocou metódy Horn-Schunck\cite{hs-original}, ktorá vypočíta optický tok na každých dvoch po sebe idúcich framoch videa, čím vzniká sémantický príznak pohybu rôznych objektov po scéne spolu so smerovými vektormi pohybu.
 Smerové vektory spočítavame, aby sme získali celkový obraz optického toku pre danú dvojicu obrazov.
 Obraz sa následne prahuje statickou konštantou kvôli odstráneniu šumu.
 Prahovanie prebieha dynamicky vzhľadom na počet nájdených 8-spojitých regiónov, tj. na výstup optikého toku.
-V našej implementácii je obmedzený počet regiónov na maximálnu hodnotu 200 regiónov.
+V našej implementácii je obmedzený počet regiónov na~maximálnu hodnotu 200 regiónov.
 Prahovanie začne s konštantou, ktorá je určená pomocou algoritmu Otsu\cite{otsu} a následne sa určí počet 8-spojitých regiónov. Ak je počet regiónov väčší ako maximálna hodnota, zvýši sa konštanta o 10\% z pôvodnej hodnoty.
 Tento proces sa opakuje pokiaľ sa v obraze vyskytuje viac ako maximálny počet regiónov.
 Takéto prahovanie je nutné pre optimalizáciu výkonu algoritmu, pretože v prípadoch keď obraz obsahuje veľké množstvo regiónov, takýto proces znižuje výpočtovú náročnosť algoritmu.
 Pixely s valídnou hodnotou sa rozdelia na regióny podľa spojitosti a podobnosti štandardným spôsobom.
-Pripomeňme, že v tomto obraze sa spočítali hodnoty posunu v oboch smeroch aritmeticky do jednej hodnotiacej konštanty (pre každý pixel obrazu), ktorá už nereprezentuje smer posunu daného obrazového pixelu, ale iba hodnotí celkový posun obrazového pixelu.
+Pripomeňme, že v tomto obraze sa spočítali hodnoty posunu v~oboch smeroch aritmeticky do jednej hodnotiacej konštanty (pre každý pixel obrazu), ktorá už nereprezentuje smer posunu daného obrazového pixelu, ale iba hodnotí celkový posun obrazového pixelu.
 Takto získané regióny budeme vyhodnocovať a spájať podľa pôvodných výsledkov metódy Horn-Schunck.
 Vďaka využitiu pôvodných vektorov z výsledku metódy Horn-Schunck, vieme rozlíšiť pohyb horizontálny aj vertikálny separátne.
 Pre všetky dvojice regiónov v obraze zisťujeme nasledovné charakteristiky:
@@ -26,7 +26,7 @@ Pre všetky dvojice regiónov v obraze zisťujeme nasledovné charakteristiky:
 \subsubsection{Rozdiel smerových vektorov v horizontálnom smere}
 Charakteristika sa vypočítava zo smerových horizontálnych vektorov metódy Horn-Schunck.
 Pre každý región sa vypočíta maximálna hodnota z indexov daného regiónu.
-Následne sa za hodnotu chrakteristiky považuje absolútna hodnota rozdielu týchto hodnôt pre každý región.
+Následne sa za~hodnotu chrakteristiky považuje absolútna hodnota rozdielu týchto hodnôt pre každý región.
 \begin{equation}
   H_A = \max(HS(i_A))
 \end{equation}
@@ -43,7 +43,7 @@ Kde A, B reprezentujú všetky dvojice regiónov, ktoré sa nachádzajú v obraz
 \subsubsection{Rozdiel smerových vektorov vo vertikálnom smere}
 Charakteristika sa vypočítava zo smerových vertikálnych vektorov metódy Horn-Schunck.
 Pre každý región sa vypočíta maximálna hodnota z indexov daného regiónu.
-Následne sa za hodnotu chrakteristiky považuje absolútna hodnota rozdielu týchto hodnôt.
+Následne sa za~hodnotu chrakteristiky považuje absolútna hodnota rozdielu týchto hodnôt.
 
 \begin{equation}
   H_A = \max(HS(i_A))
@@ -55,7 +55,7 @@ Následne sa za hodnotu chrakteristiky považuje absolútna hodnota rozdielu tý
   R_{V} = \left|H_A-H_B\right|
 \end{equation}
 Kde A, B reprezentujú všetky dvojice regiónov, ktoré sa nachádzajú v obraze.
-\begin{math}V_a, V_b\end{math} je maximálna hodnota vertikálnych smerových vektorov z výsledku Horn-Schunck algoritmu pre všetky oblasti patriace danému regiónu.
+\begin{math}V_a, V_b\end{math} je~maximálna hodnota vertikálnych smerových vektorov z výsledku Horn-Schunck algoritmu pre všetky oblasti patriace danému regiónu.
 \begin{math}R_{V}\end{math} je výsledná hodnota charakteristiky.
 
 \subsubsection{Rozdiel vo vzdialenosti}
@@ -85,7 +85,7 @@ Regióny spájame pomocou konvexného obalu zjednotenia bodov ležiacich v oboch
 \end{figure}
 
 \subsection{Statické príznaky videa}
-Pri videách, kde sa pohybuje celá scéna (kamera je v pohybe) nedávajú dynamické príznaky dobré výsledky, keďže logicky označia celú scénu alebo väčšinovú časť scény za výrazne salientnú.
+Pri videách, kde sa pohybuje celá scéna (kamera je v pohybe) nedávajú dynamické príznaky dobré výsledky, keďže logicky označia celú scénu alebo väčšinovú časť scény za~výrazne salientnú.
 Preto je vhodné dynamické príznaky kombinovať s klasickými modelmi pozornosti, ktoré síce zanedbajú postupnosť obrazov, ale nezlyhajú ako dynamické príznaky.
 Pre extrakciu statických obrazov sme zvolili metódu založnú na spektrálnych reziduách\cite{spectral-rezidual}.
 Vďaka svojmu princípu potláčania štatisticky opakujúcich sa predmetov na scéne, sa dá predpokladať vhodné doplnenie statických objektov, ktoré môžu zaujať pozornosť na videu, ak zlyhávajú dynamické príznaky.
@@ -110,7 +110,7 @@ Kde \begin{math}P_D\end{math} reprezentuje mapu dynamických príznakov a \begin
 
 V prípade, že algoritmus nedokáže detekovať žiadny pohyb na scéne, bol by model pozornosti prázdny.
 Preto v prípade, keď je vyššie spomínaný pomer dynamických pixelov extrémne nízky, použijeme ako výstup algoritmu iba statické príznaky.
-Naopak v prípade, ak kamera je v pohybe Horn-Schunck algoritmus označí ako pohybujúcu sa väčšinovú oblasť obrazu, v tom prípade je potrebné utlmiť dynamické príznaky obrazu a do popredia vystupujú statické príznaky.
+Naopak v prípade, ak~kamera je v pohybe Horn-Schunck algoritmus označí ako pohybujúcu sa väčšinovú oblasť obrazu, v tom prípade je potrebné utlmiť dynamické príznaky obrazu a do popredia vystupujú statické príznaky.
 
 \clearpage
 
@@ -120,22 +120,22 @@ Prvý parameter je aktuálny frame videa a druhý parameter je frame videa urče
 Tieto dva obrazové vstupy nemusia byť nutne po sebe idúce.
 Je na používateľovi, či použije model serializovane na každý frame videa, alebo zvolí vlastnú implementáciu keyframingu (napríklad kvôli časovej náročnosti algoritmu).
 Algoritmus je schopný procesovať farebné aj čiernobiele obrazové vstupy.
-V prílohe je možné nájsť implementáciu  modelu pre aplikáciu na porovnávanie modelov načítavajúcu kažké dva po sebe idúce obrazové framy.
-Implementácia je dostupná v prílohe na CD alebo voľne dostupné na internete.
+V prílohe je možné nájsť implementáciu modelu pre~aplikáciu na porovnávanie modelov načítavajúcu kažké dva po sebe idúce obrazové framy.
+Implementácia je dostupná v prílohe na CD alebo voľne dostupné na~internete.
 
 \subsection{Ukážky výsledkov}
 V tejto sekcii budem prezentovať výsledky konkrétnych prípadov videí (framov) zachytené počas testovania a validácie.
 Uvediem po sebe nasledujúce originálne framy videa a vizualizáciu fixácií. Ako príklad uvediem frame 53 z videa č. 23 z datasetu ASCMN\cite{accv}.
 \begin{figure}[H]
   \centering
-  \includegraphics[width=14cm]{pics/ACCV-23-54-compare.png}
+  \includegraphics[width=15cm]{pics/ACCV-23-54-compare.png}
   \caption{Porovnanie výstupu mapy pozornosti a reálnych dát}
   \label{fig:ASCMN-53-23}
   \vspace{10mm}
 \end{figure}
-Grafy sú generované pomocou pozmeneného ukážkového scriptu distribuovaného spolu s datasetom ASCMN\cite{accv} a porovnávané s výsledkom navrhovaného modelu pomocou grafu \ref{fig:ASCMN-53-23}.
+Grafy sú generované pomocou pozmeneného ukážkového scriptu distribuovaného spolu s~datasetom ASCMN\cite{accv} a porovnávané s výsledkom navrhovaného modelu pomocou grafu \ref{fig:ASCMN-53-23}.
 V prvom riadku vidíme ako prvý pôvodný frame (n-1) nasledovaný testovaným framom a posledný obrázok zobrazuje fixácie.
-V druhom riadku uvádzam postupne heat mapu pre daný frame, prahovanú heat mapu a ako poslednú výslednú saliency mapu.
+V druhom riadku uvádzam postupne heat mapu pre~daný frame, prahovanú heat mapu a ako poslednú výslednú saliency mapu.
 
 \begin{figure}[H]
   \centering
@@ -151,8 +151,8 @@ Z grafov \ref{fig:ASCMN-53-23} vidno koreláciu dát, čo taktiež potvrdzuje me
 V tejto sekcii uvediem typové video s rovnakou analýzou ako je uvedená vyššie, iba na typ videa bude nevhodný navhovaný model.
 Typovo možno videá označiť ako videá s fixovanou kamerou v pohybe.
 Kamera je fixovaná k sledovanému objektu na scéne z čoho vyplýva, že pozadie obrazu (okolie sledovaného objektu) je pre náš algoritmus v pohybe aj keď reálne sa hýbe kamera a preto je pozadie obrazu považované za významný objekt.
-Zároveň sledovaný objekt (často aj objekt v pozornosti používateľov) sa vizuálne nepohybuje z dôvodu, že jeho pohyb je kompenzovaný fixáciou kamery a preto ho navrhovaný algoritmus považuje za vizuálne nevýznamný.
-Ako príklad uvediem frame č. 80 z videa č. 10 z datasetu coutrot #1.
+Zároveň sledovaný objekt (často aj objekt v pozornosti používateľov) sa vizuálne nepohybuje z dôvodu, že jeho pohyb je kompenzovaný fixáciou kamery a preto ho navrhovaný algoritmus považuje za~vizuálne nevýznamný.
+Ako príklad uvediem frame č. 80 z videa č. 10 z datasetu coutrot~1.
 
 \begin{figure}[H]
   \centering
@@ -183,7 +183,7 @@ Implementácia vyššie uvedeného algoritmu je implementovaná ako modul pre ap
 Aplikácia na porovnávanie je tiež implementovaná v prostredí matlab.
 
 \subsection{Aplikácia na porovnávanie a automatickú validáciu}
-Sekundárnym prínosom práce je vytvorenie aplikácie pre zjednodušenie budúcej práce pri prototypovaní nových modelov pozornosti a následné uľahčenie validačného procesu pre potencionálnych vývojárov.\\
+Sekundárnym prínosom práce je vytvorenie aplikácie pre zjednodušenie budúcej práce pri~prototypovaní nových modelov pozornosti a následné uľahčenie validačného procesu pre potencionálnych vývojárov.\\
 Základná functionalita:
 \begin{enumerate}
   \item\textbf{Oddelenie logiky testovania a logiky samotného modelu}
@@ -198,24 +198,24 @@ Pre iné jazyky je potrebné doprogramovať wrapper, ktorý spustí daný jazyk 
 Ukážkový wrapper je súčasťou aplikácie.
 Na pridanie nového modelu je potrebné pridať wrapper do zložky 'models'.
 Knižnice vyžadované modelom je potrebné skopírovať do ľubovolnej podzložky tohoto priečinka.
-Pri spustení apikácie sa načítajú všetky modely aj kničnice uložené v príslušných podzložkách.
+Pri~spustení apikácie sa načítajú všetky modely aj kničnice uložené v príslušných podzložkách.
 
 \subsubsection{Simultálne sledovanie videa z viacerých modelov}
 Pre rýchle prototypovanie je vhodné pozorovať rovnaké video pri rôznych úpravách.
-Táto funkcionalita je dostupná pre každý model s vygenerovanými mapami pozornosti na zvolenom videu.
+Táto funkcionalita je dostupná pre každý model s vygenerovanými mapami pozornosti na~zvolenom videu.
 
 \subsubsection{Automatická validácia modelu}
 Validovanie výsledkov je nutnou súčasťou každého modelu pozornosti, preto aplikácia ponúka automatizovaný spôsob ako zvalidovať výsledky na vybraných referenčných datasetoch.
 Validácia tvorí pre kažké video perzistentný súbor obsahujúci tri metriky: AUC-Judd, KL-Div, a NSS.
 Vyššie spomenuté metriky sa vypočítavajú pre každý frame videa.
 Validácia prebieha paralelne pre všetky videá zvoleného datasetu.
-Vytvorené súbory sú perzistentné z dôvodu dlhého výpočtového času a ukladajú sa do priečinku results a podložky podľa názvu testovaného datasetu v tvare \begin{math}názovModelu.názovDatasetuČísloVidea.mat\end{math}.
-Formát súboru obsahuje tri premenné s názvami: AUROC\_score, KLDIV\_score, NSS\_score.
+Vytvorené súbory sú perzistentné z dôvodu dlhého výpočtového času a ukladajú sa do priečinku 'results' a podložky podľa názvu testovaného datasetu v tvare \begin{math}názovModelu.názovDatasetuČísloVidea.mat\end{math}.
+Formát súboru obsahuje tri premenné s~názvami: AUROC\_score, KLDIV\_score, NSS\_score.
 Každá premenná obsahuje pole podľa dĺžky videa (počet frameov) a s hodnotami danej metriky.
 Aplikácia aktuálne podporuje dva datasety a to: ASCMN\cite{accv}, coutrotove testovacie datasety #1\cite{coutrot-database} a #2\cite{coutrot-database-2}.
-Tieto datasety sú voľne dostupné a súčasťou aplikácie je programový kód slúžiaci na načítanie a validovanie výsledkov (samotné vstupné videá a fixácie je potrebné stiahnuť zo stránky autorov).
+Tieto datasety sú~voľne dostupné a súčasťou aplikácie je programový kód slúžiaci na načítanie a validovanie výsledkov (samotné vstupné videá a fixácie je potrebné stiahnuť zo stránky autorov).
 Dataset ASCMN\cite{accv} je poskytovaný autormi aj s testovacím algoritmom na výpočet vyššie uvedených metrík.
-Testovací algoritmus je do aplikácie na testovanie iba pozmenený pre načítanie ľubovolného modelu a prispôsobený na paralelný výpočet všetkých videí naraz.
+Testovací algoritmus je do aplikácie na testovanie iba pozmenený pre~načítanie ľubovolného modelu a prispôsobený na paralelný výpočet všetkých videí naraz.
 Pre Coutrot datasety aplikácia na testovanie obsahuje upravenú verziu validačného algoritmu z datasetu ASCMN.
 
 \subsubsection{Vizualizácia výsledkov validácie}
@@ -227,7 +227,7 @@ Implementácia nového modelu pozornosti je jednoduchá.
 Pre integrovanie ľubovolného modelu je možné použiť vzorovú implementáciu, ktorá je dostupná v prílohách.
 
 \section{Validácia výsledkov}
-Validácia vyššie spomínaného modelu prebiehala pomocou automatického testovania v aplikácii na testovanie.
+Validácia vyššie spomínaného modelu prebiehala pomocou automatického testovania v~aplikácii na testovanie.
 Prezentovať budem výsledky z nasledujúch datasetov: \textbf{ASCMN\cite{accv}}, \textbf{Coutrot #1\cite{coutrot-database}}, \textbf{Coutrot #2\cite{coutrot-database-2}}.
 Výsledky budem hodnotiť pomocou nasledujúcich metrík: \textbf{AUCROC\cite{metrics-1}}, \textbf{KLDIV\cite{metrics-1}}, \textbf{NSS\cite{metrics-1}}.
 V nasledujúcich sekciách budem prezentovať výsledky validácie pre navrhovaný model a ďalej vyhodnocovať vytvorený benchmark.
@@ -257,12 +257,12 @@ Hodnoty menšie ako 2 znamenajú tiež koreláciu s reálnymi dátami.
 Výsledná hodnota KLDIV je 1.6027 a je nižsia ako 2, preto aj metrika KLDIV úspešne validuje náš model v rámci datasetu.
 \subsubsection{ASCMN - NSS}
 Výsledná hodnota NSS je 0.6809.
-Hodnota NSS metriky indentifikuje, že hodnoty v oblastiach fixácií sú minimálne nepresné oproti normalizovaným fixáciám a model by mal zmeniť hodnoty v oblastiach fixácií.
+Hodnota NSS metriky indentifikuje, že hodnoty v~oblastiach fixácií sú minimálne nepresné oproti normalizovaným fixáciám a model by mal zmeniť hodnoty v oblastiach fixácií.
 
 \subsubsection{Coutrot #1}
-V datasete Coutrot #1 boli z testovania vyňaté videá číslo: 34, 39, 51, 5 z dôvodu chybného zdrojového videa alebo fixácií zverejnených autormi, alebo nevalídnymi výsledkami v niektorej z vypočítavaných metrík.
+V datasete Coutrot #1 boli z testovania vyňaté videá číslo: 34, 39, 51, 5 z dôvodu chybného zdrojového videa alebo fixácií zverejnených autormi, alebo nevalídnymi výsledkami v~niektorej z vypočítavaných metrík.
 \begin{figure}[H]
-  \includegraphics[width=15cm]{pics/single-coutrot1.png}
+  \includegraphics[width=14.5cm]{pics/single-coutrot1.png}
   \caption{Vizualizácia všetkých testovaných metrík pre dataset Coutrot #1\cite{coutrot-database} pre jednotlivé videá}
   \label{fig:coutrotOne}
 \end{figure}
@@ -299,7 +299,7 @@ Metrika KLDIV dosahuje priemernú hodnotu pre všeky datasety 1.6438.
 Metrika KLDIV poukazje na fakt, že metóda označuje viacej oblastí ako významných, aj keď neboli namerané.
 Metrika NSS dosahuje priemernú hodnotu pre všeky datasety 0.5487.
 Táto metrika validuje, že aj hodnoty v oblastich fixácií korelujú s dátami.
-V tejto metrike však záleží od typu videa viacej ako u iných metrík.
+V~tejto metrike však záleží od typu videa viacej ako u iných metrík.
 
 \subsection{Porovnávanie s konkurenčnými modelmi pozornosti}
 Porovnanie s konkurenciou nám poskytne ďalšie relevantné poznatky.
@@ -368,7 +368,7 @@ Celkové hodnotenie benchmarku znázorním porovnanním priemerov všetkých dat
 \subsection{Zhrnutie validácie}
 Všetky metriky potvrdzujú tvrdenie, že narvhovaný model má značnú koreláciu k skutočným dátam nameraným na reálnych používateľoch.
 Zároveň bola validácia vykonaná na typovo rozdielnych videách, keďže obsahujú pohybujúcu sa kameru aj statickú pozíciu kamery, konverzačné scény aj scény s prírodnými motívami.
-Súčastne na základe vypracovaného benchmarku môžem konštatovať, že nová metóda je efektívnejšia vo väčšine prípadov ako dve základné metódy použité na získanie dynamických aj statických príznakov, pričom vo všetkých videách dosahuje lepšie výsledky ako aspoň jeden zo základných algoritmov.
+Súčastne na základe vypracovaného benchmarku môžem konštatovať, že nová metóda je efektívnejšia vo väčšine prípadov ako dve základné metódy použité na získanie dynamických aj statických príznakov, pričom vo~všetkých videách dosahuje lepšie výsledky ako aspoň jeden zo základných algoritmov.
 
 \section{Diskusia}
 \label{ssec:diskusia}
@@ -386,7 +386,7 @@ Pri vysokej obrazovej kvalite však algoritmus nevykazoval vyššiu efektivitu (
 Ďalšiu možnosť pre zlepšenie identifikuje validácia datasetu Coutrot #2\cite{coutrot-database-2}, kde pôvodný algotritmus horn-struck dosiahol hodnotenie porovnateľné s navrhovaným modelom.
 Takéto výsledky sú spôsobené výberom rozostupu frameov, podľa ktorých sa počíta dynamická zložka.
 Keďže rozpätie bolo zvolené na každú dvojicu framov, pri týchto videách sa často stávalo, že algoritmus detekoval iba minimálny pohyb.
-Čo bolo považované za šum a z toho dôvodu bola dymamická zložka potlačená alebo úplne eliminovaná (čo bolo v tomto prípade chybné).
+Čo bolo považované za šum a z~toho dôvodu bola dymamická zložka potlačená alebo úplne eliminovaná (čo bolo v tomto prípade chybné).
 Riešením by bolo porovnávanie viacej framov a následná extrakcia pohybu všetkých dvojíc spolu.
 Týmto postupom by už nebol pohyb považovaný za šum a dynamická zložka by nebola eliminovaná.
-Ďalšou možnosťou je použiť inú formu rozloženia videa na dynamicky sa meniace keyframy, medzi ktorými sa bude vypočítavať dynamická zložka mapy, zatiaľ čo statická sa bude generovať počas kažkého framu.
+Ďalšou možnosťou je použiť inú formu rozloženia videa na~dynamicky sa meniace keyframy, medzi ktorými sa bude vypočítavať dynamická zložka mapy, zatiaľ čo statická sa bude generovať počas kažkého framu.
