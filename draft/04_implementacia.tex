@@ -7,13 +7,13 @@ Tieto príznaky sú vypočítavané separátne a nakoniec ich metóda spája do 
 \subsection{Dynamické príznaky videa}
 Dynamické príznaky videa metóda najskôr extrahuje pomocou metódy Horn-Schunck\cite{hs-original}, ktorá vypočíta optický tok na každých dvoch po sebe idúcich framoch videa, čím vzniká sémantický príznak pohybu rôznych objektov po scéne spolu so smerovými vektormi pohybu.
 Smerové vektory spočítavame, aby sme získali celkový obraz optického toku pre danú dvojicu obrazov.
-Obraz sa následne prahuje statickou konštantou kvôli ostráneniu šumu.
+Obraz sa následne prahuje statickou konštantou kvôli odstráneniu šumu.
 Prahovanie prebieha dynamicky vzhľadom na počet nájdených 8-spojitých regiónov, tj. na výstup optikého toku.
 V našej implementácii je obmedzený počet regiónov na maximálnu hodnotu 200 regiónov.
 Prahovanie začne s konštantou, ktorá je určená pomocou algoritmu Otsu\cite{otsu} a následne sa určí počet 8-spojitých regiónov. Ak je počet regiónov väčší ako maximálna hodnota, zvýši sa konštanta o 10\% z pôvodnej hodnoty.
 Tento proces sa opakuje pokiaľ sa v obraze vyskytuje viac ako maximálny počet regiónov.
 Takéto prahovanie je nutné pre optimalizáciu výkonu algoritmu, pretože v prípadoch keď obraz obsahuje veľké množstvo regiónov, takýto proces znižuje výpočtovú náročnosť algoritmu.
-Pixely s valídnou honotou sa rozdelia na regióny podľa spojitosti a podobnosti štandardným spôsobom.
+Pixely s valídnou hodnotou sa rozdelia na regióny podľa spojitosti a podobnosti štandardným spôsobom.
 Pripomeňme, že v tomto obraze sa spočítali hodnoty posunu v oboch smeroch aritmeticky do jednej hodnotiacej konštanty (pre každý pixel obrazu), ktorá už nereprezentuje smer posunu daného obrazového pixelu, ale iba hodnotí celkový posun obrazového pixelu.
 Takto získané regióny budeme vyhodnocovať a spájať podľa pôvodných výsledkov metódy Horn-Schunck.
 Vďaka využitiu pôvodných vektorov z výsledku metódy Horn-Schunck, vieme rozlíšiť pohyb horizontálny aj vertikálny separátne.
@@ -120,10 +120,8 @@ Prvý parameter je aktuálny frame videa a druhý parameter je frame videa urče
 Tieto dva obrazové vstupy nemusia byť nutne po sebe idúce.
 Je na používateľovi, či použije model serializovane na každý frame videa, alebo zvolí vlastnú implementáciu keyframingu (napríklad kvôli časovej náročnosti algoritmu).
 Algoritmus je schopný procesovať farebné aj čiernobiele obrazové vstupy.
-V prílohe je možné nájsť dve implementácie a to implementáciu modelu pre aplikáciu na porovnávanie modelov načítavajúcu kažké dva po sebe idúce obrazové framy.
-Druhá implementácia načítava na vstupe priamo video a na výstup dá video s korešpondujúcim videom významných oblastí.
-Táto implementácia je určená na použitie mimo aplikácie na testovanie.
-Obidve implementácie sú dostupné v prílohe na CD alebo voľne dostupné na internete.
+V prílohe je možné nájsť implementáciu  modelu pre aplikáciu na porovnávanie modelov načítavajúcu kažké dva po sebe idúce obrazové framy.
+Implementácia je dostupná v prílohe na CD alebo voľne dostupné na internete.
 
 \subsection{Ukážky výsledkov}
 V tejto sekcii budem prezentovať výsledky konkrétnych prípadov videí (framov) zachytené počas testovania a validácie.
@@ -370,7 +368,7 @@ Celkové hodnotenie benchmarku znázorním porovnanním priemerov všetkých dat
 \subsection{Zhrnutie validácie}
 Všetky metriky potvrdzujú tvrdenie, že narvhovaný model má značnú koreláciu k skutočným dátam nameraným na reálnych používateľoch.
 Zároveň bola validácia vykonaná na typovo rozdielnych videách, keďže obsahujú pohybujúcu sa kameru aj statickú pozíciu kamery, konverzačné scény aj scény s prírodnými motívami.
-Súčastne na základe vypracovaného benchmarku môžeme konštatovať, že nová metóda je efektívnejšia vo väčšine prípadov ako dve základné metódy použité na získanie dynamických aj statických príznakov, pričom vo všetkých videách dosahuje lepšie výsledky ako aspoň jeden zo základných algoritmov.
+Súčastne na základe vypracovaného benchmarku môžem konštatovať, že nová metóda je efektívnejšia vo väčšine prípadov ako dve základné metódy použité na získanie dynamických aj statických príznakov, pričom vo všetkých videách dosahuje lepšie výsledky ako aspoň jeden zo základných algoritmov.
 
 \section{Diskusia}
 \label{ssec:diskusia}
@@ -379,7 +377,7 @@ Preto použitie algoritmu Rare\cite{rare-1} by viedlo k zlepšeniu aktuálnych v
 
 \\
 
-Ďalšia možnosť ako vylepšiť je v rýchlosti spracovania, ktorá nie je použiteľná na realtime spracovanie videa v štandardnej kvalite videa.
+Ďalšia možnosť ako ho vylepšiť je v rýchlosti spracovania, ktorá nie je použiteľná na realtime spracovanie videa v štandardnej kvalite videa.
 Algoritmus je svojou časovou náročnosťou vhodný na spracovanie videí v nízkej obrazovej kvalite.
 Pri vysokej obrazovej kvalite však algoritmus nevykazoval vyššiu efektivitu (otestované na datasete savam\cite{savam}, ktorý poskytuje videá vo vysokej kvalite), výpočet ale trval výrazne dlhšie ako v porovnaní s videom s nízkou obrazovou kvalitou.
 

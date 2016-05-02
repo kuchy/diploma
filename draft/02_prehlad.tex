@@ -61,11 +61,11 @@ Model zakladá hlavne na Bayesovom pravidle.
 Ako výsledok hľadania potom udáva asymetrie v týchto štatistických štruktúrach\cite{sun-1}.
 \subsection{Rare Model}
 Výrazná väčšina modelov pozornosti typu bottom-up funguje ustáleným postupom, kde sa z pôvodného obrazu extrahuje definovaná množina chrakteristík paralelne a tie sa následne kombinujú alebo inak použijú na výpočet výslednej mapy pozornosti.
-Rare model narvhuje sekvenčnú architektúru, kde z pôvodného obrazu extrahuje nízko úrovňové príznaky.
+Rare model narvhuje sekvenčnú architektúru, kde z pôvodného obrazu extrahuje nízkoúrovňové príznaky.
 Následne na výsledkoch sériovo vykonáva extrakciu ďalších príznakov (v literatúre nazývané mid-level).
 Nakoniec ako posledný krok spojí a normalizuje výsledné chrakteristiky do konečnej mapy významných oblastí.
 Rare model ako nízkoúrovňové chrakteristiky používa jas a colorimetrické rozdiely (ako farebný model používa YCbCr) a následne na mapách rozložených zložiek farebného modelu detekuje orientáciu pomocou gáborových filtrov\cite{rare-1}.
-Po extrakcii všetkých charakteristík použije iteratívnu metódu pre optimálne kvantovanie, založenú na metóde Otsu\cite{otsu}.
+Po extrakcii všetkých charakteristík použije iteratívnu metódu pre optimálne kvantovanie založenú na metóde Otsu\cite{otsu}.
 Na takto upravenom vstupe sa následne vyhľadávajú vzácne (z angl. rare) oblasti obrazu.
 Metóda preskúmala možnosti nesekvenčnej extrakcie príznakov z obrazu, čo bolo novým prístupom v oblasti modelov pozornosti.
 
@@ -271,7 +271,7 @@ Je rozčlenený do štyroch vizuálne rozličných kategórií:
   \item Konverzačné scény
 \end{itemize}
 Tento dataset obsahuje spolu 60 videí, ktoré sledovali vždy 18-tich rôznych používateľov.
-Všetky videá boli zaznamenávané v štyroch rôznych zvukových podmienkach (využívať budeme iba dáta s pôvodnou zvukovou stopou). \\
+Všetky videá boli zaznamenávané v štyroch rôznych zvukových podmienkach (využívať budem iba dáta s pôvodnou zvukovou stopou). \\
 \textbf{Druhý dataset \cite{coutrot-database-2}} obsahuje 15 videí.
 Všetky videá obsahujú nahraté stretnutie štyroch konverzujúcich ľudí so statickou kamerou.
 Dataset nie je členený do žiadnych kategórií.
