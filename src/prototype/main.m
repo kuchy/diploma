@@ -56,13 +56,6 @@ handles.output = hObject;
 % Update handles structure
 guidata(hObject, handles);
 
-% UIWAIT makes main wait for user response (see UIRESUME)
-% uiwait(handles.figure1);
-
-% loading generated videos
-% tempFiles = dir(fullfile('temp'));
-% tempFiles = {tempFiles(4:end).name}';
-
 % add to path models folder
 addpath(genpath('models'));
 
@@ -85,8 +78,6 @@ for ii = 1:length(modelFiles)
     data(ii,1)={name};
 end
 set(handles.listbox1, 'String', modelFiles);
-
-
 set(handles.uitable1, 'data', data);
 
 % --- Outputs from this function are returned to the command line.
@@ -106,7 +97,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 [FileName,PathName]=uigetfile('*.*','All Files');
-LoadedData = loadVideo(FileName,PathName);
+LoadedData = loadVideo(FileName,PathName,100);
 
 videoData = get(handles.pushbutton1,'UserData');
 videoData = [videoData, LoadedData];
@@ -187,7 +178,7 @@ tableData=get(handles.uitable1, 'data');
 % compute maps
 [avgtime, max, min, fps] = computeModel(fullfile('temp',data.name), functionName{1});
 
-for ii = 1:length(tableData)
+for ii = 1:length(tableData)-1
     rowName = tableData(ii,1);
     if strcmp(rowName{1}, functionName{1})
         tableData(ii,2) = {avgtime};
@@ -377,7 +368,7 @@ functionName = cellstr(list(index));
 
 if strcmp(databaseName, 'ACCV2012_database')
     disp(strcat('Evaluation of: ',functionName{1}, ' on ',databaseName{1})); 
-    Evaluation(functionName{1});
+    accv(functionName{1});
 end
 
 if strcmp(databaseName, 'coutrot')
@@ -389,36 +380,6 @@ if strcmp(databaseName, 'coutrot2')
     disp(strcat('Evaluation of: ',functionName{1}, ' on ',databaseName{1})); 
     EvaluationCoutrot2(functionName{1});
 end
-
-% % SAVAM
-% videoData = get(handles.pushbutton1,'UserData');
-% 
-% index=get(handles.listbox2,'value');
-% list=get(handles.listbox2,'string');
-% video = cellstr(list(index));
-% name = video{1};
-% 
-% data = findVideoByName(name, videoData);
-% index=get(handles.listbox1,'value');
-% list=get(handles.listbox1,'string');
-% functionName = cellstr(list(index));
-% 
-% % TODO parametrize the frame number
-% saliencyPath = fullfile('temp',data.name,'saliency', functionName{1},'005.jpg');
-% saliencyMap = imread(saliencyPath);
-% video = VideoReader('/Users/kuchy/skola/diplomovka/src/prototype/datasets/savam/video/v04_LIVE1_0_left_gt.avi');
-% fixationMap = video.read(5);
-% % fixationMap = loader('v04_LIVE1_0');
-% % fixations = load('/Users/kuchy/skola/diplomovka/src/prototype/datasets/coutrot_database1.mat');
-% fixationMap=rgb2gray(fixationMap);
-% % figure; imshow(saliencyMap);
-% % figure; imshow(fixationMap);
-% saliencyMap = impyramid(saliencyMap, 'reduce');
-% saliencyMap = impyramid(saliencyMap, 'reduce');
-% fixationMap = impyramid(fixationMap, 'reduce');
-% fixationMap = impyramid(fixationMap, 'reduce');
-% AUC_Judd(saliencyMap, fixationMap, 0, 1)
-
 
 % --- Executes on button press in pushbutton12.
 function pushbutton12_Callback(hObject, eventdata, handles)

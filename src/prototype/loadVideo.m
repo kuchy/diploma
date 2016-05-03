@@ -1,12 +1,10 @@
-function videoData=loadVideo(FileName,PathName)
+function videoData=loadVideo(FileName,PathName,maxFrames)
 shuttleVideo = VideoReader(fullfile(PathName,FileName));
 
 videoDir = fullfile('temp',FileName);
 mkdir(videoDir)
 
 ii = 1;
-% TODO parametrize
-maxFrames = 100;
 
 while shuttleVideo.NumberOfFrames>=ii && maxFrames>=ii
    img = read(shuttleVideo,ii);

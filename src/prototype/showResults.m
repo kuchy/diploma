@@ -49,7 +49,7 @@ function showResults (dataset, numOfVideos)
         result.(modelName).mean.NSS_score = mean([result.(modelName).frameMean(:).NSS_score]);
     end
 
-    %% MIN/MAX definitions
+    %% MIN/MAX definitions for graphs
     AUC_max = 1;
     AUC_min = 0.45;
     AUC_random = [0.5 0.5];
@@ -63,7 +63,6 @@ function showResults (dataset, numOfVideos)
     %% plot AUROC_score
     i = 1;
     for model = fieldnames(result)'
-    %     videos = size(result.(model).frameMean,2); 
         modelName = char(model);
         data= extractfield(result.(modelName).frameMean(:), 'AUROC_score');    
         graph(i,:) = data(:);
@@ -86,7 +85,6 @@ function showResults (dataset, numOfVideos)
     %% plot KLDIV_score
     i = 1;
     for model = fieldnames(result)'
-    %     videos = size(result.(model).frameMean,2);    
         modelName = char(model);
         data= extractfield(result.(modelName).frameMean(:), 'KLDIV_score');    
         graph(i,:) = data(:);
@@ -106,7 +104,6 @@ function showResults (dataset, numOfVideos)
     %% plot NSS_score
     i = 1;
     for model = fieldnames(result)'
-    %     videos = size(result.(model).frameMean,2);    
         modelName = char(model);
         data= extractfield(result.(modelName).frameMean(:), 'NSS_score');    
         graph(i,:) = data(:);
